@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/size_3">
+
+    <com.toandoan.lol.widget.view.SquareImageView
+        android:id="@+id/ivChampIcon"
+        android:background="@drawable/bg_icon"
+        android:padding="@dimen/size_1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.toandoan.lol.widget.view.RobotoTextView
+        android:id="@+id/tvChampName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#10000000"
+        android:gravity="center"
+        android:padding="@dimen/size_5"
+        android:text="Akali"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_10"
+        app:typeface="roboto_bold" />
+
+</RelativeLayout>

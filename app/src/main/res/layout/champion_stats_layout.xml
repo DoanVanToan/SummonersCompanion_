@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="@dimen/size_10"
+    android:paddingLeft="@dimen/size_10"
+    android:paddingRight="@dimen/size_10">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="@dimen/size_60"
+        android:orientation="vertical">
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_3"
+            android:gravity="right"
+            android:text="@string/health_"
+            android:textColor="@color/gray_b7baba"
+            android:textSize="@dimen/text_size_12"
+            app:typeface="roboto_regular" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/tvEnergy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_3"
+            android:gravity="right"
+            android:text="@string/energy"
+            android:textColor="@color/gray_b7baba"
+            android:textSize="@dimen/text_size_12"
+            app:typeface="roboto_regular" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_3"
+            android:gravity="right"
+            android:text="@string/attack_"
+            android:textColor="@color/gray_b7baba"
+            android:textSize="@dimen/text_size_12"
+            app:typeface="roboto_regular" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_3"
+            android:gravity="right"
+            android:text="@string/armor"
+            android:textColor="@color/gray_b7baba"
+            android:textSize="@dimen/text_size_12"
+            app:typeface="roboto_regular" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/size_3"
+            android:layout_marginTop="@dimen/size_3"
+            android:gravity="right"
+            android:text="@string/range_"
+            android:textColor="@color/gray_b7baba"
+            android:textSize="@dimen/text_size_12"
+            app:typeface="roboto_regular" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/text_size_12"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/tvHealthValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_3"
+            android:gravity="left"
+            android:text="540 (87)"
+            android:textColor="@color/gray_b7baba"
+            android:textSize="@dimen/text_size_12"
+            app:typeface="roboto_regular" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/tvEneryValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_3"
+            android:gravity="left"
+            android:text="540 (87)"
+            android:textColor="@color/gray_b7baba"
+            android:textSize="@dimen/text_size_12"
+            app:typeface="roboto_regular" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/tvAttackValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_3"
+            android:gravity="left"
+            android:text="300 (87)"
+            android:textColor="@color/gray_b7baba"
+            android:textSize="@dimen/text_size_12"
+            app:typeface="roboto_regular" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/tvArmorValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_3"
+            android:gravity="left"
+            android:text="54 (87)"
+            android:textColor="@color/gray_b7baba"
+            android:textSize="@dimen/text_size_12"
+            app:typeface="roboto_regular" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/tvRange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_3"
+            android:gravity="left"
+            android:text="500"
+            android:textColor="@color/gray_b7baba"
+            android:textSize="@dimen/text_size_12"
+            app:typeface="roboto_regular" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:minWidth="@dimen/size_60"
+        android:orientation="vertical">
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_3"
+            android:gravity="right"
+            android:text="@string/health_regen_"
+            android:textColor="@color/gray_b7baba"
+            android:textSize="@dimen/text_size_12"
+            app:typeface="roboto_regular" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/tvManaRegen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_3"
+            android:gravity="right"
+            android:text="@string/mana_regen_"
+            android:textColor="@color/gray_b7baba"
+            android:textSize="@dimen/text_size_12"
+            app:typeface="roboto_regular" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_3"
+            android:gravity="right"
+            android:text="@string/attack_speech_"
+            android:textColor="@color/gray_b7baba"
+            android:textSize="@dimen/text_size_12"
+            app:typeface="roboto_regular" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_3"
+            android:gravity="right"
+            android:text="@string/magic_resist_"
+            android:textColor="@color/gray_b7baba"
+            android:textSize="@dimen/text_size_12"
+            app:typeface="roboto_regular" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/size_3"
+            android:layout_marginTop="@dimen/size_3"
+            android:gravity="right"
+            android:text="@string/movement_"
+            android:textColor="@color/gray_b7baba"
+            android:textSize="@dimen/text_size_12"
+            app:typeface="roboto_regular" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/text_size_12"
+        android:minWidth="@dimen/size_60"
+        android:orientation="vertical">
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/tvHealthRegenValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_3"
+            android:gravity="left"
+            android:text="540 (87)"
+            android:textColor="@color/gray_b7baba"
+            android:textSize="@dimen/text_size_12"
+            app:typeface="roboto_regular" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/tvManaRegenValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_3"
+            android:gravity="left"
+            android:text="540 (87)"
+            android:textColor="@color/gray_b7baba"
+            android:textSize="@dimen/text_size_12"
+            app:typeface="roboto_regular" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/tvAttackSpeechValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_3"
+            android:gravity="left"
+            android:text="300 (87)"
+            android:textColor="@color/gray_b7baba"
+            android:textSize="@dimen/text_size_12"
+            app:typeface="roboto_regular" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/tvMagicResistValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_3"
+            android:gravity="left"
+            android:text="54 (87)"
+            android:textColor="@color/gray_b7baba"
+            android:textSize="@dimen/text_size_12"
+            app:typeface="roboto_regular" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/tvManaMovementValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_3"
+            android:gravity="left"
+            android:text="500"
+            android:textColor="@color/gray_b7baba"
+            android:textSize="@dimen/text_size_12"
+            app:typeface="roboto_regular" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/yellow_D4BC6C"
+    android:orientation="vertical"
+    android:padding="@dimen/size_10">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="@dimen/size_10"
+        android:layout_marginTop="@dimen/size_10"
+        android:orientation="horizontal">
+
+        <com.toandoan.lol.widget.view.SquareImageView
+            android:id="@+id/ivItemImage"
+            android:layout_width="@dimen/size_50"
+            android:layout_height="@dimen/size_50"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/bg_icon"
+            android:padding="@dimen/size_1" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.toandoan.lol.widget.view.RobotoTextView
+                android:id="@+id/tvItemName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/ivPassiveIcon"
+                android:paddingLeft="@dimen/size_5"
+                android:singleLine="true"
+                android:text="Enchamtent "
+                android:textAllCaps="false"
+                android:textColor="@color/black_171717"
+                android:textSize="@dimen/text_size_14"
+                app:typeface="roboto_bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/size_7"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/size_20"
+                    android:layout_height="@dimen/size_20"
+                    android:layout_below="@+id/tvPassiveTitle"
+                    android:layout_marginLeft="@dimen/size_5"
+                    android:layout_toRightOf="@+id/ivPassiveIcon"
+                    android:src="@drawable/gold" />
+
+
+                <com.toandoan.lol.widget.view.RobotoTextView
+                    android:id="@+id/tvItemGoldPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/ivPassiveIcon"
+                    android:paddingLeft="@dimen/size_5"
+                    android:text="800"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black_171717"
+                    android:textSize="@dimen/text_size_13"
+                    app:typeface="roboto_regular" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <com.toandoan.lol.widget.view.RobotoTextView
+        android:id="@+id/tvItemTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_10"
+        android:layout_toRightOf="@+id/ivPassiveIcon"
+        android:text="Enchamtent "
+        android:textAllCaps="false"
+        android:textColor="@color/black_171717"
+        android:textSize="@dimen/text_size_14"
+        app:typeface="roboto_bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_1"
+        android:background="@color/yellow_D4BC6C"
+        android:paddingLeft="@dimen/size_10"
+        android:paddingRight="@dimen/size_10" />
+
+    <LinearLayout
+        android:id="@+id/llBuiltFrom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_10"
+        android:orientation="vertical">
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ivPassiveIcon"
+            android:singleLine="true"
+            android:text="@string/build_from"
+            android:textAllCaps="false"
+            android:textColor="@color/black_0c1111"
+            android:textSize="@dimen/text_size_14"
+            android:textStyle="bold"
+            app:typeface="roboto_bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:layout_marginTop="@dimen/size_5"
+            android:background="@color/trans_80"
+            android:paddingLeft="@dimen/size_10"
+            android:paddingRight="@dimen/size_10" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/mBuiltFromRyRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_5" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llBuiltInto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_10"
+        android:orientation="vertical">
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ivPassiveIcon"
+            android:singleLine="true"
+            android:text="@string/build_into"
+            android:textAllCaps="false"
+            android:textColor="@color/black_0c1111"
+            android:textSize="@dimen/text_size_14"
+            android:textStyle="bold"
+            app:typeface="roboto_bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:layout_marginTop="@dimen/size_5"
+            android:background="@color/trans_80"
+            android:paddingLeft="@dimen/size_10"
+            android:paddingRight="@dimen/size_10" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/mBuiltIntoRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_5" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

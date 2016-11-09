@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@color/gray_0E1617"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.toandoan.lol.widget.view.SquareImageView
+            android:tag="6111"
+            android:layout_width="@dimen/size_60"
+            android:layout_height="@dimen/size_60"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/bg_icon"
+            android:padding="@dimen/size_1" />
+
+        <com.toandoan.lol.widget.view.SquareImageView
+            android:layout_width="@dimen/size_60"
+            android:tag="6114"
+            android:layout_height="@dimen/size_60"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/size_80"
+            android:background="@drawable/bg_icon"
+            android:padding="@dimen/size_1" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_15"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.toandoan.lol.widget.view.SquareImageView
+            android:layout_width="@dimen/size_60"
+            android:layout_height="@dimen/size_60"
+            android:tag="6121"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/bg_icon"
+            android:padding="@dimen/size_1" />
+
+        <com.toandoan.lol.widget.view.SquareImageView
+            android:tag="6122"
+            android:layout_width="@dimen/size_60"
+            android:layout_height="@dimen/size_60"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/size_10"
+            android:background="@drawable/bg_icon"
+            android:padding="@dimen/size_1" />
+
+
+        <com.toandoan.lol.widget.view.SquareImageView
+            android:tag="6123"
+            android:layout_width="@dimen/size_60"
+            android:layout_height="@dimen/size_60"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/size_10"
+            android:background="@drawable/bg_icon"
+            android:padding="@dimen/size_1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_15"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.toandoan.lol.widget.view.SquareImageView
+            android:tag="6131"
+            android:layout_width="@dimen/size_60"
+            android:layout_height="@dimen/size_60"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/bg_icon"
+            android:padding="@dimen/size_1" />
+
+        <com.toandoan.lol.widget.view.SquareImageView
+            android:layout_width="@dimen/size_60"
+            android:tag="6134"
+            android:layout_height="@dimen/size_60"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/size_80"
+            android:background="@drawable/bg_icon"
+            android:padding="@dimen/size_1" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_15"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.toandoan.lol.widget.view.SquareImageView
+            android:layout_width="@dimen/size_60"
+            android:layout_height="@dimen/size_60"
+            android:tag="6141"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/bg_icon"
+            android:padding="@dimen/size_1" />
+
+        <com.toandoan.lol.widget.view.SquareImageView
+            android:layout_width="@dimen/size_60"
+            android:tag="6142"
+            android:layout_height="@dimen/size_60"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/size_10"
+            android:background="@drawable/bg_icon"
+            android:padding="@dimen/size_1" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_15"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.toandoan.lol.widget.view.SquareImageView
+            android:tag="6151"
+            android:layout_width="@dimen/size_60"
+            android:layout_height="@dimen/size_60"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/bg_icon"
+            android:padding="@dimen/size_1" />
+
+        <com.toandoan.lol.widget.view.SquareImageView
+            android:tag="6154"
+            android:layout_width="@dimen/size_60"
+            android:layout_height="@dimen/size_60"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/size_80"
+            android:background="@drawable/bg_icon"
+            android:padding="@dimen/size_1" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_15"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.toandoan.lol.widget.view.SquareImageView
+            android:tag="6161"
+            android:layout_width="@dimen/size_60"
+            android:layout_height="@dimen/size_60"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/bg_icon"
+            android:padding="@dimen/size_1" />
+
+        <com.toandoan.lol.widget.view.SquareImageView
+            android:tag="6162"
+            android:layout_width="@dimen/size_60"
+            android:layout_height="@dimen/size_60"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/size_10"
+            android:background="@drawable/bg_icon"
+            android:padding="@dimen/size_1"
+            android:id="@+id/squareImageView" />
+
+
+        <com.toandoan.lol.widget.view.SquareImageView
+            android:tag="6164"
+            android:layout_width="@dimen/size_60"
+            android:layout_height="@dimen/size_60"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/size_10"
+            android:background="@drawable/bg_icon"
+            android:padding="@dimen/size_1" />
+
+    </LinearLayout>
+1`
+</LinearLayout>

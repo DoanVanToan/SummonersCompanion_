@@ -1,0 +1,12 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/gray_0E1617"
+    android:layout_height="match_parent"
+    tools:context="com.toandoan.lol.fragment.ItemFragment">
+
+ <android.support.v7.widget.RecyclerView
+     android:id="@+id/mReyclerView"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"/>
+</FrameLayout>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/size_5"
+    android:gravity="center"
+    android:padding="@dimen/size_5">
+
+    <ImageView
+        android:id="@+id/ivRuneTitle"
+        android:layout_width="@dimen/size_50"
+        android:layout_height="@dimen/size_50" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/size_10"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/tvRuneName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ivPassiveIcon"
+            android:paddingLeft="@dimen/size_5"
+            android:text="aaaaaaaaaaaaa"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_16"
+            android:textStyle="bold"
+            app:typeface="roboto_bold" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/tvRuneTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_5"
+            android:layout_toRightOf="@+id/ivPassiveIcon"
+            android:paddingLeft="@dimen/size_5"
+            android:text="aaaaaaaaaaaaa"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_13"
+            android:textStyle="bold"
+            app:typeface="roboto_light" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/gray_0E1617"
+    android:paddingTop="@dimen/size_5"
+    android:paddingBottom="@dimen/size_15"
+    android:paddingLeft="@dimen/size_5"
+    android:paddingRight="@dimen/size_5"
+    android:orientation="vertical">
+
+    <com.toandoan.lol.widget.view.RobotoTextView
+        android:id="@+id/tvSpellName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tips"
+        android:textColor="@color/yellow_D4BC6C"
+        android:textSize="@dimen/text_size_18"
+        app:typeface="arista_light" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/size_5"
+        android:orientation="horizontal">
+
+        <com.toandoan.lol.widget.view.SquareImageView
+            android:id="@+id/ivSpellIcon"
+            android:layout_width="@dimen/size_50"
+            android:layout_height="@dimen/size_50"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_icon"
+            android:padding="@dimen/size_1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/size_5"
+            android:orientation="vertical">
+
+            <com.toandoan.lol.widget.view.RobotoTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cooldown:"
+                android:textAllCaps="false"
+                android:textColor="#C9CFCF"
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular"
+                android:id="@+id/tvSpellCooldown" />
+
+            <com.toandoan.lol.widget.view.RobotoTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cost:"
+                android:textAllCaps="false"
+                android:id="@+id/tvSpellCost"
+                android:textColor="#C9CFCF"
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
+
+            <com.toandoan.lol.widget.view.RobotoTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Range:"
+                android:id="@+id/tvSpellRange"
+                android:textAllCaps="false"
+                android:textColor="#C9CFCF"
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.toandoan.lol.widget.view.RobotoTextView
+        android:id="@+id/tvSpellTitle"
+        android:layout_marginTop="@dimen/size_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cooldown:"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_14"
+        app:typeface="roboto_regular" />
+
+</LinearLayout>

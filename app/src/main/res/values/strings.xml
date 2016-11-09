@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">"Summoner'sCompanion "</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="something_wrong">Something wrong, please try again later.</string>
+    <string name="attack">Attack</string>
+    <string name="defence">Defence</string>
+    <string name="ability">Ability</string>
+    <string name="dificulty">Difficultly</string>
+    <string name="health_">Health:</string>
+    <string name="energy">Energy:</string>
+    <string name="attack_">Attack:</string>
+    <string name="armor">Armor:</string>
+    <string name="range_">Range:</string>
+    <string name="health_regen_">Health Regen:</string>
+    <string name="mana_regen_">Mana Regen:</string>
+    <string name="attack_speech_">Attack Speed:</string>
+    <string name="magic_resist_">Magic Resist:</string>
+    <string name="movement_">Movement:</string>
+    <string name="lore">Lore</string>
+    <string name="loading"></string>
+    <string name="not_internet_connected">Can not connect to server, please check internet connection.</string>
+    <string name="overview">OVERVIEW</string>
+    <string name="_default">Default</string>
+    <string name="tips">Tips</string>
+    <string name="counter_tips">Counter Tips</string>
+    <string name="counter_and_tip"><![CDATA[COUNTERS & TIPS]]></string>
+    <string name="cool_down">Cooldown</string>
+    <string name="cost">Cost</string>
+    <string name="range">Range</string>
+    <string name="abilities">ABILITES</string>
+    <string name="description">DESCRIPTION</string>
+    <string name="build_from">Built from</string>
+    <string name="build_into">Built into</string>
+    <string name="action_search">Search</string>
+    <string name="search_hint">Input something</string>
+    <string name="cuning">CUNING</string>
+    <string name="resolve">RESOLVE</string>
+    <string name="ferocity">FEROCITY</string>
+</resources>

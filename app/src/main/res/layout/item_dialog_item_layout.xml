@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_marginBottom="@dimen/size_5"
+        android:layout_marginTop="@dimen/size_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:orientation="vertical">
+
+        <com.toandoan.lol.widget.view.SquareImageView
+            android:id="@+id/ivItemImage"
+            android:layout_width="@dimen/size_50"
+            android:layout_height="@dimen/size_50"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/bg_icon"
+            android:padding="@dimen/size_1" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/size_2"
+            android:gravity="top|center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/size_15"
+                android:layout_height="@dimen/size_15"
+                android:layout_below="@+id/tvPassiveTitle"
+                android:layout_marginLeft="@dimen/size_5"
+                android:layout_toRightOf="@+id/ivPassiveIcon"
+                android:src="@drawable/gold" />
+
+
+            <com.toandoan.lol.widget.view.RobotoTextView
+                android:id="@+id/tvItemGoldPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/ivPassiveIcon"
+                android:text="800"
+                android:textAllCaps="false"
+                android:textColor="@color/black_171717"
+                android:textSize="@dimen/text_size_12"
+                app:typeface="roboto_regular" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

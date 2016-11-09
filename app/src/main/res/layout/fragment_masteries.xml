@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="com.toandoan.lol.fragment.MasteriesFragment">
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tablayout_title"
+        app:tabSelectedTextColor="@color/white"
+        app:tabIndicatorColor="@color/white"
+        android:background="@color/colorPrimary"
+        app:tabTextColor="@color/gray_b7baba"
+        style="@style/AppTheme"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager_mastery"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
