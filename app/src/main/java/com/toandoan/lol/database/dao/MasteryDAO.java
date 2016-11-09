@@ -22,9 +22,7 @@ public interface MasteryDAO {
     public static final String TYPE_FEROCITY = "Ferocity";
     public static final String TYPE_CUNNING ="Cunning";
     public static final String TYPE_RESOLVE= "Resolve";
-
-
-
+    
     public static final String COMMAND_GET_ALL_ROWS = "SELECT * FROM " + TABLE_MASTERIES;
     public static final String COMMAND_DELETE_TABLE = "DELETE FROM " + TABLE_MASTERIES;
     public static final String COMMAND_GET_ITEM_BY_MASTERYTREE = "SELECT * FROM " + TABLE_MASTERIES + " WHERE " + FIELD_MASTERYTREE + " = ?";
