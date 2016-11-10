@@ -9,6 +9,15 @@
     android:orientation="vertical"
     tools:context="com.toandoan.lol.activity.SumonerMasteriesActivity">
 
+    <com.jaredrummler.materialspinner.MaterialSpinner
+        app:paddingStart="@dimen/size_10"
+        app:paddingEnd="@dimen/size_10"
+        android:id="@+id/matery_spinner"
+        app:ms_background_color="@color/colorPrimary"
+        app:ms_text_color="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager_mastery"
         android:layout_width="match_parent"
@@ -27,10 +36,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
+        android:gravity="center"
         android:paddingBottom="@dimen/size_10"
         android:paddingTop="@dimen/size_10"
         android:text="10 / 10 / 10"
-        android:gravity="center"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_17"
         android:typeface="monospace"

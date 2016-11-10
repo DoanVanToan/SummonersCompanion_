@@ -55,6 +55,7 @@ public class SumonerMasteriesPresenter implements SumonerMasteriesAbstract.Prese
 
     @Override
     public void loadSumonerMasteries(String region, String id) {
+        mActivity.showDialog();
         RiotService service = ServiceGenerator.createStaticService(RiotService.class);
         Call<ResponseBody> call = service.getSumonnerMasteries(region, id);
         call.enqueue(getSummonerMasteryCallBack);
@@ -65,21 +66,24 @@ public class SumonerMasteriesPresenter implements SumonerMasteriesAbstract.Prese
         mCunningCount = 0;
         mResolveCount = 0;
         mFerocityCount = 0;
-        for (int i = 0; i < listPages.size(); i++) {
-            MasteryEnity masteryEnity = listPages.get(i);
-            if (masteryEnity != null && masteryEnity.getMasteryTree() != null) {
-                if (masteryEnity.getMasteryTree().equalsIgnoreCase(MasteriesImpl.TYPE_CUNNING)) {
-                    mCunningCount += masteryEnity.getRank();
-                } else {
-                    if (masteryEnity.getMasteryTree().equalsIgnoreCase(MasteriesImpl.TYPE_FEROCITY)) {
-                        mFerocityCount += masteryEnity.getRank();
+        if (listPages != null && listPages.size() != 0) {
+            for (int i = 0; i < listPages.size(); i++) {
+                MasteryEnity masteryEnity = listPages.get(i);
+                if (masteryEnity != null && masteryEnity != null) {
+                    if (masteryEnity.getMasteryTree().equalsIgnoreCase(MasteriesImpl.TYPE_CUNNING)) {
+                        mCunningCount += masteryEnity.getRank();
                     } else {
-                        mResolveCount += masteryEnity.getRank();
+                        if (masteryEnity.getMasteryTree().equalsIgnoreCase(MasteriesImpl.TYPE_FEROCITY)) {
+                            mFerocityCount += masteryEnity.getRank();
+                        } else {
+                            mResolveCount += masteryEnity.getRank();
+                        }
                     }
                 }
-            }
 
+            }
         }
+
     }
 
 
@@ -105,23 +109,35 @@ public class SumonerMasteriesPresenter implements SumonerMasteriesAbstract.Prese
 
 
                 getMasteriesFromDatabase();
+
                 mCurrentPage = mPageMasteries.get(0);
                 getCountMasteries(mCurrentPage.getMasteries());
 
                 mView.initViewPager(mCurrentPage.getMasteries());
                 mView.updateTabLayout(mFerocityCount, mCunningCount, mResolveCount);
+                mView.updateSpinner(mPageMasteries);
 
 
             } else {
                 Toast.makeText(mActivity, mActivity.getString(R.string.not_internet_connected), Toast.LENGTH_SHORT).show();
             }
+
+            mActivity.dismissDialog();
         }
 
         @Override
         public void onFailure(Call<ResponseBody> call, Throwable t) {
+            mActivity.dismissDialog();
             Toast.makeText(mActivity, mActivity.getString(R.string.not_internet_connected), Toast.LENGTH_SHORT).show();
         }
     };
+
+    @Override
+    public void onSpinnerSelected(PageMasteries page) {
+        getCountMasteries(page.getMasteries());
+        mView.initViewPager(page.getMasteries());
+        mView.updateTabLayout(mFerocityCount, mCunningCount, mResolveCount);
+    }
 
     void getMasteriesFromDatabase() {
         for (int i = 0; i < mPageMasteries.size(); i++) {
@@ -129,22 +145,12 @@ public class SumonerMasteriesPresenter implements SumonerMasteriesAbstract.Prese
             List<MasteryEnity> temps = new ArrayList<>();
             for (int j = 0; j < pages.getMasteries().size(); j++) {
                 MasteryEnity masteryEnity = pages.getMasteries().get(j);
+                MasteryEnity masteryDB = masteryDatabase.getMasteryByID(String.valueOf(masteryEnity.getId()));
 
-                String id = String.valueOf(masteryEnity.getId());
-                if (id.startsWith("4")) {
-                    id = id.substring(1, id.length());
-                    id = "6" + id;
+                if (masteryDB != null) {
+                    masteryDB.setRank(masteryEnity.getRank());
+                    temps.add(masteryDB);
                 }
-
-                MasteryEnity masteryEnityDB = masteryDatabase.getMasteryByID(id);
-
-                if (masteryEnityDB != null) {
-                    masteryEnityDB.setRank(masteryEnity.getRank());
-                    temps.add(masteryEnityDB);
-                }else {
-                    temps.add(masteryEnity);
-                }
-
             }
             pages.setMasteries(temps);
         }

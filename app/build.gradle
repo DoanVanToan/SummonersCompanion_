@@ -34,6 +34,7 @@ dependencies {
     compile 'com.linsea:universalvideoview:1.1.0@aar'
     compile 'fm.jiecao:jiecaovideoplayer:3.6.3'
     compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
+    compile 'com.jaredrummler:material-spinner:1.1.0'
     compile 'com.orhanobut:dialogplus:1.11@aar'
     testCompile 'junit:junit:4.12'
 }

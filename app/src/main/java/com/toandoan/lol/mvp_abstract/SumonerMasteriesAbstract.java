@@ -14,10 +14,12 @@ public interface SumonerMasteriesAbstract {
         void initViews();
         void initViewPager(List<MasteryEnity> masteryEnities);
         void updateTabLayout(int countFerocity, int countCunning, int countReslve);
+        void updateSpinner(List<PageMasteries> pageMasteries);
     }
 
     interface Presenter{
         void loadSumonerMasteries(String region, String id);
         void getCountMasteries(List<MasteryEnity> listPages);
+        void onSpinnerSelected(PageMasteries page);
     }
 }
