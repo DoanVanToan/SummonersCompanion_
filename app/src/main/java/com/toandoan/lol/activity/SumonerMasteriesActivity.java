@@ -58,6 +58,8 @@ public class SumonerMasteriesActivity extends BaseActivity implements SumonerMas
 
     @Override
     public void updateTabLayout(int countFerocity, int countCunning, int countReslve) {
+
+
         mTitleTextView.setText(countFerocity + " / " + countCunning + " / " + countReslve);
     }
 
