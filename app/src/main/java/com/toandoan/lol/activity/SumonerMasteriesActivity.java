@@ -24,7 +24,6 @@ public class SumonerMasteriesActivity extends BaseActivity implements SumonerMas
     private ViewPager mMasteryViewPager;
     private TabLayout mMasteryTablayout;
     private MasteriesPagerAdapter mMasteryAdapter;
-    private List<MasteryEnity> mMasteryEnities;
     private String mSumonerID;
     private SumonerMasteriesPresenter mPresenter;
     private TextView mTitleTextView;
@@ -65,6 +64,7 @@ public class SumonerMasteriesActivity extends BaseActivity implements SumonerMas
 
     @Override
     public void getAllMasteriesSuccessful(List<MasteryEnity> listData) {
+        // To do
 
     }
 
