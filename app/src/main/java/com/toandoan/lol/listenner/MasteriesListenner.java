@@ -1,7 +1,6 @@
 package com.toandoan.lol.listenner;
 
-import com.toandoan.lol.model.MasteryEnity;
-import com.toandoan.lol.model.rune.RuneEnity;
+import com.toandoan.lol.model.matery.MasteryEnity;
 
 import java.util.List;
 

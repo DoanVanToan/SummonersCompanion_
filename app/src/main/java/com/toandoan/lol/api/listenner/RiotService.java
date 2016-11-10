@@ -31,4 +31,8 @@ public interface RiotService {
 
     @GET(Constant.Api.GET_LIST_MASTERIES)
     Call<ResponseBody> getAllMasteries(@Path(Constant.ApiKey.REGION) String region);
+
+    @GET(Constant.Api.GET_SUMMONER_MASTERIES)
+    Call<ResponseBody> getSumonnerMasteries(@Path(Constant.ApiKey.REGION) String region,
+                                            @Path(Constant.ApiKey.SUMMONER_ID) String summonerID);
 }

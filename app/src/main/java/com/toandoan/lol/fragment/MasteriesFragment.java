@@ -1,8 +1,6 @@
 package com.toandoan.lol.fragment;
 
 
-import android.app.AlarmManager;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
@@ -13,21 +11,18 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
 import com.toandoan.lol.R;
 import com.toandoan.lol.adapter.MasteriesPagerAdapter;
 import com.toandoan.lol.base.BaseActivity;
-import com.toandoan.lol.database.dao.MasteryDAO;
 import com.toandoan.lol.presenter.MasteriesPresenter;
 import com.toandoan.lol.listenner.MasteriesListenner;
-import com.toandoan.lol.model.MasteryEnity;
+import com.toandoan.lol.model.matery.MasteryEnity;
 import com.toandoan.lol.utility.Utils;
 
 import java.util.List;
@@ -43,6 +38,7 @@ public class MasteriesFragment extends Fragment {
     private MasteriesPagerAdapter mAdapter;
     private TabLayout mTitleTabLayout;
     private final int DELAY_TIME = 4000;
+
 
     public static MasteriesFragment newInstance() {
         MasteriesFragment masteriesFragment = new MasteriesFragment();
@@ -88,41 +84,9 @@ public class MasteriesFragment extends Fragment {
 
         @Override
         public void onItemClickListenner(MasteryEnity masteryEnity) {
-            showMasteryDialog(masteryEnity);
+            Utils.showMasteryDialog(getActivity(), masteryEnity);
         }
 
-        public void showMasteryDialog(MasteryEnity masteryEnity) {
-            View view = LayoutInflater.from(getActivity()).inflate(R.layout.can_not_start_layout, null);
-            ImageView imgTitle = (ImageView) view.findViewById(R.id.imageview_icon);
-            TextView txtTitle = (TextView) view.findViewById(R.id.textview_title);
-            TextView textViewMessage = (TextView) view.findViewById(R.id.textview_messsage);
-            imgTitle.setImageBitmap(Utils.getMasteryImageFromAssets(getContext(), true, masteryEnity.getImage().getFull()));
-            txtTitle.setText(masteryEnity.getName());
-            textViewMessage.setText(Html.fromHtml(masteryEnity.getDescription().get(masteryEnity.getRanks() - 1)));
-
-            final DialogPlus dialog = DialogPlus.newDialog(getActivity())
-                    .setContentHolder(new ViewHolder(view))
-                    .setGravity(Gravity.BOTTOM)
-                    .setExpanded(false)
-                    .setCancelable(true)
-                    .create();
-
-            Handler h = new Handler();
-            h.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            dialog.dismiss();
-                        }
-                    });
-                }
-            }, DELAY_TIME);
-
-            dialog.show();
-
-        }
 
 
     };

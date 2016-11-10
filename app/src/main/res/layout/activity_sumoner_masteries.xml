@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_sumoner_masteries"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_0E1617"
+    android:orientation="vertical"
+    tools:context="com.toandoan.lol.activity.SumonerMasteriesActivity">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager_mastery"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_mastery_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_3"
+        android:background="@color/colorPrimary"
+        app:tabIndicatorColor="@color/green_008000" />
+
+    <com.toandoan.lol.widget.view.RobotoTextView
+        android:id="@+id/title_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:paddingBottom="@dimen/size_10"
+        android:paddingTop="@dimen/size_10"
+        android:text="10 / 10 / 10"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_17"
+        android:typeface="monospace"
+        app:typeface="roboto_bold" />
+</LinearLayout>

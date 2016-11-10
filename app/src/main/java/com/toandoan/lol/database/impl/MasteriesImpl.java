@@ -7,8 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.toandoan.lol.database.base.DatabaseAbstract;
 import com.toandoan.lol.database.dao.MasteryDAO;
-import com.toandoan.lol.model.MasteryEnity;
-import com.toandoan.lol.model.item.ItemEnity;
+import com.toandoan.lol.model.matery.MasteryEnity;
 import com.toandoan.lol.utility.LogUtil;
 import com.toandoan.lol.utility.Utils;
 
@@ -39,6 +38,19 @@ public class MasteriesImpl extends DatabaseAbstract implements MasteryDAO {
             cursor.close();
         }
         return result;
+    }
+
+    public MasteryEnity getMasteryByID(String id) {
+        MasteryEnity masteryEnity = null;
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(COMMAND_GET_ITEM_BY_ID + id, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                masteryEnity = new MasteryEnity(cursor);
+            } while ((cursor.moveToNext()));
+            cursor.close();
+        }
+        return masteryEnity;
     }
 
     @Override

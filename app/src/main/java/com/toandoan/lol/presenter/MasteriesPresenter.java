@@ -9,7 +9,7 @@ import com.toandoan.lol.api.listenner.RiotService;
 import com.toandoan.lol.base.BaseActivity;
 import com.toandoan.lol.database.impl.MasteriesImpl;
 import com.toandoan.lol.listenner.MasteriesListenner;
-import com.toandoan.lol.model.MasteryEnity;
+import com.toandoan.lol.model.matery.MasteryEnity;
 import com.toandoan.lol.utility.JsonUtil;
 import com.toandoan.lol.utility.LogUtil;
 

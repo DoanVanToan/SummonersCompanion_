@@ -8,19 +8,28 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Environment;
+import android.os.Handler;
+import android.text.Html;
 import android.text.TextUtils;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.dialogplus.ViewHolder;
+import com.toandoan.lol.R;
 import com.toandoan.lol.model.champion.ChampionEnity;
 import com.toandoan.lol.model.champion.ChampionSkinEnity;
+import com.toandoan.lol.model.matery.MasteryEnity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -296,6 +305,40 @@ public class Utils {
         }
         return bitmap;
     }
+
+    public static void showMasteryDialog(final Activity activity, MasteryEnity masteryEnity) {
+        View view = LayoutInflater.from(activity).inflate(R.layout.can_not_start_layout, null);
+        ImageView imgTitle = (ImageView) view.findViewById(R.id.imageview_icon);
+        TextView txtTitle = (TextView) view.findViewById(R.id.textview_title);
+        TextView textViewMessage = (TextView) view.findViewById(R.id.textview_messsage);
+        imgTitle.setImageBitmap(Utils.getMasteryImageFromAssets(activity, true, masteryEnity.getImage().getFull()));
+        txtTitle.setText(masteryEnity.getName());
+        textViewMessage.setText(Html.fromHtml(masteryEnity.getDescription().get(masteryEnity.getRanks() - 1)));
+
+        final DialogPlus dialog = DialogPlus.newDialog(activity)
+                .setContentHolder(new ViewHolder(view))
+                .setGravity(Gravity.BOTTOM)
+                .setExpanded(false)
+                .setCancelable(true)
+                .create();
+
+        Handler h = new Handler();
+        h.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        dialog.dismiss();
+                    }
+                });
+            }
+        }, 5000);
+
+        dialog.show();
+
+    }
+
 
 
 }

@@ -2,18 +2,16 @@ package com.toandoan.lol.adapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.toandoan.lol.R;
 import com.toandoan.lol.database.dao.MasteryDAO;
 import com.toandoan.lol.database.impl.MasteriesImpl;
 import com.toandoan.lol.listenner.MasteriesListenner;
-import com.toandoan.lol.model.MasteryEnity;
+import com.toandoan.lol.model.matery.MasteryEnity;
 import com.toandoan.lol.utility.Utils;
 
 import java.util.List;
@@ -31,6 +29,7 @@ public class MasteriesPagerAdapter extends PagerAdapter {
     private final int RESOLVE = 2;
     private final int FEROCITY = 0;
     private String[] tabtitle;
+    private MasteriesImpl mMasterieDatabase;
 
     public MasteriesPagerAdapter(Context mContext, List<MasteryEnity> activeMasteries, MasteriesListenner listenner) {
         this.mContext = mContext;
@@ -39,6 +38,7 @@ public class MasteriesPagerAdapter extends PagerAdapter {
         this.tabtitle = new String[]{mContext.getString(R.string.cuning),
                 mContext.getString(R.string.resolve),
                 mContext.getString(R.string.ferocity)};
+        this.mMasterieDatabase = new MasteriesImpl(mContext);
     }
 
     @Override
@@ -87,21 +87,23 @@ public class MasteriesPagerAdapter extends PagerAdapter {
     }
 
     private void updateUIAtPosition(View view, int position) {
-        MasteriesImpl masterieDatabase = new MasteriesImpl(mContext);
+
+        List<MasteryEnity> masteryEnities = null;
         switch (position) {
             case CUNING:
-                List<MasteryEnity> masteryEnities = masterieDatabase.getMasteriesByType(MasteryDAO.TYPE_CUNNING);
-                binData(view, masteryEnities);
+                masteryEnities = mMasterieDatabase.getMasteriesByType(MasteryDAO.TYPE_CUNNING);
                 break;
+
             case RESOLVE:
-                masteryEnities = masterieDatabase.getMasteriesByType(MasteryDAO.TYPE_RESOLVE);
-                binData(view, masteryEnities);
+                masteryEnities = mMasterieDatabase.getMasteriesByType(MasteryDAO.TYPE_RESOLVE);
                 break;
+
             case FEROCITY:
-                masteryEnities = masterieDatabase.getMasteriesByType(MasteryDAO.TYPE_FEROCITY);
-                binData(view, masteryEnities);
+                masteryEnities = mMasterieDatabase.getMasteriesByType(MasteryDAO.TYPE_FEROCITY);
                 break;
         }
+
+        binData(view, masteryEnities);
     }
 
     private void binData(View view, final List<MasteryEnity> masteries) {
@@ -124,10 +126,14 @@ public class MasteriesPagerAdapter extends PagerAdapter {
 
         if (activeMasteries != null && activeMasteries.size() != 0) {
             for (int i = 0; i < activeMasteries.size(); i++) {
-                ImageView ivTitle = (ImageView) view.findViewWithTag(activeMasteries.get(i).getId() + "");
-                if (ivTitle != null) {
-                    ivTitle.setImageBitmap(Utils.getMasteryImageFromAssets(mContext, true, activeMasteries.get(i).getImage().getFull()));
+                MasteryEnity masteryEnity = activeMasteries.get(i);
+                if (masteryEnity!=null){
+                    ImageView ivTitle = (ImageView) view.findViewWithTag(masteryEnity.getId() + "");
+                    if (ivTitle != null) {
+                        ivTitle.setImageBitmap(Utils.getMasteryImageFromAssets(mContext, true, activeMasteries.get(i).getImage().getFull()));
+                    }
                 }
+
 
             }
         }

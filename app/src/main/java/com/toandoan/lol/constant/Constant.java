@@ -7,6 +7,7 @@ package com.toandoan.lol.constant;
 public class Constant {
     public static class Config {
         public static final String REGION = Region.NORTH_AMERICA;
+
         public static final String URL = "api.pvp.net";
 
         public static final boolean DEBUG = true;
@@ -62,12 +63,15 @@ public class Constant {
         public static final String GET_LIST_MASTERIES = "/api/lol/static-data/{region}/v1.2/mastery?masteryListData=all&api_key=" + ApiKey.API_KEY_VALUES;
 
         public static final String GET_CHAMPION_BY_ID = "/api/lol/static-data/{region}/v1.2/champion/{id}?champData=all&api_key=" + ApiKey.API_KEY_VALUES;
+
+        public static final String GET_SUMMONER_MASTERIES = "/api/lol/{region}/v1.4/summoner/{summonerIds}/masteries"+ ApiKey.API_KEY_URL;
     }
 
     public static class ApiKey {
         public static final String API_KEY = "api_key";
         public static final String API_KEY_VALUES = "RGAPI-950d5f5c-cbae-4b0e-8bea-89daff98c0bf";
         public static final String REGION = "region";
+        public static final String SUMMONER_ID = "summonerIds";
         public static final String SUMMONER_NAMES = "summonerNames";
         public static final String API_KEY_URL = "?" + API_KEY + "=" + API_KEY_VALUES;
         public static final String ID = "id";
@@ -100,6 +104,7 @@ public class Constant {
         public static final String ATTACKSPEEDPERLEVEL = "hp";
 
         public static final String DATA = "data";
+        public static final String PAGES = "pages";
     }
 
     public static class Data {

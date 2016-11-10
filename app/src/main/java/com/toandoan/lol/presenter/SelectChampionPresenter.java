@@ -93,23 +93,18 @@ public class SelectChampionPresenter {
         }
     };
 
-
     public List<ChampionEnity> parseChampFromJson(String fullChampStr) {
         List<ChampionEnity> result = new ArrayList<>();
-
         if (!TextUtils.isEmpty(fullChampStr)) {
             try {
                 JSONObject dataJsonObj = new JSONObject(fullChampStr);
                 if (dataJsonObj != null) {
                     JSONObject dataObj = JsonUtil.getJsonData(dataJsonObj);
-
                     if (dataObj != null) {
                         Iterator<String> iter = dataObj.keys();
                         while (iter.hasNext()) {
-
                             String key = iter.next();
                             JSONObject championObj = dataObj.optJSONObject(key);
-
                             ChampionEnity champion = new Gson().fromJson(championObj.toString(), ChampionEnity.class);
 
                             if (champion != null) {

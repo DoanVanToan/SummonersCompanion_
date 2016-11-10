@@ -1,9 +1,10 @@
-package com.toandoan.lol.model;
+package com.toandoan.lol.model.matery;
 
 import android.database.Cursor;
 
 import com.google.gson.annotations.SerializedName;
 import com.toandoan.lol.database.dao.MasteryDAO;
+import com.toandoan.lol.model.ImageEnity;
 import com.toandoan.lol.utility.Utils;
 
 import java.util.List;
@@ -29,6 +30,8 @@ public class MasteryEnity {
     private int prereq;
     @SerializedName("masteryTree")
     private String masteryTree;
+    @SerializedName("rank")
+    private int rank;
 
     public MasteryEnity(Cursor cursor) {
         this.id = cursor.getInt(cursor.getColumnIndex(MasteryDAO.FIELD_ID));
@@ -104,5 +107,13 @@ public class MasteryEnity {
 
     public void setMasteryTree(String masteryTree) {
         this.masteryTree = masteryTree;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 }

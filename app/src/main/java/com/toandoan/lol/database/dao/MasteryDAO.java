@@ -1,6 +1,6 @@
 package com.toandoan.lol.database.dao;
 
-import com.toandoan.lol.model.MasteryEnity;
+import com.toandoan.lol.model.matery.MasteryEnity;
 
 import java.util.List;
 
@@ -9,29 +9,29 @@ import java.util.List;
  */
 
 public interface MasteryDAO {
-    public static final String TABLE_MASTERIES = "tbl_masteries";
-    public static final String FIELD_ID = "id";
-    public static final String FIELD_RANKS = "ranks";
-    public static final String FIELD_NAME = "name";
-    public static final String FIELD_IMAGE = "image";
-    public static final String FIELD_PREREQ = "prereq";
-    public static final String FIELD_MASTERYTREE = "masteryTree";
-    public static final String FIELD_SANITIZEDDESCRIPTION = "sanitizedDescription";
-    public static final String FIELD_DESCRIPTION = "description";
+    String TABLE_MASTERIES = "tbl_masteries";
+    String FIELD_ID = "id";
+    String FIELD_RANKS = "ranks";
+    String FIELD_NAME = "name";
+    String FIELD_IMAGE = "image";
+    String FIELD_PREREQ = "prereq";
+    String FIELD_MASTERYTREE = "masteryTree";
+    String FIELD_SANITIZEDDESCRIPTION = "sanitizedDescription";
+    String FIELD_DESCRIPTION = "description";
 
-    public static final String TYPE_FEROCITY = "Ferocity";
-    public static final String TYPE_CUNNING ="Cunning";
-    public static final String TYPE_RESOLVE= "Resolve";
-    
-    public static final String COMMAND_GET_ALL_ROWS = "SELECT * FROM " + TABLE_MASTERIES;
-    public static final String COMMAND_DELETE_TABLE = "DELETE FROM " + TABLE_MASTERIES;
-    public static final String COMMAND_GET_ITEM_BY_MASTERYTREE = "SELECT * FROM " + TABLE_MASTERIES + " WHERE " + FIELD_MASTERYTREE + " = ?";
+    String TYPE_FEROCITY = "Ferocity";
+    String TYPE_CUNNING = "Cunning";
+    String TYPE_RESOLVE = "Resolve";
 
-    public List<MasteryEnity> getAllMasteries();
+    String COMMAND_GET_ALL_ROWS = "SELECT * FROM " + TABLE_MASTERIES;
+    String COMMAND_DELETE_TABLE = "DELETE FROM " + TABLE_MASTERIES;
+    String COMMAND_GET_ITEM_BY_MASTERYTREE = "SELECT * FROM " + TABLE_MASTERIES + " WHERE " + FIELD_MASTERYTREE + " = ?";
+    String COMMAND_GET_ITEM_BY_ID = "SELECT * FROM " + TABLE_MASTERIES + " WHERE " + FIELD_ID + " = ";
+    List<MasteryEnity> getAllMasteries();
 
-    public List<MasteryEnity> getMasteriesByType(String type);
+    List<MasteryEnity> getMasteriesByType(String type);
 
-    public boolean insertMastery(MasteryEnity masteryEnity);
+    boolean insertMastery(MasteryEnity masteryEnity);
 
     boolean deleteAllMasteriesTable();
 
