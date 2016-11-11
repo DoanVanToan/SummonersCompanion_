@@ -25,6 +25,7 @@ public class RuneEnity {
     private int mRuneSlotId;
     @SerializedName("runeId")
     private int runeId;
+    private int mCount;
 
     public RuneEnity(Cursor cursor) {
         this.id = cursor.getInt(cursor.getColumnIndex(RunesDAO.FIELD_ID));
@@ -92,5 +93,17 @@ public class RuneEnity {
 
     public void setRuneId(int runeId) {
         this.runeId = runeId;
+    }
+
+    public void setmRuneSlotId(int mRuneSlotId) {
+        this.mRuneSlotId = mRuneSlotId;
+    }
+
+    public int getmCount() {
+        return mCount;
+    }
+
+    public void setmCount(int mCount) {
+        this.mCount = mCount;
     }
 }

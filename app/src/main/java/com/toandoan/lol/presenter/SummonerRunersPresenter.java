@@ -101,6 +101,7 @@ public class SummonerRunersPresenter implements SumonerMasteriesAbstract.Present
             }
 
             page.setRunes(temps);
+            page.getCountRunes();
         }
     }
 
