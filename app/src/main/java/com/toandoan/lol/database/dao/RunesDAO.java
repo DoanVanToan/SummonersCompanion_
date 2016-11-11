@@ -9,24 +9,27 @@ import java.util.List;
  */
 
 public interface RunesDAO {
-    public static final String TABLE_RUNE = "tbl_rune";
-    public static final String FIELD_ID = "id";
-    public static final String FIELD_NAME = "name";
-    public static final String FIELD_DESCRIPTION = "description";
-    public static final String FIELD_ISRUNE = "isRune";
-    public static final String FIELD_TIER = "tier";
-    public static final String FIELD_TYPE = "type";
-    public static final String FIELD_IMAGE = "image";
+    String TABLE_RUNE = "tbl_rune";
+    String FIELD_ID = "id";
+    String FIELD_NAME = "name";
+    String FIELD_DESCRIPTION = "description";
+    String FIELD_ISRUNE = "isRune";
+    String FIELD_TIER = "tier";
+    String FIELD_TYPE = "type";
+    String FIELD_IMAGE = "image";
 
 
-    public static final String COMMAND_GET_ALL_ROWS = "SELECT * FROM " + TABLE_RUNE + " ORDER BY " + FIELD_TIER + " DESC";
-    public static final String COMMAND_DELETE_TABLE = "DELETE FROM " + TABLE_RUNE;
+    String COMMAND_GET_ALL_ROWS = "SELECT * FROM " + TABLE_RUNE + " ORDER BY " + FIELD_TIER + " DESC";
+    String COMMAND_DELETE_TABLE = "DELETE FROM " + TABLE_RUNE;
+    String COMMAND_GET_RUNE_BY_ID = "SELECT * FROM " + TABLE_RUNE + " ORDER BY " + FIELD_ID + " =";
 
-    public List<RuneEnity> getAllRunes();
+    List<RuneEnity> getAllRunes();
 
-    public boolean insertRunes(RuneEnity itemEnity);
+    boolean insertRunes(RuneEnity itemEnity);
 
     boolean deleteAllRuneTable();
 
     void insertListRunes(List<RuneEnity> list);
+
+    RuneEnity getRuneByID(int id);
 }

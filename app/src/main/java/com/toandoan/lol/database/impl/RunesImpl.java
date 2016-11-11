@@ -80,4 +80,19 @@ public class RunesImpl extends DatabaseAbstract implements RunesDAO {
             }
         }
     }
+
+    @Override
+    public RuneEnity getRuneByID(int id) {
+        RuneEnity result = null;
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(COMMAND_GET_RUNE_BY_ID + id, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                result = new RuneEnity(cursor);
+            } while ((cursor.moveToNext()));
+            cursor.close();
+        }
+
+        return result;
+    }
 }

@@ -22,7 +22,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".activity.ChampionDetailActivity"
@@ -38,6 +37,7 @@
         <activity
             android:name=".activity.SumonerMasteriesActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".activity.SumonerRunesActivity"></activity>
     </application>
 
 </manifest>

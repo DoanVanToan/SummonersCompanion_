@@ -21,6 +21,10 @@ public class RuneEnity {
     private String name;
     @SerializedName("masteries_image")
     private ImageEnity image;
+    @SerializedName("runeSlotId")
+    private int mRuneSlotId;
+    @SerializedName("runeId")
+    private int runeId;
 
     public RuneEnity(Cursor cursor) {
         this.id = cursor.getInt(cursor.getColumnIndex(RunesDAO.FIELD_ID));
@@ -72,5 +76,21 @@ public class RuneEnity {
 
     public void setImage(ImageEnity image) {
         this.image = image;
+    }
+
+    public int getmRuneSlotId() {
+        return mRuneSlotId;
+    }
+
+    public void setRuneSlotId(int runeSlotId) {
+        this.mRuneSlotId = runeSlotId;
+    }
+
+    public int getRuneId() {
+        return runeId;
+    }
+
+    public void setRuneId(int runeId) {
+        this.runeId = runeId;
     }
 }

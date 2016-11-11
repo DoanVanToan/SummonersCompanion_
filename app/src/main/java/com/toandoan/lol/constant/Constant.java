@@ -65,6 +65,10 @@ public class Constant {
         public static final String GET_CHAMPION_BY_ID = "/api/lol/static-data/{region}/v1.2/champion/{id}?champData=all&api_key=" + ApiKey.API_KEY_VALUES;
 
         public static final String GET_SUMMONER_MASTERIES = "/api/lol/{region}/v1.4/summoner/{summonerIds}/masteries"+ ApiKey.API_KEY_URL;
+
+        public static final String GET_SUMMONER_RUNES = " /api/lol/{region}/v1.4/summoner/{summonerIds}/runes"+ ApiKey.API_KEY_URL;
+
+
     }
 
     public static class ApiKey {
@@ -105,6 +109,8 @@ public class Constant {
 
         public static final String DATA = "data";
         public static final String PAGES = "pages";
+        public static final String SLOTS = "slots";
+
     }
 
     public static class Data {
