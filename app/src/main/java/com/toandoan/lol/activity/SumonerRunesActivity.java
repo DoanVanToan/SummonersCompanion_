@@ -2,7 +2,10 @@ package com.toandoan.lol.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
+import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.toandoan.lol.R;
 import com.toandoan.lol.base.BaseActivity;
 import com.toandoan.lol.constant.Constant;
@@ -19,6 +22,10 @@ import java.util.List;
 public class SumonerRunesActivity extends BaseActivity implements SumonerRunesAbstract.View{
     private SummonerRunersPresenter mPresenter;
     private String mID;
+    private MaterialSpinner mRuneSpinner;
+    private RecyclerView mRuneRecyclerView;
+    private TextView mTitleTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +41,10 @@ public class SumonerRunesActivity extends BaseActivity implements SumonerRunesAb
 
     @Override
     public void initViews() {
+        mRuneSpinner = (MaterialSpinner) findViewById(R.id.spinner_runes);
+        mRuneRecyclerView = (RecyclerView) findViewById(R.id.recycler_runes);
+        mTitleTextView = (TextView) findViewById(R.id.text_title);
+
         mPresenter = new SummonerRunersPresenter(this, this);
         mPresenter.loadSumonerMasteries(Constant.Region.NORTH_AMERICA, mID);
     }

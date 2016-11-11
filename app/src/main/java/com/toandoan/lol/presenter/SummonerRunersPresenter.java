@@ -53,6 +53,7 @@ public class SummonerRunersPresenter implements SumonerMasteriesAbstract.Present
         call.enqueue(getSummonerRuneCallBack);
     }
 
+
     Callback<ResponseBody> getSummonerRuneCallBack = new Callback<ResponseBody>() {
 
         @Override

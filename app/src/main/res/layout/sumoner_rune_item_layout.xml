@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/size_5"
+    android:background="@color/gray_0E1617"
+    android:gravity="center"
+    android:padding="@dimen/size_5">
+
+    <com.toandoan.lol.widget.view.RobotoTextView
+        android:id="@+id/tv_rune_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/ivPassiveIcon"
+        android:paddingLeft="@dimen/size_5"
+        android:text="1x"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_14"
+        android:textStyle="bold"
+        app:typeface="roboto_bold" />
+
+
+    <ImageView
+        android:layout_marginLeft="@dimen/size_10"
+        android:id="@+id/ivRuneAvatar"
+        android:layout_width="@dimen/size_40"
+        android:layout_height="@dimen/size_40" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/size_10"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/tvRuneName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ivPassiveIcon"
+            android:paddingLeft="@dimen/size_5"
+            android:text="aaaaaaaaaaaaa"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_14"
+            android:textStyle="bold"
+            app:typeface="roboto_bold" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/tvRuneTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_5"
+            android:layout_toRightOf="@+id/ivPassiveIcon"
+            android:paddingLeft="@dimen/size_5"
+            android:text="aaaaaaaaaaaaa"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_12"
+            android:textStyle="bold"
+            app:typeface="roboto_light" />
+    </LinearLayout>
+
+</LinearLayout>
