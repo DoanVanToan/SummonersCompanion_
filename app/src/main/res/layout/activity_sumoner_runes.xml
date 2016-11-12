@@ -26,13 +26,13 @@
 
     <com.toandoan.lol.widget.view.RobotoTextView
         android:id="@+id/text_title"
+        android:paddingLeft="@dimen/size_5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:gravity="center"
+        android:gravity="left"
         android:paddingBottom="@dimen/size_10"
         android:paddingTop="@dimen/size_10"
-        android:text="10 / 10 / 10\n adjiasdksadasjd\nasidhaidh"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_17"
         android:typeface="monospace"

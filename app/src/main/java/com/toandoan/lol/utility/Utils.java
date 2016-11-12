@@ -40,6 +40,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.channels.FileChannel;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -339,6 +341,10 @@ public class Utils {
 
     }
 
+    public static String formatDouble(double number) {
+        NumberFormat formatter = new DecimalFormat("#0.00");
+        return formatter.format(number);
+    }
 
 
 }

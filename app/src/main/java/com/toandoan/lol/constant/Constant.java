@@ -5,6 +5,10 @@ package com.toandoan.lol.constant;
  */
 
 public class Constant {
+    public static final String SPACE = " ";
+    public static final String PERCENT = "%";
+    public static final String LINE_BREAK = "\n";
+
     public static class Config {
         public static final String REGION = Region.NORTH_AMERICA;
 

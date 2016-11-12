@@ -33,7 +33,7 @@ import retrofit2.Callback;
  * Created by framgia on 11/11/2016.
  */
 
-public class SummonerRunersPresenter implements SumonerMasteriesAbstract.Presenter {
+public class SummonerRunersPresenter implements SumonerRunesAbstract.Presenter {
     private SumonerRunesAbstract.View mView;
     private BaseActivity mActivity;
     private List<PageRunes> mPageRunes;
@@ -46,13 +46,12 @@ public class SummonerRunersPresenter implements SumonerMasteriesAbstract.Present
     }
 
     @Override
-    public void loadSumonerMasteries(String region, String id) {
+    public void loadSumonerRunes(String region, String id) {
         mActivity.showDialog();
         RiotService service = ServiceGenerator.createStaticService(RiotService.class);
         Call<ResponseBody> call = service.getSumonnerRunes(region, id);
         call.enqueue(getSummonerRuneCallBack);
     }
-
 
     Callback<ResponseBody> getSummonerRuneCallBack = new Callback<ResponseBody>() {
 
@@ -73,6 +72,13 @@ public class SummonerRunersPresenter implements SumonerMasteriesAbstract.Present
                 }
 
                 getRuneDetailFromDB();
+
+
+                PageRunes firstPage = mPageRunes.get(0);
+                mView.initViewPager(firstPage.getCountRunes());
+                mView.updateTabLayout(firstPage.getPageTitle());
+                mView.updateSpinner(mPageRunes);
+
                 LogUtil.e("getSummonerRuneCallBack>>", String.valueOf(mPageRunes.size()));
 
             } else {
@@ -102,18 +108,14 @@ public class SummonerRunersPresenter implements SumonerMasteriesAbstract.Present
             }
 
             page.setRunes(temps);
-            page.getCountRunes();
+            page.updateCountRunes();
         }
     }
 
 
     @Override
-    public void getCountMasteries(List<MasteryEnity> listPages) {
-
-    }
-
-    @Override
-    public void onSpinnerSelected(PageMasteries page) {
-
+    public void onSpinnerSelected(PageRunes page) {
+        mView.initViewPager(page.getCountRunes());
+        mView.updateTabLayout(page.getPageTitle());
     }
 }
