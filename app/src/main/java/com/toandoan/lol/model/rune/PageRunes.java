@@ -106,7 +106,7 @@ public class PageRunes {
             runeValueStr = Utils.formatDouble(runValue);
 
             int index = runeFooter.indexOf("(");
-            if (index == -1) index = runeFooter.indexOf("/");
+//            if (index == -1) index = runeFooter.indexOf("/");
 
             if (index != -1) {
                 StringBuilder builder = new StringBuilder();
@@ -119,13 +119,14 @@ public class PageRunes {
                 String lastFooter = runeFooter.substring(space, runeFooter.length());
                 if (value.endsWith(Constant.Charactor.PERCENT)) {
                     lastFooter = Constant.Charactor.PERCENT + lastFooter;
-                    value.replace(Constant.Charactor.PERCENT, Constant.Charactor.SPACE);
+                    value = value.replace(Constant.Charactor.PERCENT, Constant.Charactor.SPACE);
                 }
 
                 double valuePerLevel = Double.parseDouble(value);
                 valuePerLevel = rune.getmCount() * valuePerLevel;
                 value = Utils.formatDouble(valuePerLevel);
-                if (valuePerLevel > 0) value = Constant.Charactor.PLUS + value;
+
+                value = runeHeader + value;
 
                 builder
                         .append(value)

@@ -98,13 +98,14 @@ public class SummonerRunersPresenter implements SumonerRunesAbstract.Presenter {
     private void getRuneDetailFromDB() {
         for (PageRunes page : mPageRunes) {
             List<RuneEnity> temps = new ArrayList<>();
-
-            for (RuneEnity rune : page.getRunes()) {
-                int slotID = rune.getmRuneSlotId();
-                rune = mRuneDatabase.getRuneByID(rune.getRuneId());
-                rune.setRuneSlotId(slotID);
-                rune.setRuneId(rune.getId());
-                temps.add(rune);
+            if (page.getRunes() != null) {
+                for (RuneEnity rune : page.getRunes()) {
+                    int slotID = rune.getmRuneSlotId();
+                    rune = mRuneDatabase.getRuneByID(rune.getRuneId());
+                    rune.setRuneSlotId(slotID);
+                    rune.setRuneId(rune.getId());
+                    temps.add(rune);
+                }
             }
 
             page.setRunes(temps);

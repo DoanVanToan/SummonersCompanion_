@@ -3,6 +3,7 @@ package com.toandoan.lol.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -20,6 +21,7 @@ public class SumonerDetailActivity extends BaseActivity implements SumonerDetail
     private Toolbar mToolbar;
     private UserEnity mUserEnity;
     private FloatingActionMenu mMenu;
+    private CollapsingToolbarLayout mCollapsingTollbar;
 
 
     public static void startActivity(Context context, UserEnity userID) {
@@ -47,9 +49,11 @@ public class SumonerDetailActivity extends BaseActivity implements SumonerDetail
     @Override
     public void initViews() {
         mToolbar = (Toolbar) findViewById(R.id.mToolbar);
+        mCollapsingTollbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(mUserEnity.getName());
+        mCollapsingTollbar.setTitle(mUserEnity.getName());
+
         mRunesButton = (FloatingActionButton) findViewById(R.id.menu_runes);
         mMasteriesButton = (FloatingActionButton) findViewById(R.id.menu_masteries);
         mMenu = (FloatingActionMenu) findViewById(R.id.menu);
