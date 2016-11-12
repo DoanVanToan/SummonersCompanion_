@@ -37,8 +37,13 @@
         <activity
             android:name=".activity.SumonerMasteriesActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.SumonerRunesActivity" />
-        <activity android:name=".activity.SumonerDetailActivity"></activity>
+        <activity
+            android:name=".activity.SumonerRunesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SumonerDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

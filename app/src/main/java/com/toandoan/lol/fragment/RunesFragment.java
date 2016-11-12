@@ -81,4 +81,6 @@ public class RunesFragment extends BaseFragment {
     public void onSearch(String key) {
         Utils.show(getContext(), TAG + key);
     }
+
+
 }

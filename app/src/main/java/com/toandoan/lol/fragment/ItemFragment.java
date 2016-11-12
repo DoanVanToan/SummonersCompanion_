@@ -99,4 +99,6 @@ public class ItemFragment extends BaseFragment {
     public void onSearch(String key) {
         Utils.show(getContext(), TAG + key);
     }
+
+
 }

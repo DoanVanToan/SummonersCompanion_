@@ -53,7 +53,7 @@ public class MainActivity extends BaseActivity
         mRunesFragment = RunesFragment.newInstance();
         mMasteriesFragment = MasteriesFragment.newInstance();
 
-        changeFramget(mSelectChampionFragment);
+        changeFramget(mUserOverviewFragment);
     }
 
     public void initViews() {
@@ -110,6 +110,10 @@ public class MainActivity extends BaseActivity
     private SearchView.OnQueryTextListener onQueryTextListener = new SearchView.OnQueryTextListener() {
         @Override
         public boolean onQueryTextSubmit(String query) {
+            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.flContent);
+            if (currentFragment instanceof BaseFragment) {
+                ((BaseFragment) currentFragment).onSearchSubmit(query);
+            }
             return false;
         }
 

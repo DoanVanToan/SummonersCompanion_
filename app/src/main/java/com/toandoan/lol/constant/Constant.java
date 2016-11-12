@@ -5,9 +5,12 @@ package com.toandoan.lol.constant;
  */
 
 public class Constant {
-    public static final String SPACE = " ";
-    public static final String PERCENT = "%";
-    public static final String LINE_BREAK = "\n";
+    public static class Charactor{
+        public static final String PLUS = "+";
+        public static final String SPACE = " ";
+        public static final String PERCENT = "%";
+        public static final String LINE_BREAK = "\n";
+    }
 
     public static class Config {
         public static final String REGION = Region.NORTH_AMERICA;
@@ -49,6 +52,8 @@ public class Constant {
         public static final String URL_VIDEO = "url_video";
         public static final String URL_THUMB_VIDEO = "url_thumb_video";
         public static final String TITLE = "title";
+        public static final String SUMONER_ID = "id";
+        public static final String SUMONER = "sumoner";
     }
 
 

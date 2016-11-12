@@ -92,28 +92,59 @@ public class PageRunes {
         for (RuneEnity rune : mCountRunes) {
             String description = rune.getDescription();
             String runeHeader = description.substring(0, 1);
-            int firstSpace = description.indexOf(Constant.SPACE);
+            int firstSpace = description.indexOf(Constant.Charactor.SPACE);
             String runeFooter = description.substring(firstSpace, description.length());
             String runeValueStr = description.substring(1, firstSpace);
 
-            if (runeValueStr.endsWith(Constant.PERCENT)) {
-                runeFooter = Constant.PERCENT + runeFooter;
+            if (runeValueStr.endsWith(Constant.Charactor.PERCENT)) {
+                runeFooter = Constant.Charactor.PERCENT + runeFooter;
                 runeValueStr = runeValueStr.substring(0, runeValueStr.length() - 1);
             }
+
             double runValue = Double.parseDouble(runeValueStr);
             runValue = rune.getmCount() * runValue;
             runeValueStr = Utils.formatDouble(runValue);
+
+            int index = runeFooter.indexOf("(");
+            if (index == -1) index = runeFooter.indexOf("/");
+
+            if (index != -1) {
+                StringBuilder builder = new StringBuilder();
+                builder.append(runeFooter.substring(0, index + 1));
+
+                runeFooter = runeFooter.substring(index + 2, runeFooter.length());
+                int space = runeFooter.indexOf(Constant.Charactor.SPACE);
+
+                String value = runeFooter.substring(0, space);
+                String lastFooter = runeFooter.substring(space, runeFooter.length());
+                if (value.endsWith(Constant.Charactor.PERCENT)) {
+                    lastFooter = Constant.Charactor.PERCENT + lastFooter;
+                    value.replace(Constant.Charactor.PERCENT, Constant.Charactor.SPACE);
+                }
+
+                double valuePerLevel = Double.parseDouble(value);
+                valuePerLevel = rune.getmCount() * valuePerLevel;
+                value = Utils.formatDouble(valuePerLevel);
+                if (valuePerLevel > 0) value = Constant.Charactor.PLUS + value;
+
+                builder
+                        .append(value)
+                        .append(lastFooter);
+
+                runeFooter = builder.toString();
+            }
+
             stringBuilder
                     .append(runeHeader)
-                    .append(Constant.SPACE)
+                    .append(Constant.Charactor.SPACE)
                     .append(runeValueStr)
-                    .append(Constant.SPACE)
+                    .append(Constant.Charactor.SPACE)
                     .append(runeFooter)
-                    .append(Constant.LINE_BREAK);
+                    .append(Constant.Charactor.LINE_BREAK);
         }
 
         mPageTitle = stringBuilder.toString();
-        if (mPageTitle.endsWith(Constant.LINE_BREAK)) {
+        if (mPageTitle.endsWith(Constant.Charactor.LINE_BREAK)) {
             mPageTitle = mPageTitle.substring(0, mPageTitle.length() - 1);
         }
         return mPageTitle;

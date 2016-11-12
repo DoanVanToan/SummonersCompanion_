@@ -36,5 +36,6 @@ dependencies {
     compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
     compile 'com.jaredrummler:material-spinner:1.1.0'
     compile 'com.orhanobut:dialogplus:1.11@aar'
+    compile 'com.github.clans:fab:1.6.4'
     testCompile 'junit:junit:4.12'
 }

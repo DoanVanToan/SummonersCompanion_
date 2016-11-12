@@ -5,11 +5,13 @@ import com.toandoan.lol.constant.Constant;
 
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * Created by ToanDoan on 9/29/2016.
  */
 
-public class UserEnity {
+public class UserEnity implements Serializable{
     private int id;
     private String name;
     private int profileIconId;

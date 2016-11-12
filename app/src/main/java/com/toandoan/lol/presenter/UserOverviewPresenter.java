@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.toandoan.lol.R;
 import com.toandoan.lol.api.listenner.RiotService;
+import com.toandoan.lol.base.BaseActivity;
 import com.toandoan.lol.constant.Constant;
 import com.toandoan.lol.listenner.IUserOverviewListenner;
 import com.toandoan.lol.utility.JsonUtil;
@@ -22,11 +23,11 @@ import retrofit2.Retrofit;
  */
 
 public class UserOverviewPresenter {
-    public Context mContext;
+    public BaseActivity mActivity;
     private IUserOverviewListenner listenner;
 
-    public UserOverviewPresenter(Context mContext, IUserOverviewListenner listenner) {
-        this.mContext = mContext;
+    public UserOverviewPresenter(BaseActivity mActivity, IUserOverviewListenner listenner) {
+        this.mActivity = mActivity;
         this.listenner = listenner;
     }
 
@@ -34,8 +35,7 @@ public class UserOverviewPresenter {
         if (!TextUtils.isEmpty(region)) {
 //            Constant.Config.REGION = region;
         }
-
-
+        mActivity.showDialog();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constant.Config.getBaseUrl())
                 .build();
@@ -50,6 +50,7 @@ public class UserOverviewPresenter {
     Callback<ResponseBody> searchUserByName = new Callback<ResponseBody>() {
         @Override
         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            mActivity.dismissDialog();
             JSONObject responseJson = JsonUtil.convertResponseToJson(response);
             if (responseJson != null) {
                 if (JsonUtil.getJsonStatus(responseJson) == null) {
@@ -58,13 +59,14 @@ public class UserOverviewPresenter {
                     listenner.searchUserByNameFail(JsonUtil.getStatusMsg(responseJson));
                 }
             }else {
-                listenner.searchUserByNameFail(mContext.getString(R.string.something_wrong));
+                listenner.searchUserByNameFail(mActivity.getString(R.string.something_wrong));
             }
         }
 
         @Override
         public void onFailure(Call<ResponseBody> call, Throwable t) {
             listenner.searchUserByNameFail(t.toString());
+            mActivity.dismissDialog();
         }
     };
 }

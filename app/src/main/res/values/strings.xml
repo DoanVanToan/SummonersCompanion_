@@ -43,4 +43,6 @@
     <string name="cuning">CUNING</string>
     <string name="resolve">RESOLVE</string>
     <string name="ferocity">FEROCITY</string>
+    <string name="mastery">Masteries</string>
+    <string name="runes">Runes</string>
 </resources>

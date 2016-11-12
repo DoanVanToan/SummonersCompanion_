@@ -1,5 +1,7 @@
 package com.toandoan.lol.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +13,7 @@ import com.toandoan.lol.R;
 import com.toandoan.lol.adapter.SumonerRuneAdapter;
 import com.toandoan.lol.base.BaseActivity;
 import com.toandoan.lol.constant.Constant;
+import com.toandoan.lol.model.UserEnity;
 import com.toandoan.lol.model.matery.MasteryEnity;
 import com.toandoan.lol.model.matery.PageMasteries;
 import com.toandoan.lol.model.rune.PageRunes;
@@ -23,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SumonerRunesActivity extends BaseActivity implements SumonerRunesAbstract.View
-, MaterialSpinner.OnItemSelectedListener{
+        , MaterialSpinner.OnItemSelectedListener {
     private SummonerRunersPresenter mPresenter;
     private String mID;
     private MaterialSpinner mRuneSpinner;
@@ -31,7 +34,13 @@ public class SumonerRunesActivity extends BaseActivity implements SumonerRunesAb
     private TextView mTitleTextView;
     private SumonerRuneAdapter mAdapter;
     private List<PageRunes> mPageRunes;
+    private UserEnity mUserEnity;
 
+    public static void startActivity(Context context, UserEnity userID) {
+        Intent intent = new Intent(context, SumonerRunesActivity.class);
+        intent.putExtra(Constant.IntentKey.SUMONER, userID);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +50,9 @@ public class SumonerRunesActivity extends BaseActivity implements SumonerRunesAb
         initViews();
     }
 
-    private void initData(){
-        mID = String.valueOf(26700896);
+    private void initData() {
+        mUserEnity = (UserEnity) getIntent().getExtras().getSerializable(Constant.IntentKey.SUMONER);
+        mID = String.valueOf(mUserEnity.getId());
     }
 
     @Override

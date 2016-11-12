@@ -108,4 +108,5 @@ public class SelectChampionFragment extends BaseFragment {
 
         adapter.updateViews(searchChampions);
     }
+
 }

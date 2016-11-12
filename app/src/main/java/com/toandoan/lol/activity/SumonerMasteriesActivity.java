@@ -1,5 +1,7 @@
 package com.toandoan.lol.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import com.toandoan.lol.adapter.MasteriesPagerAdapter;
 import com.toandoan.lol.base.BaseActivity;
 import com.toandoan.lol.constant.Constant;
 import com.toandoan.lol.listenner.MasteriesListenner;
+import com.toandoan.lol.model.UserEnity;
 import com.toandoan.lol.model.matery.MasteryEnity;
 import com.toandoan.lol.model.matery.PageMasteries;
 import com.toandoan.lol.mvp_abstract.SumonerMasteriesAbstract;
@@ -30,6 +33,13 @@ public class SumonerMasteriesActivity extends BaseActivity implements SumonerMas
     private TextView mTitleTextView;
     private MaterialSpinner mMasterySpinner;
     private List<PageMasteries> mPageMasteries;
+    private UserEnity mUserEnity;
+
+    public static void startActivity(Context context, UserEnity userID) {
+        Intent intent = new Intent(context, SumonerMasteriesActivity.class);
+        intent.putExtra(Constant.IntentKey.SUMONER, userID);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +50,8 @@ public class SumonerMasteriesActivity extends BaseActivity implements SumonerMas
     }
 
     private void initData() {
-        mSumonerID = String.valueOf(26700896);
+        mUserEnity = (UserEnity) getIntent().getExtras().getSerializable(Constant.IntentKey.SUMONER);
+        mSumonerID = String.valueOf(mUserEnity.getId());
     }
 
     @Override

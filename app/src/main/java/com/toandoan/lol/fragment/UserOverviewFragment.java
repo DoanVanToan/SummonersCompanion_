@@ -9,9 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.toandoan.lol.R;
+import com.toandoan.lol.activity.ChampionDetailActivity;
+import com.toandoan.lol.activity.SumonerDetailActivity;
+import com.toandoan.lol.base.BaseActivity;
+import com.toandoan.lol.base.BaseFragment;
 import com.toandoan.lol.constant.Constant;
 import com.toandoan.lol.presenter.UserOverviewPresenter;
 import com.toandoan.lol.listenner.IUserOverviewListenner;
@@ -26,11 +31,12 @@ import java.util.Iterator;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UserOverviewFragment extends Fragment {
+public class UserOverviewFragment extends BaseFragment {
     private ImageView ivAvatar;
     private TextView tvName, tvLevel;
     private Context mContext;
     private UserOverviewPresenter helper;
+    private BaseActivity mActivity;
 
     public static UserOverviewFragment newInstance() {
         UserOverviewFragment userOverviewFragment = new UserOverviewFragment();
@@ -53,6 +59,7 @@ public class UserOverviewFragment extends Fragment {
 
 
     private void initViews(View v) {
+        mActivity = (BaseActivity) getActivity();
         ivAvatar = (ImageView) v.findViewById(R.id.ivAvt);
         tvLevel = (TextView) v.findViewById(R.id.tvLevel);
         tvName = (TextView) v.findViewById(R.id.tvName);
@@ -62,8 +69,8 @@ public class UserOverviewFragment extends Fragment {
     }
 
     private void initHelper() {
-        helper = new UserOverviewPresenter(mContext, iUserOverviewListenner);
-        helper.callApiSearch(Constant.Region.NORTH_AMERICA, "hide on bush");
+        helper = new UserOverviewPresenter(mActivity, iUserOverviewListenner);
+
     }
 
     /**
@@ -72,7 +79,6 @@ public class UserOverviewFragment extends Fragment {
     public IUserOverviewListenner iUserOverviewListenner = new IUserOverviewListenner() {
         @Override
         public void searchUserByNameSuccess(JSONObject response) {
-
             LogUtil.e("searchUserByNameSuccess>>>", response.toString());
             Iterator<String> iter = response.keys();
             String key = iter.next();
@@ -85,6 +91,10 @@ public class UserOverviewFragment extends Fragment {
                         .into(ivAvatar);
                 tvName.setText(userEnity.getName());
                 tvLevel.setText("- " + userEnity.getSummonerLevel());
+
+                SumonerDetailActivity.startActivity(getContext(), userEnity);
+            }else {
+
             }
 
 
@@ -93,8 +103,17 @@ public class UserOverviewFragment extends Fragment {
 
         @Override
         public void searchUserByNameFail(String message) {
-
+            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
         }
     };
 
+    @Override
+    public void onSearch(String key) {
+
+    }
+
+    @Override
+    public void onSearchSubmit(String key) {
+        helper.callApiSearch(Constant.Region.NORTH_AMERICA, key);
+    }
 }
