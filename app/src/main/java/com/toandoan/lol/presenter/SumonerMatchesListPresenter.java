@@ -8,9 +8,11 @@ import com.toandoan.lol.api.base.ServiceGenerator;
 import com.toandoan.lol.api.listenner.RiotService;
 import com.toandoan.lol.base.BaseActivity;
 import com.toandoan.lol.constant.Constant;
+import com.toandoan.lol.model.UserEnity;
 import com.toandoan.lol.model.match.MatchList;
 import com.toandoan.lol.model.match.MatchReference;
 import com.toandoan.lol.model.match_detail.MatchDetail;
+import com.toandoan.lol.model.match_detail.Participant;
 import com.toandoan.lol.mvp_abstract.SumonerMatchesListAbstract;
 import com.toandoan.lol.utility.JsonUtil;
 import com.toandoan.lol.utility.LogUtil;
@@ -38,10 +40,12 @@ public class SumonerMatchesListPresenter implements SumonerMatchesListAbstract.P
     private List<MatchDetail> mMatchDetails;
     private int mCurrentPos;
     private int mMaxSize;
+    private UserEnity mUser;
 
-    public SumonerMatchesListPresenter(BaseActivity activity, SumonerMatchesListAbstract.View view) {
+    public SumonerMatchesListPresenter(BaseActivity activity, SumonerMatchesListAbstract.View view, UserEnity user) {
         mActivity = activity;
         mView = view;
+        mUser = user;
     }
 
     @Override
@@ -93,6 +97,36 @@ public class SumonerMatchesListPresenter implements SumonerMatchesListAbstract.P
         }
     };
 
+    public List<Participant> getHistoryMatch() {
+        List<Participant> userParticipants = new ArrayList<>();
+        if (mMatchDetails == null || mMatchDetails.size() == 0) {
+            return userParticipants;
+        }
+
+        for (MatchDetail matchDetail : mMatchDetails) {
+            int participantId = -1;
+            if (matchDetail.getParticipantIdentities()==null || matchDetail.getParticipantIdentities().size()==0) break;
+
+            for (int i = 0; i < matchDetail.getParticipantIdentities().size(); i++) {
+                long sumonerId = matchDetail.getParticipantIdentities().get(i).getPlayer().getSummonerId();
+                if (sumonerId == mUser.getId()) {
+                    participantId = matchDetail.getParticipantIdentities().get(i).getParticipantId();
+                    break;
+                }
+            }
+            if (participantId == -1) break;
+
+            for (int i = 0; i < matchDetail.getParticipants().size(); i++) {
+                if (matchDetail.getParticipants().get(i).getParticipantId() == participantId) {
+                    matchDetail.getParticipants().get(i).setMatchDuration(matchDetail.getMatchDuration());
+                    userParticipants.add(matchDetail.getParticipants().get(i));
+                    break;
+                }
+            }
+        }
+        return userParticipants;
+    }
+
     Callback<ResponseBody> getSumonerMatchByIDCallback = new Callback<ResponseBody>() {
         @Override
         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -112,6 +146,7 @@ public class SumonerMatchesListPresenter implements SumonerMatchesListAbstract.P
             } else {
                 mActivity.dismissDialog();
                 LogUtil.e(TAG, mMatchDetails.size() + "");
+                mView.updateHistoryMatches(getHistoryMatch());
             }
         }
 
@@ -122,6 +157,7 @@ public class SumonerMatchesListPresenter implements SumonerMatchesListAbstract.P
             } else {
                 mActivity.dismissDialog();
                 LogUtil.e(TAG, mMatchDetails.size() + "");
+                mView.updateHistoryMatches(getHistoryMatch());
             }
         }
     };

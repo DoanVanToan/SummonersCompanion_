@@ -24,6 +24,7 @@ import com.toandoan.lol.fragment.ItemFragment;
 import com.toandoan.lol.fragment.MasteriesFragment;
 import com.toandoan.lol.fragment.RunesFragment;
 import com.toandoan.lol.fragment.SelectChampionFragment;
+import com.toandoan.lol.fragment.SpellsFragment;
 import com.toandoan.lol.fragment.UserOverviewFragment;
 import com.toandoan.lol.utility.Utils;
 
@@ -42,7 +43,7 @@ public class MainActivity extends BaseActivity
         setContentView(R.layout.activity_main);
         initViews();
         initUserViews();
-        Utils.getDataBaseFromEmuler(getApplicationContext(), "data.db");
+        Utils.getDataBaseFromEmuler(getApplicationContext(), "database.db");
     }
 
 

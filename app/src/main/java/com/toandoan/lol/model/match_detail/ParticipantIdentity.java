@@ -12,4 +12,20 @@ public class ParticipantIdentity {
 
     @SerializedName("player")
     private Player mPlayer;
+
+    public int getParticipantId() {
+        return participantId;
+    }
+
+    public void setParticipantId(int participantId) {
+        this.participantId = participantId;
+    }
+
+    public Player getPlayer() {
+        return mPlayer;
+    }
+
+    public void setPlayer(Player player) {
+        mPlayer = player;
+    }
 }

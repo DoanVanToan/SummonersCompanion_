@@ -3,18 +3,24 @@ package com.toandoan.lol.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.toandoan.lol.R;
+import com.toandoan.lol.adapter.SumonerMatchesAdapter;
 import com.toandoan.lol.base.BaseActivity;
 import com.toandoan.lol.base.BaseFragment;
 import com.toandoan.lol.constant.Constant;
 import com.toandoan.lol.model.UserEnity;
+import com.toandoan.lol.model.match_detail.Participant;
 import com.toandoan.lol.mvp_abstract.SumonerMasteriesAbstract;
 import com.toandoan.lol.mvp_abstract.SumonerMatchesListAbstract;
 import com.toandoan.lol.presenter.SumonerMatchesListPresenter;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +28,8 @@ import com.toandoan.lol.presenter.SumonerMatchesListPresenter;
 public class SumonerMatchesListFragment extends Fragment implements SumonerMatchesListAbstract.View {
     private SumonerMatchesListPresenter mPresenter;
     private UserEnity mUser;
+    private SumonerMatchesAdapter mAdapter;
+    private RecyclerView mRecyclerView;
 
 
     public SumonerMatchesListFragment() {
@@ -54,8 +62,16 @@ public class SumonerMatchesListFragment extends Fragment implements SumonerMatch
 
     @Override
     public void initViews(View v) {
-        mPresenter = new SumonerMatchesListPresenter((BaseActivity) getActivity(), this);
+        mRecyclerView = (RecyclerView) v.findViewById(R.id.sumoner_match_recyclerview);
+        mPresenter = new SumonerMatchesListPresenter((BaseActivity) getActivity(), this, mUser);
         mPresenter.getAllMatches(Constant.Region.NORTH_AMERICA, String.valueOf(mUser.getId()));
+    }
+
+    @Override
+    public void updateHistoryMatches(List<Participant> list) {
+        mAdapter = new SumonerMatchesAdapter(getContext(), list);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setAdapter(mAdapter);
     }
 
 

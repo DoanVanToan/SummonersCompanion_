@@ -12,6 +12,7 @@ public class Constant {
         public static final String SPACE = " ";
         public static final String PERCENT = "%";
         public static final String LINE_BREAK = "\n";
+        public static final String DIV = "/";
     }
 
     public static class Config {
@@ -70,6 +71,8 @@ public class Constant {
         public static final String GET_LIST_ITEMS = "/api/lol/static-data/{region}/v1.2/item?itemListData=all&api_key=" + ApiKey.API_KEY_VALUES;
 
         public static final String GET_LIST_RUNES = "/api/lol/static-data/{region}/v1.2/rune?runeListData=all&api_key=" + ApiKey.API_KEY_VALUES;
+
+        public static final String GET_LIST_SPELLS = "/api/lol/static-data/{region}/v1.2/summoner-spell?spellData=image&api_key=" + ApiKey.API_KEY_VALUES;
 
         public static final String GET_LIST_MASTERIES = "/api/lol/static-data/{region}/v1.2/mastery?masteryListData=all&api_key=" + ApiKey.API_KEY_VALUES;
 
