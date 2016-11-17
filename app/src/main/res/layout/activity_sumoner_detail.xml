@@ -53,18 +53,14 @@
                 fab:fab_label="@string/runes"
                 fab:fab_size="mini" />
 
-
-
         </com.github.clans.fab.FloatingActionMenu>
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/vpContent"
+        <FrameLayout
+            android:id="@+id/sumoner_frame_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
     </RelativeLayout>
-
-
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBar"

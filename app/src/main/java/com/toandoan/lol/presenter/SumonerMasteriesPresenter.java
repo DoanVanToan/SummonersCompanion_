@@ -143,13 +143,15 @@ public class SumonerMasteriesPresenter implements SumonerMasteriesAbstract.Prese
         for (int i = 0; i < mPageMasteries.size(); i++) {
             PageMasteries pages = mPageMasteries.get(i);
             List<MasteryEnity> temps = new ArrayList<>();
-            for (int j = 0; j < pages.getMasteries().size(); j++) {
-                MasteryEnity masteryEnity = pages.getMasteries().get(j);
-                MasteryEnity masteryDB = masteryDatabase.getMasteryByID(String.valueOf(masteryEnity.getId()));
+            if (pages.getMasteries() != null) {
+                for (int j = 0; j < pages.getMasteries().size(); j++) {
+                    MasteryEnity masteryEnity = pages.getMasteries().get(j);
+                    MasteryEnity masteryDB = masteryDatabase.getMasteryByID(String.valueOf(masteryEnity.getId()));
 
-                if (masteryDB != null) {
-                    masteryDB.setRank(masteryEnity.getRank());
-                    temps.add(masteryDB);
+                    if (masteryDB != null) {
+                        masteryDB.setRank(masteryEnity.getRank());
+                        temps.add(masteryDB);
+                    }
                 }
             }
             pages.setMasteries(temps);

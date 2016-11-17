@@ -34,9 +34,17 @@ public interface RiotService {
 
     @GET(Constant.Api.GET_SUMMONER_MASTERIES)
     Call<ResponseBody> getSumonnerMasteries(@Path(Constant.ApiKey.REGION) String region,
-                                            @Path(Constant.ApiKey.SUMMONER_ID) String summonerID);
+                                            @Path(Constant.ApiKey.SUMMONER_IDS) String summonerID);
 
     @GET(Constant.Api.GET_SUMMONER_RUNES)
     Call<ResponseBody> getSumonnerRunes(@Path(Constant.ApiKey.REGION) String region,
-                                            @Path(Constant.ApiKey.SUMMONER_ID) String summonerID);
+                                            @Path(Constant.ApiKey.SUMMONER_IDS) String summonerID);
+
+    @GET(Constant.Api.GET_SUMMONER_MATCHES_LIST)
+    Call<ResponseBody> getSumonnerMatchesList(@Path(Constant.ApiKey.REGION) String region,
+                                        @Path(Constant.ApiKey.SUMMONER_ID) String summonerID);
+
+    @GET(Constant.Api.GET_SUMMONER_MATCHE_BY_ID)
+    Call<ResponseBody> getSumonnerMatcheByID(@Path(Constant.ApiKey.REGION) String region,
+                                              @Path(Constant.ApiKey.MATCH_ID) String matchID);
 }

@@ -11,8 +11,10 @@ import com.github.clans.fab.FloatingActionMenu;
 import com.toandoan.lol.R;
 import com.toandoan.lol.base.BaseActivity;
 import com.toandoan.lol.constant.Constant;
+import com.toandoan.lol.fragment.SumonerMatchesListFragment;
 import com.toandoan.lol.model.UserEnity;
 import com.toandoan.lol.mvp_abstract.SumonerDetailAsbtract;
+import com.toandoan.lol.utility.Utils;
 
 public class SumonerDetailActivity extends BaseActivity implements SumonerDetailAsbtract.View, View.OnClickListener {
 
@@ -20,6 +22,7 @@ public class SumonerDetailActivity extends BaseActivity implements SumonerDetail
     private Toolbar mToolbar;
     private UserEnity mUserEnity;
     private FloatingActionMenu mMenu;
+    private SumonerMatchesListFragment mMatchesListFragment;
 
 
     public static void startActivity(Context context, UserEnity userID) {
@@ -55,7 +58,14 @@ public class SumonerDetailActivity extends BaseActivity implements SumonerDetail
         mMenu = (FloatingActionMenu) findViewById(R.id.menu);
         mRunesButton.setOnClickListener(this);
         mMasteriesButton.setOnClickListener(this);
+
+        mMatchesListFragment = SumonerMatchesListFragment.newInstance(mUserEnity);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.sumoner_frame_layout, mMatchesListFragment)
+                .commit();
     }
+
 
     @Override
     public void onClick(View v) {

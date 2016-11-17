@@ -5,7 +5,9 @@ package com.toandoan.lol.constant;
  */
 
 public class Constant {
-    public static class Charactor{
+    public static int MAX_MATCH_SIZE = 10;
+
+    public static class Charactor {
         public static final String PLUS = "+";
         public static final String SPACE = " ";
         public static final String PERCENT = "%";
@@ -73,9 +75,13 @@ public class Constant {
 
         public static final String GET_CHAMPION_BY_ID = "/api/lol/static-data/{region}/v1.2/champion/{id}?champData=all&api_key=" + ApiKey.API_KEY_VALUES;
 
-        public static final String GET_SUMMONER_MASTERIES = "/api/lol/{region}/v1.4/summoner/{summonerIds}/masteries"+ ApiKey.API_KEY_URL;
+        public static final String GET_SUMMONER_MASTERIES = "/api/lol/{region}/v1.4/summoner/{summonerIds}/masteries" + ApiKey.API_KEY_URL;
 
-        public static final String GET_SUMMONER_RUNES = " /api/lol/{region}/v1.4/summoner/{summonerIds}/runes"+ ApiKey.API_KEY_URL;
+        public static final String GET_SUMMONER_RUNES = " /api/lol/{region}/v1.4/summoner/{summonerIds}/runes" + ApiKey.API_KEY_URL;
+
+        public static final String GET_SUMMONER_MATCHES_LIST = "/api/lol/{region}/v2.2/matchlist/by-summoner/{summonerId}" + ApiKey.API_KEY_URL;
+
+        public static final String GET_SUMMONER_MATCHE_BY_ID = "/api/lol/{region}/v2.2/match/{matchId}" + ApiKey.API_KEY_URL;
 
 
     }
@@ -84,7 +90,9 @@ public class Constant {
         public static final String API_KEY = "api_key";
         public static final String API_KEY_VALUES = "RGAPI-950d5f5c-cbae-4b0e-8bea-89daff98c0bf";
         public static final String REGION = "region";
-        public static final String SUMMONER_ID = "summonerIds";
+        public static final String SUMMONER_IDS = "summonerIds";
+        public static final String SUMMONER_ID = "summonerId";
+        public static final String MATCH_ID = "matchId";
         public static final String SUMMONER_NAMES = "summonerNames";
         public static final String API_KEY_URL = "?" + API_KEY + "=" + API_KEY_VALUES;
         public static final String ID = "id";
