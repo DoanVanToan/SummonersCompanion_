@@ -64,6 +64,7 @@
                 android:orientation="horizontal">
 
                 <com.toandoan.lol.widget.view.SquareImageView
+                    android:scaleType="fitXY"
                     android:layout_width="@dimen/size_13"
                     android:layout_marginRight="@dimen/text_size_3"
                     android:layout_height="@dimen/size_13"
@@ -124,7 +125,5 @@
                 app:typeface="roboto_bold"/>
 
         </LinearLayout>
-
-
     </LinearLayout>
 </LinearLayout>
