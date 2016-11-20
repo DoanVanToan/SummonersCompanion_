@@ -24,6 +24,7 @@ import com.toandoan.lol.fragment.ItemFragment;
 import com.toandoan.lol.fragment.MasteriesFragment;
 import com.toandoan.lol.fragment.RunesFragment;
 import com.toandoan.lol.fragment.SelectChampionFragment;
+import com.toandoan.lol.fragment.SpellsFragment;
 import com.toandoan.lol.fragment.UserOverviewFragment;
 import com.toandoan.lol.utility.Utils;
 

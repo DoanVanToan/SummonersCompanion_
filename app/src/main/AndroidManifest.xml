@@ -44,6 +44,7 @@
             android:name=".activity.SumonerDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.MatchDetailActivity"></activity>
     </application>
 
 </manifest>

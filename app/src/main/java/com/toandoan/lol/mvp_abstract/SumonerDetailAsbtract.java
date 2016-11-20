@@ -8,7 +8,6 @@ import com.toandoan.lol.base.BaseView;
 
 public interface SumonerDetailAsbtract {
     interface View extends BaseView{
-
     }
 
     interface Presenter{

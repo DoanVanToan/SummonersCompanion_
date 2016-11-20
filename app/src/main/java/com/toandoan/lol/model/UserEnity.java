@@ -18,6 +18,9 @@ public class UserEnity implements Serializable{
     private long revisionDate;
     private int summonerLevel;
 
+    public UserEnity() {
+    }
+
     public UserEnity(JSONObject jsonObject) {
         if (!jsonObject.isNull(Constant.ApiKey.ID)) {
             id = jsonObject.optInt(Constant.ApiKey.ID);

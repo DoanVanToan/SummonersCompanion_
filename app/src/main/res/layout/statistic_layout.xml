@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.toandoan.lol.widget.view.RobotoTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/size_5"
+        android:text="@string/statistics"
+        android:textColor="@color/yellow_D4BC6C"
+        android:textSize="@dimen/text_size_17"
+        android:textStyle="bold"
+        app:typeface="arista_light" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/size_10"
+        android:paddingRight="@dimen/size_10">
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/dame_dealt"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/dame_dealt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_2"
+        android:background="@color/colorPrimaryDark"
+        android:paddingLeft="@dimen/size_10"
+        android:paddingRight="@dimen/size_10">
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/damage_taken"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/damage_taken"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/size_10"
+        android:paddingRight="@dimen/size_10">
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/gold_earned"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/gold_earned"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_2"
+        android:background="@color/colorPrimaryDark"
+        android:paddingLeft="@dimen/size_10"
+        android:paddingRight="@dimen/size_10">
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/healing_done"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/healing_done"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/size_10"
+        android:paddingRight="@dimen/size_10">
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/largest_killing_spree"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/largest_killing_spree"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_2"
+        android:background="@color/colorPrimaryDark"
+        android:paddingLeft="@dimen/size_10"
+        android:paddingRight="@dimen/size_10">
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/largest_multi_kill"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/largest_multi_kill"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_2"
+        android:paddingLeft="@dimen/size_10"
+        android:paddingRight="@dimen/size_10">
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/penta_kill"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/penta_kill"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_2"
+        android:background="@color/colorPrimaryDark"
+        android:paddingLeft="@dimen/size_10"
+        android:paddingRight="@dimen/size_10">
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/turrets_destroyed"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/turrets_destroyed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/size_10"
+        android:paddingRight="@dimen/size_10">
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/magic_dame_dealt"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/magic_dame_dealt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_2"
+        android:background="@color/colorPrimaryDark"
+        android:paddingLeft="@dimen/size_10"
+        android:paddingRight="@dimen/size_10">
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/physical_damage_dealt"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/physical_damage_dealt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/size_10"
+        android:paddingRight="@dimen/size_10">
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/minions_kill"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/minions_kill"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_2"
+        android:background="@color/colorPrimaryDark"
+        android:paddingLeft="@dimen/size_10"
+        android:paddingRight="@dimen/size_10">
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/neatural_minions_killed"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/neatural_minions_killed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/size_10"
+        android:paddingRight="@dimen/size_10">
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/magic_dame_taken"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/magic_dame_taken"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_2"
+        android:background="@color/colorPrimaryDark"
+        android:paddingLeft="@dimen/size_10"
+        android:paddingRight="@dimen/size_10">
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/physic_damge_taken"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/physic_damge_taken"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/size_10"
+        android:paddingRight="@dimen/size_10">
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/crowd_control_dealt"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/crowd_control_dealt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:paddingLeft="@dimen/size_10"
+        android:paddingRight="@dimen/size_10">
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/inhibitors_destroyed"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/inhibitors_destroyed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_2"
+        android:paddingLeft="@dimen/size_10"
+        android:paddingRight="@dimen/size_10">
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/wards_placed"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/wards_placed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_15" />
+
+    </LinearLayout>
+
+</LinearLayout>

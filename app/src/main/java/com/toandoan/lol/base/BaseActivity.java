@@ -69,7 +69,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void showDialog() {
-        if (null != loadingDialog) {
+        if (null != loadingDialog && !loadingDialog.isShowing()) {
             try {
                 loadingDialog.show();
             } catch (Exception e) {

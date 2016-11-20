@@ -27,6 +27,7 @@ import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
 import com.toandoan.lol.R;
+import com.toandoan.lol.model.SpellEnity;
 import com.toandoan.lol.model.champion.ChampionEnity;
 import com.toandoan.lol.model.champion.ChampionSkinEnity;
 import com.toandoan.lol.model.matery.MasteryEnity;
@@ -42,9 +43,13 @@ import java.io.InputStream;
 import java.nio.channels.FileChannel;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
+
+import javax.microedition.khronos.opengles.GL;
 
 /**
  * Created by ToanDoan on 9/29/2016.
@@ -130,6 +135,10 @@ public class Utils {
          */
         public static String getRuneImage(String runeImage) {
             return "http://ddragon.leagueoflegends.com/cdn/6.21.1/img/rune/" + runeImage;
+        }
+
+        public static String getSpellImage(String spellImage) {
+            return "http://ddragon.leagueoflegends.com/cdn/6.22.1/img/spell/" + spellImage;
         }
     }
 
@@ -341,10 +350,58 @@ public class Utils {
 
     }
 
+    public static void showSpellDialog(final Activity activity, SpellEnity spellEnity) {
+        View view = LayoutInflater.from(activity).inflate(R.layout.can_not_start_layout, null);
+        ImageView imgTitle = (ImageView) view.findViewById(R.id.imageview_icon);
+        TextView txtTitle = (TextView) view.findViewById(R.id.textview_title);
+        TextView textViewMessage = (TextView) view.findViewById(R.id.textview_messsage);
+        Glide.with(activity)
+                .load(Utils.RiotStatic.getSpellImage(spellEnity.getImage().getFull()))
+                .into(imgTitle);
+        txtTitle.setText(spellEnity.getName());
+        textViewMessage.setText(Html.fromHtml(spellEnity.getDescription()));
+
+        final DialogPlus dialog = DialogPlus.newDialog(activity)
+                .setContentHolder(new ViewHolder(view))
+                .setGravity(Gravity.BOTTOM)
+                .setExpanded(false)
+                .setCancelable(true)
+                .create();
+
+        Handler h = new Handler();
+        h.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        dialog.dismiss();
+                    }
+                });
+            }
+        }, 5000);
+
+        dialog.show();
+
+    }
+
+
     public static String formatDouble(double number) {
         NumberFormat formatter = new DecimalFormat("#0.00");
         return formatter.format(number);
     }
 
+
+    public static String getTimeFromSecond(long number) {
+        long minute = number / 60;
+        long second = number % 60;
+        return minute + ":" + second;
+    }
+
+    public static String getDateFormatFromSecond(long number){
+        Date date = new Date(number);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        return format.format(date);
+    }
 
 }

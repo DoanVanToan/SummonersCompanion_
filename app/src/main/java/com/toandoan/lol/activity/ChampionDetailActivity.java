@@ -1,8 +1,6 @@
 package com.toandoan.lol.activity;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -10,13 +8,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.toandoan.lol.R;
-import com.toandoan.lol.adapter.ChampionFragmentPagerAdapter;
+import com.toandoan.lol.adapter.MyFragmentPagerAdapter;
 import com.toandoan.lol.adapter.SkinPagerAdapter;
 import com.toandoan.lol.base.BaseActivity;
 import com.toandoan.lol.constant.Constant;
@@ -42,7 +39,7 @@ public class ChampionDetailActivity extends BaseActivity implements ViewPager.On
     private ChampionDetailActivityPresenter helper;
     private SkinPagerAdapter bannerAdaper;
     private ViewPager vpContent;
-    private ChampionFragmentPagerAdapter championAdapter;
+    private MyFragmentPagerAdapter championAdapter;
     private TabLayout tlChampion;
     private ImageView ivChampIcon;
     private TextView tvChampName, tvChampTitle, tvChampSkin;
@@ -54,6 +51,12 @@ public class ChampionDetailActivity extends BaseActivity implements ViewPager.On
         setContentView(R.layout.activity_champion_detail);
         getDataIntent();
         initViews();
+    }
+
+    public static void startActivity(Context context, ChampionEnity championEnity){
+        Intent intent = new Intent(context, ChampionDetailActivity.class);
+        intent.putExtra(Constant.IntentKey.CHAMPION_ENITY, championEnity);
+        context.startActivity(intent);
     }
 
     private void initViews() {
@@ -155,7 +158,7 @@ public class ChampionDetailActivity extends BaseActivity implements ViewPager.On
         abilitiesFragment = AbilitiesFragment.newInstance(championEnity);
         MasteriesFragment masteriesFragment =  MasteriesFragment.newInstance();
 
-        championAdapter = new ChampionFragmentPagerAdapter(getSupportFragmentManager());
+        championAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
         championAdapter.addFrag(championOverviewFragment, getString(R.string.overview));
         championAdapter.addFrag(counterAndTipFragment, getString(R.string.counter_and_tip));
         championAdapter.addFrag(abilitiesFragment, getString(R.string.abilities));
