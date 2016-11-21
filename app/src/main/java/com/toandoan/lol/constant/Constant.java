@@ -61,6 +61,7 @@ public class Constant {
         public static final String PARTICIPANT_STATS = "participant_stats";
         public static final String PARTICIPANT = "participant";
         public static final String MATCHDETAIL = "matchdetail";
+        public static final String GAME_ENITY = "game_enity";
     }
 
 
@@ -91,6 +92,8 @@ public class Constant {
         public static final String GET_SUMMONER_MATCHE_BY_ID = "/api/lol/{region}/v2.2/match/{matchId}" + ApiKey.API_KEY_URL;
 
         public static final String GET_SUMMONER_CHAMPIONS_STATS_BY_ID = "/api/lol/{region}/v1.3/stats/by-summoner/{summonerId}/ranked?season=SEASON2016&api_key=" + ApiKey.API_KEY_VALUES;
+
+        public static final String GET_SUMMONER_RECENT_MATCHES = "api/lol/{region}/v1.3/game/by-summoner/{summonerId}/recent" + ApiKey.API_KEY_URL;
 
 
     }

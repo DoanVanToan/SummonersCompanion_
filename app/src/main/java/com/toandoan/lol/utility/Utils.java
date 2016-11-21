@@ -47,6 +47,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import javax.microedition.khronos.opengles.GL;
@@ -387,8 +388,7 @@ public class Utils {
 
 
     public static String formatDouble(double number) {
-        NumberFormat formatter = new DecimalFormat("#0.00");
-        return formatter.format(number);
+        return String.format(Locale.US, "%1$,.0f", number).replace(",", ".");
     }
 
 
@@ -398,9 +398,15 @@ public class Utils {
         return minute + ":" + second;
     }
 
-    public static String getDateFormatFromSecond(long number){
+    public static String getDateFormatFromSecond(long number) {
         Date date = new Date(number);
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        return format.format(date);
+    }
+
+    public static String getHourFormatFromSecond(long number) {
+        Date date = new Date(number);
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
         return format.format(date);
     }
 

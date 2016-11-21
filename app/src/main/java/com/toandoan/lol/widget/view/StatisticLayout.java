@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 
 import com.toandoan.lol.R;
 import com.toandoan.lol.model.match_detail.ParticipantStats;
+import com.toandoan.lol.model.recent_match.GameEnity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,7 +52,7 @@ public class StatisticLayout extends LinearLayout {
     RobotoTextView mPentaKill;
     @BindView(R.id.turrets_destroyed)
     RobotoTextView mTurretsDestroyed;
-    private ParticipantStats mStats;
+    private GameEnity mGame;
 
     public StatisticLayout(Context context) {
         super(context);
@@ -83,29 +84,29 @@ public class StatisticLayout extends LinearLayout {
         ButterKnife.bind(this);
     }
 
-    public void setStats(ParticipantStats stats) {
-        this.mStats = stats;
+    public void setGame(GameEnity game) {
+        this.mGame = game;
         bindStats();
     }
 
     public void bindStats() {
-        mDameDealt.setText(String.valueOf(mStats.getTotalDamageDealt()));
-        mDamageTaken.setText(String.valueOf(mStats.getTotalDamageTaken()));
-        mGoldEarned.setText(String.valueOf(mStats.getGoldEarned()));
-        mHealingDone.setText(String.valueOf(mStats.getTotalHeal()));
-        mLargestKillingSpree.setText(String.valueOf(mStats.getLargestKillingSpree()));
-        mLargestMultiKill.setText(String.valueOf(mStats.getLargestMultiKill()));
-        mMagicDameDealt.setText(String.valueOf(mStats.getMagicDamageDealt()));
-        mPhysicalDamageDealt.setText(String.valueOf(mStats.getPhysicalDamageDealt()));
-        mMinionsKill.setText(String.valueOf(mStats.getMinionsKilled()));
-        mNeaturalMinionsKilled.setText(String.valueOf(mStats.getNeutralMinionsKilled()));
-        mMagicDameTaken.setText(String.valueOf(mStats.getMagicDamageTaken()));
-        mPhysicDamgeTaken.setText(String.valueOf(mStats.getPhysicalDamageTaken()));
-        mCrowdControlDealt.setText(String.valueOf(mStats.getTotalTimeCrowdControlDealt()));
-        mInhibitorsDestroyed.setText(String.valueOf(mStats.getInhibitorKills()));
-        mWardsPlaced.setText(String.valueOf(mStats.getWardsPlaced()));
-        mPentaKill.setText(String.valueOf(mStats.getPentaKills()));
-        mTurretsDestroyed.setText(String.valueOf(mStats.getTowerKills()));
+        mDameDealt.setText(String.valueOf(mGame.getStats().getTotalDamageDealt()));
+        mDamageTaken.setText(String.valueOf(mGame.getStats().getTotalDamageTaken()));
+        mGoldEarned.setText(String.valueOf(mGame.getStats().getGoldEarned()));
+        mHealingDone.setText(String.valueOf(mGame.getStats().getTotalHeal()));
+        mLargestKillingSpree.setText(String.valueOf(mGame.getStats().getLargestKillingSpree()));
+        mLargestMultiKill.setText(String.valueOf(mGame.getStats().getLargestMultiKill()));
+        mMagicDameDealt.setText(String.valueOf(mGame.getStats().getMagicDamageDealtPlayer()));
+        mPhysicalDamageDealt.setText(String.valueOf(mGame.getStats().getPhysicalDamageDealtPlayer()));
+        mMinionsKill.setText(String.valueOf(mGame.getStats().getMinionsKilled()));
+        mNeaturalMinionsKilled.setText(String.valueOf(mGame.getStats().getNeutralMinionsKilled()));
+        mMagicDameTaken.setText(String.valueOf(mGame.getStats().getMagicDamageTaken()));
+        mPhysicDamgeTaken.setText(String.valueOf(mGame.getStats().getPhysicalDamageTaken()));
+        mCrowdControlDealt.setText(String.valueOf(mGame.getStats().getTotalTimeCrowdControlDealt()));
+        mInhibitorsDestroyed.setText(String.valueOf(mGame.getIpEarned()));
+        mWardsPlaced.setText(String.valueOf(mGame.getStats().getWardPlaced()));
+        mPentaKill.setText(String.valueOf(mGame.getStats().getPentaKills()));
+        mTurretsDestroyed.setText(String.valueOf(mGame.getStats().getTurretsKilled()));
 
     }
 }

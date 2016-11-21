@@ -3,7 +3,6 @@ package com.toandoan.lol.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,10 +20,7 @@ import com.toandoan.lol.database.impl.SpellsImpl;
 import com.toandoan.lol.model.SpellEnity;
 import com.toandoan.lol.model.champion.ChampionEnity;
 import com.toandoan.lol.model.item.ItemEnity;
-import com.toandoan.lol.model.match_detail.Participant;
-import com.toandoan.lol.model.match_detail.ParticipantStats;
-import com.toandoan.lol.model.match_detail.Team;
-import com.toandoan.lol.model.rune.RuneEnity;
+import com.toandoan.lol.model.recent_match.GameEnity;
 import com.toandoan.lol.utility.FileOperations;
 import com.toandoan.lol.utility.Utils;
 import com.toandoan.lol.widget.dialog.ItemDialog;
@@ -38,7 +34,7 @@ import java.util.List;
  */
 
 public class SumonerMatchesAdapter extends RecyclerView.Adapter<SumonerMatchesAdapter.SumonerMatchesViewHolder> {
-    private List<Participant> mParticipants;
+    private List<GameEnity> mGames;
     private Context mContext;
     private List<ChampionEnity> mChampions;
     private MyItemImpl mDatabase;
@@ -47,9 +43,9 @@ public class SumonerMatchesAdapter extends RecyclerView.Adapter<SumonerMatchesAd
     private OnItemClickListenner mListenner;
 
 
-    public SumonerMatchesAdapter(Context context, List<Participant> participants, OnItemClickListenner listenner) {
+    public SumonerMatchesAdapter(Context context, List<GameEnity> games, OnItemClickListenner listenner) {
         mContext = context;
-        mParticipants = participants;
+        mGames = games;
         mListenner = listenner;
         loadChampions();
         mDatabase = new MyItemImpl(mContext);
@@ -84,18 +80,18 @@ public class SumonerMatchesAdapter extends RecyclerView.Adapter<SumonerMatchesAd
 
     @Override
     public void onBindViewHolder(SumonerMatchesViewHolder holder, int position) {
-        Participant participant = mParticipants.get(position);
-        holder.bindView(participant);
+        GameEnity gameEnity = mGames.get(position);
+        holder.bindView(gameEnity);
     }
 
     @Override
     public int getItemCount() {
-        return mParticipants != null ? mParticipants.size() : 0;
+        return mGames != null ? mGames.size() : 0;
     }
 
 
-    public interface OnItemClickListenner{
-        void onItemClick(View v, int position,Participant participant);
+    public interface OnItemClickListenner {
+        void onItemClick(View v, int position, GameEnity game);
     }
 
     public class SumonerMatchesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -104,7 +100,7 @@ public class SumonerMatchesAdapter extends RecyclerView.Adapter<SumonerMatchesAd
         private ImageView mItemViewSlot1, mItemViewSlot2,
                 mItemViewSlot3, mItemViewSlot4, mItemViewSlot5, mItemViewSlot6, mItemViewSlot7;
         private ImageView mItemSpell1, mItemSpell2;
-        private Participant mParticipant;
+        private GameEnity mGame;
         private TextView mMatchResult;
 
         public SumonerMatchesViewHolder(View itemView) {
@@ -125,41 +121,41 @@ public class SumonerMatchesAdapter extends RecyclerView.Adapter<SumonerMatchesAd
             mItemViewSlot7 = (ImageView) itemView.findViewById(R.id.item_7);
             mItemSpell2 = (ImageView) itemView.findViewById(R.id.spellid_2);
             mItemSpell1 = (ImageView) itemView.findViewById(R.id.spellid_1);
-            mMatchResult= (TextView) itemView.findViewById(R.id.match_title);
+            mMatchResult = (TextView) itemView.findViewById(R.id.match_title);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mListenner.onItemClick(v, getAdapterPosition(), mParticipants.get(getAdapterPosition()));
+                    mListenner.onItemClick(v, getAdapterPosition(), mGames.get(getAdapterPosition()));
                 }
             });
         }
 
-        public void bindView(Participant participant) {
-            mParticipant = participant;
+        public void bindView(GameEnity game) {
+            mGame = game;
             StringBuilder builder = new StringBuilder();
-            ChampionEnity championEnity = getChampionByID(String.valueOf(participant.getChampionId()));
+            ChampionEnity championEnity = getChampionByID(String.valueOf(game.getChampionId()));
             Glide.with(mContext)
                     .load(Utils.RiotStatic.getChampionIcon(championEnity.getKey()))
                     .into(mItemImage);
 
             mItemTitle.setText(championEnity.getName());
-            builder.append(participant.getStats().getKills())
+            builder.append(game.getStats().getChampionsKilled())
                     .append(Constant.Charactor.DIV)
-                    .append(participant.getStats().getDeaths())
+                    .append(game.getStats().getNumDeaths())
                     .append(Constant.Charactor.DIV)
-                    .append(participant.getStats().getAssists());
+                    .append(game.getStats().getAssists());
             mItemKda.setText(builder);
-            mItemGold.setText(String.valueOf(participant.getStats().getGoldEarned()));
-            mItemCrep.setText(String.valueOf(participant.getStats().getMinionsKilled()));
-            mItemTime.setText(Utils.getTimeFromSecond(participant.getMatchDuration()));
-            mItemDate.setText(Utils.getDateFormatFromSecond(participant.getmMatchCreation()));
-            loadItemView(participant.getStats());
-            loadSpellView(participant);
+            mItemGold.setText(Utils.formatDouble(game.getStats().getGoldEarned()));
+            mItemCrep.setText(String.valueOf(game.getStats().getMinionsKilled()));
+            mItemTime.setText(Utils.getHourFormatFromSecond(game.getCreateDate()));
+            mItemDate.setText(Utils.getDateFormatFromSecond(game.getCreateDate()));
+            loadItemView(game);
+            loadSpellView(game);
         }
 
-        public void loadSpellView(Participant participant) {
-            SpellEnity firstSpell = mSpellDatabase.getSpellByID(participant.getSpell1Id());
-            SpellEnity secondSpell = mSpellDatabase.getSpellByID(participant.getSpell2Id());
+        public void loadSpellView(GameEnity game) {
+            SpellEnity firstSpell = mSpellDatabase.getSpellByID(game.getSpell1());
+            SpellEnity secondSpell = mSpellDatabase.getSpellByID(game.getSpell2());
 
             if (firstSpell != null) {
                 Glide.with(mContext)
@@ -176,16 +172,16 @@ public class SumonerMatchesAdapter extends RecyclerView.Adapter<SumonerMatchesAd
             }
         }
 
-        public void loadItemView(ParticipantStats stats) {
+        public void loadItemView(GameEnity game) {
 
-            ItemEnity itemEnity = mDatabase.getItemById((int) stats.getItem0());
+            ItemEnity itemEnity = mDatabase.getItemById((int) game.getStats().getItem0());
             if (itemEnity != null) {
                 Glide.with(mContext)
                         .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
                         .into(mItemViewSlot1);
                 mItemViewSlot1.setOnClickListener(this);
             }
-            itemEnity = mDatabase.getItemById((int) stats.getItem1());
+            itemEnity = mDatabase.getItemById((int) game.getStats().getItem1());
             if (itemEnity != null) {
                 Glide.with(mContext)
                         .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
@@ -193,7 +189,7 @@ public class SumonerMatchesAdapter extends RecyclerView.Adapter<SumonerMatchesAd
                 mItemViewSlot2.setOnClickListener(this);
             }
 
-            itemEnity = mDatabase.getItemById((int) stats.getItem2());
+            itemEnity = mDatabase.getItemById((int) game.getStats().getItem2());
             if (itemEnity != null) {
                 Glide.with(mContext)
                         .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
@@ -201,7 +197,7 @@ public class SumonerMatchesAdapter extends RecyclerView.Adapter<SumonerMatchesAd
                 mItemViewSlot3.setOnClickListener(this);
             }
 
-            itemEnity = mDatabase.getItemById((int) stats.getItem3());
+            itemEnity = mDatabase.getItemById((int) game.getStats().getItem3());
             if (itemEnity != null) {
                 Glide.with(mContext)
                         .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
@@ -209,7 +205,7 @@ public class SumonerMatchesAdapter extends RecyclerView.Adapter<SumonerMatchesAd
                 mItemViewSlot4.setOnClickListener(this);
             }
 
-            itemEnity = mDatabase.getItemById((int) stats.getItem4());
+            itemEnity = mDatabase.getItemById((int) game.getStats().getItem4());
             if (itemEnity != null) {
                 Glide.with(mContext)
                         .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
@@ -217,7 +213,7 @@ public class SumonerMatchesAdapter extends RecyclerView.Adapter<SumonerMatchesAd
                 mItemViewSlot5.setOnClickListener(this);
             }
 
-            itemEnity = mDatabase.getItemById((int) stats.getItem5());
+            itemEnity = mDatabase.getItemById((int) game.getStats().getItem5());
             if (itemEnity != null) {
                 Glide.with(mContext)
                         .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
@@ -225,16 +221,16 @@ public class SumonerMatchesAdapter extends RecyclerView.Adapter<SumonerMatchesAd
                 mItemViewSlot6.setOnClickListener(this);
             }
 
-            itemEnity = mDatabase.getItemById((int) stats.getItem6());
+            itemEnity = mDatabase.getItemById((int) game.getStats().getItem6());
             if (itemEnity != null) {
                 Glide.with(mContext)
                         .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
                         .into(mItemViewSlot7);
                 mItemViewSlot7.setOnClickListener(this);
             }
-            if (stats.isWinner()){
+            if (game.getStats().isWin()) {
                 mMatchResult.setBackgroundColor(Color.GREEN);
-            }else {
+            } else {
                 mMatchResult.setBackgroundColor(Color.RED);
             }
 
@@ -246,31 +242,31 @@ public class SumonerMatchesAdapter extends RecyclerView.Adapter<SumonerMatchesAd
             SpellEnity seletedSpell = null;
             switch (v.getId()) {
                 case R.id.item_1:
-                    selectedItem = mDatabase.getItemById((int) mParticipant.getStats().getItem0());
+                    selectedItem = mDatabase.getItemById((int) mGame.getStats().getItem0());
                     break;
                 case R.id.item_2:
-                    selectedItem = mDatabase.getItemById((int) mParticipant.getStats().getItem1());
+                    selectedItem = mDatabase.getItemById((int) mGame.getStats().getItem1());
                     break;
                 case R.id.item_3:
-                    selectedItem = mDatabase.getItemById((int) mParticipant.getStats().getItem2());
+                    selectedItem = mDatabase.getItemById((int) mGame.getStats().getItem2());
                     break;
                 case R.id.item_4:
-                    selectedItem = mDatabase.getItemById((int) mParticipant.getStats().getItem3());
+                    selectedItem = mDatabase.getItemById((int) mGame.getStats().getItem3());
                     break;
                 case R.id.item_5:
-                    selectedItem = mDatabase.getItemById((int) mParticipant.getStats().getItem4());
+                    selectedItem = mDatabase.getItemById((int) mGame.getStats().getItem4());
                     break;
                 case R.id.item_6:
-                    selectedItem = mDatabase.getItemById((int) mParticipant.getStats().getItem5());
+                    selectedItem = mDatabase.getItemById((int) mGame.getStats().getItem5());
                     break;
                 case R.id.item_7:
-                    selectedItem = mDatabase.getItemById((int) mParticipant.getStats().getItem6());
+                    selectedItem = mDatabase.getItemById((int) mGame.getStats().getItem6());
                     break;
                 case R.id.spellid_1:
-                    seletedSpell = mSpellDatabase.getSpellByID(mParticipant.getSpell1Id());
+                    seletedSpell = mSpellDatabase.getSpellByID(mGame.getSpell1());
                     break;
                 case R.id.spellid_2:
-                    seletedSpell = mSpellDatabase.getSpellByID(mParticipant.getSpell2Id());
+                    seletedSpell = mSpellDatabase.getSpellByID(mGame.getSpell2());
                     break;
             }
             if (selectedItem != null) {
@@ -278,7 +274,9 @@ public class SumonerMatchesAdapter extends RecyclerView.Adapter<SumonerMatchesAd
                 mItemDialog.setUp(selectedItem, mItemClickListenner);
                 mItemDialog.show();
             } else {
-                Utils.showSpellDialog((Activity) mContext, seletedSpell);
+                if (seletedSpell != null) {
+                    Utils.showSpellDialog((Activity) mContext, seletedSpell);
+                }
             }
         }
 

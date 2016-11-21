@@ -22,6 +22,7 @@ import com.toandoan.lol.model.champion.ChampionEnity;
 import com.toandoan.lol.model.item.ItemEnity;
 import com.toandoan.lol.model.match_detail.Participant;
 import com.toandoan.lol.model.match_detail.ParticipantStats;
+import com.toandoan.lol.model.recent_match.GameEnity;
 import com.toandoan.lol.utility.FileOperations;
 import com.toandoan.lol.utility.Utils;
 import com.toandoan.lol.widget.dialog.ItemDialog;
@@ -71,7 +72,7 @@ public class MatchItemHeaderLayout extends LinearLayout implements View.OnClickL
     @BindView(R.id.item_7)
     SquareImageView item7;
 
-    private Participant mParticipant;
+    private GameEnity mGame;
     private List<ChampionEnity> mChampions;
     private SpellsImpl mSpellDatabase;
     private MyItemImpl mDatabase;
@@ -104,8 +105,8 @@ public class MatchItemHeaderLayout extends LinearLayout implements View.OnClickL
         inflate(getContext(), R.layout.match_item_header_layout, this);
     }
 
-    public void setParticipant(Participant participant) {
-        this.mParticipant = participant;
+    public void setGame(GameEnity game) {
+        this.mGame = game;
         this.build();
     }
 
@@ -137,7 +138,7 @@ public class MatchItemHeaderLayout extends LinearLayout implements View.OnClickL
 
     public void bindView() {
         StringBuilder builder = new StringBuilder();
-        mChampionEnity = getChampionByID(String.valueOf(mParticipant.getChampionId()));
+        mChampionEnity = getChampionByID(String.valueOf(mGame.getChampionId()));
         Glide.with(mContext)
                 .load(Utils.RiotStatic.getChampionIcon(mChampionEnity.getKey()))
                 .into(matchItemImage);
@@ -145,23 +146,23 @@ public class MatchItemHeaderLayout extends LinearLayout implements View.OnClickL
         matchItemImage.setOnClickListener(this);
 
         matchItemTitle.setText(mChampionEnity.getName());
-        builder.append(mParticipant.getStats().getKills())
+        builder.append(mGame.getStats().getChampionsKilled())
                 .append(Constant.Charactor.DIV)
-                .append(mParticipant.getStats().getDeaths())
+                .append(mGame.getStats().getNumDeaths())
                 .append(Constant.Charactor.DIV)
-                .append(mParticipant.getStats().getAssists());
+                .append(mGame.getStats().getAssists());
         matchItemKda.setText(builder);
-        matchItemGold.setText(String.valueOf(mParticipant.getStats().getGoldEarned()));
-        matchItemCrep.setText(String.valueOf(mParticipant.getStats().getMinionsKilled()));
-        matchItemTime.setText(Utils.getTimeFromSecond(mParticipant.getMatchDuration()));
-        matchItemDate.setText(Utils.getDateFormatFromSecond(mParticipant.getmMatchCreation()));
-        loadItemView(mParticipant.getStats());
-        loadSpellView(mParticipant);
+        matchItemGold.setText(String.valueOf(mGame.getStats().getGoldEarned()));
+        matchItemCrep.setText(String.valueOf(mGame.getStats().getMinionsKilled()));
+        matchItemTime.setText(Utils.getHourFormatFromSecond(mGame.getCreateDate()));
+        matchItemDate.setText(Utils.getDateFormatFromSecond(mGame.getCreateDate()));
+        loadItemView();
+        loadSpellView();
     }
 
-    public void loadSpellView(Participant participant) {
-        SpellEnity firstSpell = mSpellDatabase.getSpellByID(participant.getSpell1Id());
-        SpellEnity secondSpell = mSpellDatabase.getSpellByID(participant.getSpell2Id());
+    public void loadSpellView() {
+        SpellEnity firstSpell = mSpellDatabase.getSpellByID(mGame.getSpell1());
+        SpellEnity secondSpell = mSpellDatabase.getSpellByID(mGame.getSpell2());
 
         if (firstSpell != null) {
             Glide.with(getContext())
@@ -178,16 +179,16 @@ public class MatchItemHeaderLayout extends LinearLayout implements View.OnClickL
         }
     }
 
-    public void loadItemView(ParticipantStats stats) {
+    public void loadItemView() {
 
-        ItemEnity itemEnity = mDatabase.getItemById((int) stats.getItem0());
+        ItemEnity itemEnity = mDatabase.getItemById((int) mGame.getStats().getItem0());
         if (itemEnity != null) {
             Glide.with(mContext)
                     .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
                     .into(item1);
             item1.setOnClickListener(this);
         }
-        itemEnity = mDatabase.getItemById((int) stats.getItem1());
+        itemEnity = mDatabase.getItemById((int) mGame.getStats().getItem1());
         if (itemEnity != null) {
             Glide.with(mContext)
                     .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
@@ -195,7 +196,7 @@ public class MatchItemHeaderLayout extends LinearLayout implements View.OnClickL
             item2.setOnClickListener(this);
         }
 
-        itemEnity = mDatabase.getItemById((int) stats.getItem2());
+        itemEnity = mDatabase.getItemById((int) mGame.getStats().getItem2());
         if (itemEnity != null) {
             Glide.with(mContext)
                     .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
@@ -203,7 +204,7 @@ public class MatchItemHeaderLayout extends LinearLayout implements View.OnClickL
             item3.setOnClickListener(this);
         }
 
-        itemEnity = mDatabase.getItemById((int) stats.getItem3());
+        itemEnity = mDatabase.getItemById((int) mGame.getStats().getItem3());
         if (itemEnity != null) {
             Glide.with(mContext)
                     .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
@@ -211,7 +212,7 @@ public class MatchItemHeaderLayout extends LinearLayout implements View.OnClickL
             item4.setOnClickListener(this);
         }
 
-        itemEnity = mDatabase.getItemById((int) stats.getItem4());
+        itemEnity = mDatabase.getItemById((int) mGame.getStats().getItem4());
         if (itemEnity != null) {
             Glide.with(mContext)
                     .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
@@ -219,7 +220,7 @@ public class MatchItemHeaderLayout extends LinearLayout implements View.OnClickL
             item5.setOnClickListener(this);
         }
 
-        itemEnity = mDatabase.getItemById((int) stats.getItem5());
+        itemEnity = mDatabase.getItemById((int) mGame.getStats().getItem5());
         if (itemEnity != null) {
             Glide.with(mContext)
                     .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
@@ -227,7 +228,7 @@ public class MatchItemHeaderLayout extends LinearLayout implements View.OnClickL
             item6.setOnClickListener(this);
         }
 
-        itemEnity = mDatabase.getItemById((int) stats.getItem6());
+        itemEnity = mDatabase.getItemById((int) mGame.getStats().getItem6());
         if (itemEnity != null) {
             Glide.with(mContext)
                     .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
@@ -252,31 +253,31 @@ public class MatchItemHeaderLayout extends LinearLayout implements View.OnClickL
             SpellEnity seletedSpell = null;
             switch (v.getId()) {
                 case R.id.item_1:
-                    selectedItem = mDatabase.getItemById((int) mParticipant.getStats().getItem0());
+                    selectedItem = mDatabase.getItemById((int) mGame.getStats().getItem0());
                     break;
                 case R.id.item_2:
-                    selectedItem = mDatabase.getItemById((int) mParticipant.getStats().getItem1());
+                    selectedItem = mDatabase.getItemById((int) mGame.getStats().getItem1());
                     break;
                 case R.id.item_3:
-                    selectedItem = mDatabase.getItemById((int) mParticipant.getStats().getItem2());
+                    selectedItem = mDatabase.getItemById((int) mGame.getStats().getItem2());
                     break;
                 case R.id.item_4:
-                    selectedItem = mDatabase.getItemById((int) mParticipant.getStats().getItem3());
+                    selectedItem = mDatabase.getItemById((int) mGame.getStats().getItem3());
                     break;
                 case R.id.item_5:
-                    selectedItem = mDatabase.getItemById((int) mParticipant.getStats().getItem4());
+                    selectedItem = mDatabase.getItemById((int) mGame.getStats().getItem4());
                     break;
                 case R.id.item_6:
-                    selectedItem = mDatabase.getItemById((int) mParticipant.getStats().getItem5());
+                    selectedItem = mDatabase.getItemById((int) mGame.getStats().getItem5());
                     break;
                 case R.id.item_7:
-                    selectedItem = mDatabase.getItemById((int) mParticipant.getStats().getItem6());
+                    selectedItem = mDatabase.getItemById((int) mGame.getStats().getItem6());
                     break;
                 case R.id.spellid_1:
-                    seletedSpell = mSpellDatabase.getSpellByID(mParticipant.getSpell1Id());
+                    seletedSpell = mSpellDatabase.getSpellByID(mGame.getSpell1());
                     break;
                 case R.id.spellid_2:
-                    seletedSpell = mSpellDatabase.getSpellByID(mParticipant.getSpell2Id());
+                    seletedSpell = mSpellDatabase.getSpellByID(mGame.getSpell2());
                     break;
             }
             if (selectedItem != null) {

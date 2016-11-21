@@ -4,6 +4,8 @@ import android.view.View;
 
 import com.toandoan.lol.base.BaseView;
 import com.toandoan.lol.model.match_detail.Participant;
+import com.toandoan.lol.model.recent_match.GameEnity;
+import com.toandoan.lol.model.recent_match.RecentGamesEnity;
 
 import java.util.List;
 
@@ -14,12 +16,11 @@ import java.util.List;
 public interface SumonerMatchesListAbstract {
     interface View {
         void initViews(android.view.View v);
-        void updateHistoryMatches(List<Participant> list);
+        void updateHistoryMatches(List<GameEnity> list);
     }
 
     interface Presenter {
         void getAllMatches(String region, String id);
-        void getMatchByID(String region, String matchID);
-        void onItemClickListenner(android.view.View v, int position, Participant participant);
+        void onItemClickListenner(android.view.View v, int position, GameEnity gameEnity);
     }
 }

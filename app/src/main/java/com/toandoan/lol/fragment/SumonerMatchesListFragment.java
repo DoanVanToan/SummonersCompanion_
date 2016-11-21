@@ -16,6 +16,7 @@ import com.toandoan.lol.base.BaseFragment;
 import com.toandoan.lol.constant.Constant;
 import com.toandoan.lol.model.UserEnity;
 import com.toandoan.lol.model.match_detail.Participant;
+import com.toandoan.lol.model.recent_match.GameEnity;
 import com.toandoan.lol.mvp_abstract.SumonerMasteriesAbstract;
 import com.toandoan.lol.mvp_abstract.SumonerMatchesListAbstract;
 import com.toandoan.lol.presenter.SumonerMatchesListPresenter;
@@ -68,7 +69,7 @@ public class SumonerMatchesListFragment extends Fragment implements SumonerMatch
     }
 
     @Override
-    public void updateHistoryMatches(List<Participant> list) {
+    public void updateHistoryMatches(List<GameEnity> list) {
         mAdapter = new SumonerMatchesAdapter(getContext(), list, this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
@@ -76,7 +77,7 @@ public class SumonerMatchesListFragment extends Fragment implements SumonerMatch
 
 
     @Override
-    public void onItemClick(View v, int position, Participant participant) {
-        mPresenter.onItemClickListenner(v, position,participant);
+    public void onItemClick(View v, int position, GameEnity participant) {
+        mPresenter.onItemClickListenner(v, position, participant);
     }
 }

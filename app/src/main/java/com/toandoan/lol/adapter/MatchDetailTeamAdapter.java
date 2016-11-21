@@ -15,6 +15,8 @@ import com.toandoan.lol.model.champion.ChampionEnity;
 import com.toandoan.lol.model.match_detail.Participant;
 import com.toandoan.lol.model.match_detail.ParticipantIdentity;
 import com.toandoan.lol.model.match_detail.Player;
+import com.toandoan.lol.model.recent_match.GameEnity;
+import com.toandoan.lol.model.recent_match.PlayerEnity;
 import com.toandoan.lol.utility.FileOperations;
 import com.toandoan.lol.utility.Utils;
 import com.toandoan.lol.widget.view.RobotoTextView;
@@ -32,17 +34,17 @@ import butterknife.ButterKnife;
  */
 
 public class MatchDetailTeamAdapter extends RecyclerView.Adapter<MatchDetailTeamAdapter.MatchDetailTeamViewHolder> {
-    private List<ParticipantIdentity> mParticipants;
+    private List<PlayerEnity> mPlayers;
     private Context mContext;
     private OnItemClickListenner mListenner;
     private final int LEFT_VIEW = 0;
     private final int RIGHT_VIEW = 1;
     private List<ChampionEnity> mChampions;
 
-    public MatchDetailTeamAdapter(Context mContext, List<ParticipantIdentity> participants
+    public MatchDetailTeamAdapter(Context mContext, List<PlayerEnity> players
             , OnItemClickListenner listenner) {
         this.mContext = mContext;
-        this.mParticipants = participants;
+        this.mPlayers = players;
         this.mListenner = listenner;
         this.loadChampions();
     }
@@ -80,8 +82,8 @@ public class MatchDetailTeamAdapter extends RecyclerView.Adapter<MatchDetailTeam
 
     @Override
     public void onBindViewHolder(MatchDetailTeamViewHolder holder, int position) {
-        ParticipantIdentity participant = mParticipants.get(position);
-        holder.bindData(participant);
+        PlayerEnity player = mPlayers.get(position);
+        holder.bindData(player);
     }
 
     @Override
@@ -92,7 +94,7 @@ public class MatchDetailTeamAdapter extends RecyclerView.Adapter<MatchDetailTeam
 
     @Override
     public int getItemCount() {
-        return mParticipants != null ? mParticipants.size() : 0;
+        return mPlayers != null ? mPlayers.size() : 0;
     }
 
     public class MatchDetailTeamViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -107,9 +109,9 @@ public class MatchDetailTeamAdapter extends RecyclerView.Adapter<MatchDetailTeam
             itemView.setOnClickListener(this);
         }
 
-        public void bindData(ParticipantIdentity participantIdentity) {
-            mPlayerName.setText(participantIdentity.getPlayer().getSummonerName());
-            ChampionEnity championEnity = getChampionByID(String.valueOf(participantIdentity.getPlayer().getChampionId()));
+        public void bindData(PlayerEnity playerEnity) {
+            mPlayerName.setText(playerEnity.getSumonerName());
+            ChampionEnity championEnity = getChampionByID(String.valueOf(playerEnity.getChampionId()));
             if (championEnity != null) {
                 Glide.with(mContext)
                         .load(Utils.RiotStatic.getChampionIcon(championEnity.getKey()))
@@ -120,12 +122,12 @@ public class MatchDetailTeamAdapter extends RecyclerView.Adapter<MatchDetailTeam
         @Override
         public void onClick(View v) {
             mListenner.onItemClick(v, getAdapterPosition(),
-                    mParticipants.get(getAdapterPosition()).getPlayer());
+                    mPlayers.get(getAdapterPosition()));
         }
     }
 
     public interface OnItemClickListenner {
-        void onItemClick(View v, int position, Player player);
+        void onItemClick(View v, int position, PlayerEnity player);
     }
 
 }

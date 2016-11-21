@@ -13,11 +13,11 @@
         android:padding="@dimen/size_5">
 
         <com.toandoan.lol.widget.view.SquareImageView
-            android:layout_width="@dimen/size_50"
-            android:layout_height="@dimen/size_50"
+            android:id="@+id/champion_avatar"
+            android:layout_width="@dimen/size_60"
+            android:layout_height="@dimen/size_60"
             android:background="@drawable/bg_icon"
-            android:padding="@dimen/size_2"
-            android:id="@+id/champion_avatar" />
+            android:padding="@dimen/size_2" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -47,8 +47,8 @@
                     android:gravity="center_vertical"
                     android:text="1/2/7"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_13"
-                    app:typeface="roboto_light" />
+                    android:textSize="@dimen/text_size_14"
+                    app:typeface="roboto_bold" />
 
 
             </LinearLayout>
@@ -61,8 +61,8 @@
                 android:gravity="center_vertical"
                 android:text="Wins 122/222"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_13"
-                app:typeface="roboto_light" />
+                android:textSize="@dimen/text_size_14"
+                app:typeface="roboto_bold" />
 
         </LinearLayout>
 
@@ -94,8 +94,8 @@
                     android:gravity="center_vertical"
                     android:text="1/2/7"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_13"
-                    app:typeface="roboto_light" />
+                    android:textSize="@dimen/text_size_14"
+                    app:typeface="roboto_bold" />
 
 
             </LinearLayout>
@@ -121,9 +121,8 @@
                     android:gravity="center_vertical"
                     android:text="107"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_13"
-                    app:typeface="roboto_light" />
-
+                    android:textSize="@dimen/text_size_14"
+                    app:typeface="roboto_bold" />
             </LinearLayout>
 
         </LinearLayout>
@@ -158,7 +157,8 @@
                 android:layout_weight="2"
                 android:text="@string/penta_kill"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
 
             <com.toandoan.lol.widget.view.RobotoTextView
                 android:id="@+id/penta_kill"
@@ -166,7 +166,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13" />
         </LinearLayout>
 
         <LinearLayout
@@ -183,7 +183,8 @@
                 android:layout_weight="2"
                 android:text="@string/quadra_kills"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
 
             <com.toandoan.lol.widget.view.RobotoTextView
                 android:id="@+id/quadra_kills"
@@ -191,7 +192,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
 
         </LinearLayout>
 
@@ -207,7 +209,8 @@
                 android:layout_weight="2"
                 android:text="@string/triple_kills"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
 
             <com.toandoan.lol.widget.view.RobotoTextView
                 android:id="@+id/triple_kills"
@@ -215,7 +218,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
         </LinearLayout>
 
         <LinearLayout
@@ -232,7 +236,8 @@
                 android:layout_weight="2"
                 android:text="@string/double_kills"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
 
             <com.toandoan.lol.widget.view.RobotoTextView
                 android:id="@+id/double_kills"
@@ -240,7 +245,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
 
         </LinearLayout>
 
@@ -257,7 +263,8 @@
                 android:layout_weight="2"
                 android:text="@string/kills"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
 
             <com.toandoan.lol.widget.view.RobotoTextView
                 android:id="@+id/kills"
@@ -265,7 +272,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
         </LinearLayout>
 
         <LinearLayout
@@ -282,7 +290,8 @@
                 android:layout_weight="2"
                 android:text="@string/deaths"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
 
             <com.toandoan.lol.widget.view.RobotoTextView
                 android:id="@+id/deaths"
@@ -290,7 +299,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
 
         </LinearLayout>
 
@@ -306,7 +316,8 @@
                 android:layout_weight="2"
                 android:text="@string/assists"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
 
             <com.toandoan.lol.widget.view.RobotoTextView
                 android:id="@+id/assists"
@@ -314,7 +325,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
         </LinearLayout>
 
         <LinearLayout
@@ -331,7 +343,8 @@
                 android:layout_weight="2"
                 android:text="@string/minions_kill"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
 
             <com.toandoan.lol.widget.view.RobotoTextView
                 android:id="@+id/minions_kill"
@@ -339,7 +352,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
 
         </LinearLayout>
 
@@ -355,7 +369,8 @@
                 android:layout_weight="2"
                 android:text="@string/neatural_minions_killed"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
 
             <com.toandoan.lol.widget.view.RobotoTextView
                 android:id="@+id/neatural_minions_killed"
@@ -363,7 +378,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
         </LinearLayout>
 
         <LinearLayout
@@ -380,7 +396,8 @@
                 android:layout_weight="2"
                 android:text="@string/most_dealt"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
 
             <com.toandoan.lol.widget.view.RobotoTextView
                 android:id="@+id/most_dealt"
@@ -388,7 +405,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
 
         </LinearLayout>
 
@@ -404,7 +422,8 @@
                 android:layout_weight="2"
                 android:text="@string/most_kill"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
 
             <com.toandoan.lol.widget.view.RobotoTextView
                 android:id="@+id/most_kill"
@@ -412,7 +431,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
         </LinearLayout>
 
         <LinearLayout
@@ -429,7 +449,8 @@
                 android:layout_weight="2"
                 android:text="@string/gold_earned"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
 
             <com.toandoan.lol.widget.view.RobotoTextView
                 android:id="@+id/gold_earned"
@@ -437,7 +458,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
 
         </LinearLayout>
 
@@ -453,7 +475,8 @@
                 android:layout_weight="2"
                 android:text="@string/dame_dealt"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
 
             <com.toandoan.lol.widget.view.RobotoTextView
                 android:id="@+id/dame_dealt"
@@ -461,7 +484,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
         </LinearLayout>
 
         <LinearLayout
@@ -478,7 +502,8 @@
                 android:layout_weight="2"
                 android:text="@string/physical_damage_dealt"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
 
             <com.toandoan.lol.widget.view.RobotoTextView
                 android:id="@+id/physical_damage_dealt"
@@ -486,7 +511,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
 
         </LinearLayout>
 
@@ -502,7 +528,8 @@
                 android:layout_weight="2"
                 android:text="@string/magic_dame_dealt"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
 
             <com.toandoan.lol.widget.view.RobotoTextView
                 android:id="@+id/magic_dame_dealt"
@@ -510,7 +537,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
         </LinearLayout>
 
         <LinearLayout
@@ -527,7 +555,8 @@
                 android:layout_weight="2"
                 android:text="@string/healing_done"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
 
             <com.toandoan.lol.widget.view.RobotoTextView
                 android:id="@+id/healing_done"
@@ -535,7 +564,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
 
         </LinearLayout>
 
@@ -551,7 +581,8 @@
                 android:layout_weight="2"
                 android:text="@string/damage_taken"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
 
             <com.toandoan.lol.widget.view.RobotoTextView
                 android:id="@+id/damage_taken"
@@ -559,7 +590,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_15" />
+                android:textSize="@dimen/text_size_13"
+                app:typeface="roboto_regular" />
         </LinearLayout>
     </LinearLayout>
 

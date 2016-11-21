@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="@color/gray_0E1617"
-              android:orientation="vertical"
-              android:padding="@dimen/size_5">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/gray_0E1617"
+    android:orientation="vertical"
+    android:padding="@dimen/size_5">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,9 +15,10 @@
         <TextView
             android:id="@+id/match_title"
             android:layout_width="@dimen/size_3"
-            android:background="@color/red"
+            android:layout_height="@dimen/size_60"
             android:layout_marginRight="@dimen/size_1"
-            android:layout_height="@dimen/size_60" />
+            android:background="@color/red" />
+
         <com.toandoan.lol.widget.view.SquareImageView
             android:id="@+id/match_item_image"
             android:layout_width="@dimen/size_60"
@@ -26,7 +27,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:background="@drawable/bg_icon"
-            android:padding="@dimen/size_1"/>
+            android:padding="@dimen/size_1" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -43,18 +44,31 @@
                 android:text="Bot game"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_15"
-                app:typeface="roboto_bold"/>
+                app:typeface="roboto_bold" />
 
-            <com.toandoan.lol.widget.view.RobotoTextView
-                android:id="@+id/match_item_kda"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size_5"
-                android:text="11/11/11"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_15"
-                app:typeface="roboto_bold"/>
+                android:orientation="horizontal">
 
+                <com.toandoan.lol.widget.view.SquareImageView
+                    android:layout_width="@dimen/size_25"
+                    android:layout_height="@dimen/size_25"
+                    android:layout_marginRight="@dimen/text_size_3"
+                    android:layout_marginTop="@dimen/size_5"
+                    android:background="@drawable/score"
+                    android:scaleType="fitXY" />
+
+                <com.toandoan.lol.widget.view.RobotoTextView
+                    android:id="@+id/match_item_kda"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_5"
+                    android:text="11/11/11"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_15"
+                    app:typeface="roboto_bold" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -76,7 +90,7 @@
                     android:layout_height="@dimen/size_13"
                     android:layout_marginRight="@dimen/text_size_3"
                     android:background="@drawable/gold"
-                    android:scaleType="fitXY"/>
+                    android:scaleType="fitXY" />
 
                 <com.toandoan.lol.widget.view.RobotoTextView
                     android:id="@+id/match_item_gold"
@@ -86,7 +100,7 @@
                     android:text="9.8k"
                     android:textColor="@color/gray_b7baba"
                     android:textSize="@dimen/text_size_12"
-                    app:typeface="roboto_bold"/>
+                    app:typeface="roboto_bold" />
 
             </LinearLayout>
 
@@ -95,7 +109,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                    <com.toandoan.lol.widget.view.RobotoTextView
+                <com.toandoan.lol.widget.view.SquareImageView
+                    android:layout_width="@dimen/size_15"
+                    android:layout_height="@dimen/size_15"
+                    android:layout_marginTop="@dimen/size_5"
+                    android:background="@drawable/minion"
+                    android:scaleType="fitXY" />
+
+                <com.toandoan.lol.widget.view.RobotoTextView
                     android:id="@+id/match_item_crep"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -103,7 +124,7 @@
                     android:text="156"
                     android:textColor="@color/gray_b7baba"
                     android:textSize="@dimen/text_size_12"
-                    app:typeface="roboto_bold"/>
+                    app:typeface="roboto_bold" />
 
             </LinearLayout>
 
@@ -118,25 +139,25 @@
             android:orientation="vertical">
 
             <com.toandoan.lol.widget.view.RobotoTextView
-                android:gravity="right"
                 android:id="@+id/match_item_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="right"
                 android:text="16:29"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_13"
-                app:typeface="roboto_bold"/>
+                app:typeface="roboto_bold" />
 
             <com.toandoan.lol.widget.view.RobotoTextView
-                android:gravity="right"
                 android:id="@+id/match_item_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_5"
+                android:gravity="right"
                 android:text="11/11/11"
                 android:textColor="@color/gray_b7baba"
                 android:textSize="@dimen/text_size_10"
-                app:typeface="roboto_bold"/>
+                app:typeface="roboto_bold" />
 
         </LinearLayout>
     </LinearLayout>
@@ -155,7 +176,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:background="@drawable/bg_icon"
-            android:padding="@dimen/size_1"/>
+            android:padding="@dimen/size_1" />
 
         <com.toandoan.lol.widget.view.SquareImageView
             android:id="@+id/spellid_2"
@@ -166,7 +187,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="@dimen/size_5"
             android:background="@drawable/bg_icon"
-            android:padding="@dimen/size_1"/>
+            android:padding="@dimen/size_1" />
 
         <com.toandoan.lol.widget.view.SquareImageView
             android:id="@+id/item_1"
@@ -177,7 +198,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="@dimen/size_5"
             android:background="@drawable/bg_icon"
-            android:padding="@dimen/size_1"/>
+            android:padding="@dimen/size_1" />
 
         <com.toandoan.lol.widget.view.SquareImageView
             android:id="@+id/item_2"
@@ -188,7 +209,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="@dimen/size_5"
             android:background="@drawable/bg_icon"
-            android:padding="@dimen/size_1"/>
+            android:padding="@dimen/size_1" />
 
         <com.toandoan.lol.widget.view.SquareImageView
             android:id="@+id/item_3"
@@ -199,7 +220,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="@dimen/size_5"
             android:background="@drawable/bg_icon"
-            android:padding="@dimen/size_1"/>
+            android:padding="@dimen/size_1" />
 
         <com.toandoan.lol.widget.view.SquareImageView
             android:id="@+id/item_4"
@@ -210,7 +231,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="@dimen/size_5"
             android:background="@drawable/bg_icon"
-            android:padding="@dimen/size_1"/>
+            android:padding="@dimen/size_1" />
 
         <com.toandoan.lol.widget.view.SquareImageView
             android:id="@+id/item_5"
@@ -221,7 +242,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="@dimen/size_5"
             android:background="@drawable/bg_icon"
-            android:padding="@dimen/size_1"/>
+            android:padding="@dimen/size_1" />
 
         <com.toandoan.lol.widget.view.SquareImageView
             android:id="@+id/item_6"
@@ -232,7 +253,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="@dimen/size_5"
             android:background="@drawable/bg_icon"
-            android:padding="@dimen/size_1"/>
+            android:padding="@dimen/size_1" />
 
         <com.toandoan.lol.widget.view.SquareImageView
             android:id="@+id/item_7"
@@ -243,7 +264,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="@dimen/size_5"
             android:background="@drawable/bg_icon"
-            android:padding="@dimen/size_1"/>
+            android:padding="@dimen/size_1" />
 
     </LinearLayout>
 </LinearLayout>

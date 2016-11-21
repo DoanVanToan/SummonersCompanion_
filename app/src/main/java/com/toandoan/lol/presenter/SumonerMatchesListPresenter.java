@@ -15,6 +15,8 @@ import com.toandoan.lol.model.match.MatchList;
 import com.toandoan.lol.model.match.MatchReference;
 import com.toandoan.lol.model.match_detail.MatchDetail;
 import com.toandoan.lol.model.match_detail.Participant;
+import com.toandoan.lol.model.recent_match.GameEnity;
+import com.toandoan.lol.model.recent_match.RecentGamesEnity;
 import com.toandoan.lol.mvp_abstract.SumonerMatchesListAbstract;
 import com.toandoan.lol.utility.JsonUtil;
 import com.toandoan.lol.utility.LogUtil;
@@ -37,11 +39,7 @@ public class SumonerMatchesListPresenter implements SumonerMatchesListAbstract.P
     private final static String TAG = "SumonerMatchesListPresenter";
     private SumonerMatchesListAbstract.View mView;
     private BaseActivity mActivity;
-    private MatchList mMatchList;
-    private List<MatchReference> mMatchReferences;
-    private List<MatchDetail> mMatchDetails;
-    private int mCurrentPos;
-    private int mMaxSize;
+    private RecentGamesEnity mRecentGames;
     private UserEnity mUser;
 
     public SumonerMatchesListPresenter(BaseActivity activity, SumonerMatchesListAbstract.View view, UserEnity user) {
@@ -54,26 +52,15 @@ public class SumonerMatchesListPresenter implements SumonerMatchesListAbstract.P
     public void getAllMatches(String region, String id) {
         mActivity.showDialog();
         RiotService service = ServiceGenerator.createService(RiotService.class);
-        Call<ResponseBody> call = service.getSumonnerMatchesList(region, id);
+        Call<ResponseBody> call = service.getSumonnerRecentMatches(region, id);
         call.enqueue(getSumonerMatchesListCallback);
     }
 
     @Override
-    public void onItemClickListenner(View v, int position, Participant participant) {
-        for (MatchDetail matchDetail : mMatchDetails) {
-            if (matchDetail.getMatchCreation() == participant.getmMatchCreation()) {
-                MatchDetailActivity.startActivity(mActivity, matchDetail, participant);
-                return;
-            }
-        }
+    public void onItemClickListenner(View v, int position, GameEnity gameEnity) {
+        MatchDetailActivity.startActivity(mActivity, gameEnity, (int) mRecentGames.getSummonerId());
     }
 
-    @Override
-    public void getMatchByID(String region, String matchID) {
-        RiotService service = ServiceGenerator.createService(RiotService.class);
-        Call<ResponseBody> call = service.getSumonnerMatcheByID(region, matchID);
-        call.enqueue(getSumonerMatchByIDCallback);
-    }
 
     Callback<ResponseBody> getSumonerMatchesListCallback = new Callback<ResponseBody>() {
         @Override
@@ -81,26 +68,15 @@ public class SumonerMatchesListPresenter implements SumonerMatchesListAbstract.P
             JSONObject responseJson = JsonUtil.convertResponseToJson(response);
             if (responseJson != null) {
                 LogUtil.e(TAG, responseJson.toString());
-                mMatchList = new Gson().fromJson(responseJson.toString(), MatchList.class);
-                mMatchReferences = mMatchList.getMatches();
-                if (mMatchReferences != null && mMatchReferences.size() != 0) {
-                    mMatchDetails = new ArrayList<>();
-                    mCurrentPos = 0;
-                    mMaxSize = mMatchReferences.size() < Constant.MAX_MATCH_SIZE ?
-                            mMatchReferences.size() : Constant.MAX_MATCH_SIZE;
-                    getMatchByID(Constant.Region.NORTH_AMERICA, String.valueOf(mMatchReferences.get(mCurrentPos).getMatchId()));
-                } else {
-                    Toast.makeText(mActivity, mActivity.getString(R.string.no_match_found), Toast.LENGTH_SHORT).show();
-                    mActivity.dismissDialog();
+                mRecentGames = new Gson().fromJson(responseJson.toString(), RecentGamesEnity.class);
+                if (mRecentGames != null) {
+                    mView.updateHistoryMatches(mRecentGames.getGames());
                 }
-
-
             } else {
                 Toast.makeText(mActivity, mActivity.getString(R.string.not_internet_connected), Toast.LENGTH_SHORT).show();
-                mActivity.dismissDialog();
             }
 
-
+            mActivity.dismissDialog();
         }
 
         @Override
@@ -110,72 +86,4 @@ public class SumonerMatchesListPresenter implements SumonerMatchesListAbstract.P
         }
     };
 
-    public List<Participant> getHistoryMatch() {
-        List<Participant> userParticipants = new ArrayList<>();
-        if (mMatchDetails == null || mMatchDetails.size() == 0) {
-            return userParticipants;
-        }
-
-        for (MatchDetail matchDetail : mMatchDetails) {
-            int participantId = -1;
-            if (matchDetail.getParticipantIdentities() != null &&
-                    matchDetail.getParticipantIdentities().size() != 0) {
-
-                for (int i = 0; i < matchDetail.getParticipantIdentities().size(); i++) {
-                    long sumonerId = matchDetail.getParticipantIdentities().get(i).getPlayer().getSummonerId();
-                    if (sumonerId == mUser.getId()) {
-                        participantId = matchDetail.getParticipantIdentities().get(i).getParticipantId();
-                        break;
-                    }
-                }
-
-                if (participantId != -1) {
-                    for (int i = 0; i < matchDetail.getParticipants().size(); i++) {
-                        if (matchDetail.getParticipants().get(i).getParticipantId() == participantId) {
-                            matchDetail.getParticipants().get(i).setMatchDuration(matchDetail.getMatchDuration());
-                            matchDetail.getParticipants().get(i).setmMatchCreation(matchDetail.getMatchCreation());
-                            userParticipants.add(matchDetail.getParticipants().get(i));
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        return userParticipants;
-    }
-
-    Callback<ResponseBody> getSumonerMatchByIDCallback = new Callback<ResponseBody>() {
-        @Override
-        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-            mCurrentPos++;
-            JSONObject responseJson = JsonUtil.convertResponseToJson(response);
-            if (responseJson != null) {
-                LogUtil.e(TAG, mCurrentPos + "_" + responseJson.toString());
-                MatchDetail matchDetail = new Gson().fromJson(responseJson.toString(), MatchDetail.class);
-                if (matchDetail != null) mMatchDetails.add(matchDetail);
-            } else {
-                Toast.makeText(mActivity, mActivity.getString(R.string.not_internet_connected), Toast.LENGTH_SHORT).show();
-            }
-
-            if (mCurrentPos != mMaxSize) {
-                getMatchByID(Constant.Region.NORTH_AMERICA, String.valueOf(mMatchReferences.get(mCurrentPos).getMatchId()));
-            } else {
-                mActivity.dismissDialog();
-                LogUtil.e(TAG, mMatchDetails.size() + "");
-                mView.updateHistoryMatches(getHistoryMatch());
-            }
-        }
-
-        @Override
-        public void onFailure(Call<ResponseBody> call, Throwable t) {
-            if (mCurrentPos != mMatchReferences.size() - 1) {
-                getMatchByID(Constant.Region.NORTH_AMERICA, String.valueOf(mMatchReferences.get(mCurrentPos).getMatchId()));
-            } else {
-                mActivity.dismissDialog();
-                LogUtil.e(TAG, mMatchDetails.size() + "");
-                mView.updateHistoryMatches(getHistoryMatch());
-            }
-        }
-    };
 }

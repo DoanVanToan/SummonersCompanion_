@@ -175,11 +175,11 @@ public class ChampionStatsLayout extends LinearLayout implements View.OnClickLis
 
         builder = new StringBuilder("");
         builder
-                .append(mChampionStats.getStats().getAverageChampionsKilled())
+                .append(mChampionStats.getStats().getTotalChampionKills() / mChampionStats.getStats().getTotalSessionsPlayed())
                 .append(Constant.Charactor.DIV)
-                .append(mChampionStats.getStats().getAverageNumDeaths())
+                .append(mChampionStats.getStats().getTotalDeathsPerSession() / mChampionStats.getStats().getTotalSessionsPlayed())
                 .append(Constant.Charactor.DIV)
-                .append(mChampionStats.getStats().getAverageAssists());
+                .append(mChampionStats.getStats().getTotalAssists() / mChampionStats.getStats().getTotalSessionsPlayed());
         kdaTitle.setText(builder);
         ChampionEnity championEnity = getChampionByID(String.valueOf(mChampionStats.getId()));
         if (championEnity != null) {

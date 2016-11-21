@@ -18,6 +18,8 @@ import com.toandoan.lol.model.match_detail.Participant;
 import com.toandoan.lol.model.match_detail.ParticipantIdentity;
 import com.toandoan.lol.model.match_detail.ParticipantStats;
 import com.toandoan.lol.model.match_detail.Player;
+import com.toandoan.lol.model.recent_match.GameEnity;
+import com.toandoan.lol.model.recent_match.PlayerEnity;
 import com.toandoan.lol.mvp_abstract.MatchDetailContract;
 import com.toandoan.lol.widget.view.MatchItemHeaderLayout;
 import com.toandoan.lol.widget.view.StatisticLayout;
@@ -36,11 +38,10 @@ public class MatchDetailActivity extends BaseActivity implements MatchDetailCont
     @BindView(R.id.team_recyclerview)
     RecyclerView mTeamRecyclerview;
 
-    private MatchDetail mMatchDetail;
     private MatchDetailTeamAdapter mAdapter;
-    private List<ParticipantIdentity> mParticipantIdentities;
-    private Participant mParticipant;
-    private ParticipantStats mParticipantStats;
+    private GameEnity mGame;
+    private int mCurrentID;
+    private List<PlayerEnity> mPlayers;
 
 
     @Override
@@ -52,67 +53,64 @@ public class MatchDetailActivity extends BaseActivity implements MatchDetailCont
         initViews();
     }
 
-    public static void startActivity(Context context, MatchDetail matchDetail, Participant participant) {
+    public static void startActivity(Context context, GameEnity gameEnity, int currentID) {
         Intent intent = new Intent(context, MatchDetailActivity.class);
-        intent.putExtra(Constant.IntentKey.PARTICIPANT, participant);
-        intent.putExtra(Constant.IntentKey.MATCHDETAIL, matchDetail);
+        intent.putExtra(Constant.IntentKey.GAME_ENITY, gameEnity);
+        intent.putExtra(Constant.IntentKey.SUMONER_ID, currentID);
         context.startActivity(intent);
     }
 
     private void getData() {
         Intent data = getIntent();
         if (data != null) {
-            mParticipant =
-                    (Participant) data.getExtras().getSerializable(Constant.IntentKey.PARTICIPANT);
-            mParticipantStats = mParticipant.getStats();
-            mMatchDetail = (MatchDetail)
-                    data.getExtras().getSerializable(Constant.IntentKey.MATCHDETAIL);
-            mParticipantIdentities = getListParticipant();
+            mGame = (GameEnity) data.getExtras().getSerializable(Constant.IntentKey.GAME_ENITY);
+            mCurrentID = data.getExtras().getInt(Constant.IntentKey.SUMONER_ID);
+            mPlayers = getListPlayer();
         }
     }
 
-    private List<ParticipantIdentity> getListParticipant() {
-        List<ParticipantIdentity> result = new ArrayList<>();
-        if (mMatchDetail.getParticipantIdentities() != null) {
-            int halfSize = mMatchDetail.getParticipantIdentities().size() / 2;
-            for (int i = 0; i < halfSize; i++) {
-                ParticipantIdentity firstParticipantIdentity = mMatchDetail.getParticipantIdentities().get(i);
-                ParticipantIdentity secondParticipantIdentity = mMatchDetail.getParticipantIdentities().get(i + halfSize);
-
-                for (Participant participant : mMatchDetail.getParticipants()) {
-                    if (firstParticipantIdentity.getParticipantId() == participant.getParticipantId()){
-                        firstParticipantIdentity.getPlayer().setChampionId(participant.getChampionId());
-                    }else {
-                        if (secondParticipantIdentity.getParticipantId() == participant.getParticipantId()){
-                            secondParticipantIdentity.getPlayer().setChampionId(participant.getChampionId());
-                        }
-                    }
-                }
-                result.add(firstParticipantIdentity);
-                result.add(secondParticipantIdentity);
-
-
+    private List<PlayerEnity> getListPlayer() {
+        List<PlayerEnity> result = new ArrayList<>();
+        List<PlayerEnity> firstTeam = new ArrayList<>();
+        List<PlayerEnity> secondTeam = new ArrayList<>();
+        for (PlayerEnity player : mGame.getFellowPlayers()) {
+            if (player.getTeamId() == 100) {
+                firstTeam.add(player);
+            } else {
+                secondTeam.add(player);
             }
         }
+        PlayerEnity currentPlayer = new PlayerEnity();
+        currentPlayer.setChampionId(mGame.getChampionId());
+        currentPlayer.setSummonerId(mCurrentID);
 
+        if (mGame.getTeamId() == 100) {
+            currentPlayer.setTeamId(100);
+            firstTeam.add(currentPlayer);
+        } else {
+            currentPlayer.setTeamId(200);
+            secondTeam.add(currentPlayer);
+        }
 
+        result.addAll(firstTeam);
+        result.addAll(secondTeam);
         return result;
     }
 
     @Override
     public void initViews() {
         getSupportActionBar().hide();
-        mStatisticLayout.setStats(mParticipantStats);
-        mMatchHeaderLayout.setParticipant(mParticipant);
-        mAdapter = new MatchDetailTeamAdapter(this, mParticipantIdentities, this);
+        mStatisticLayout.setGame(mGame);
+        mMatchHeaderLayout.setGame(mGame);
+        mAdapter = new MatchDetailTeamAdapter(this, mPlayers, this);
         mTeamRecyclerview.setLayoutManager(new GridLayoutManager(activity, 2));
         mTeamRecyclerview.setAdapter(mAdapter);
     }
 
     @Override
-    public void onItemClick(View v, int position, Player player) {
+    public void onItemClick(View v, int position, PlayerEnity player) {
         UserEnity userEnity = new UserEnity();
-        userEnity.setName(player.getSummonerName());
+        userEnity.setName(player.getSumonerName());
         userEnity.setId((int) player.getSummonerId());
         SumonerDetailActivity.startActivity(activity, userEnity);
     }

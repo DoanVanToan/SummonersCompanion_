@@ -394,7 +394,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="@string/inhibitors_destroyed"
+            android:text="@string/ip_earned"
             android:textColor="@android:color/white"
             android:textSize="@dimen/text_size_15" />
 
