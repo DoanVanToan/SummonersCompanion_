@@ -1,58 +1,71 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/gray_0E1617"
-    tools:context="com.toandoan.lol.fragment.UserOverviewFragment">
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/gray_0E1617"
+             tools:context="com.toandoan.lol.fragment.UserOverviewFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="@dimen/size_5">
-
+        android:padding="@dimen/size_10">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
+            <com.toandoan.lol.widget.view.SquareImageView
                 android:id="@+id/ivAvt"
                 android:layout_width="@dimen/size_60"
                 android:layout_height="@dimen/size_60"
-                android:src="@mipmap/ic_launcher" />
+                android:background="@drawable/bg_icon"
+                android:padding="@dimen/size_3"
+                android:src="@mipmap/ic_launcher"/>
 
             <LinearLayout
-                android:layout_marginLeft="@dimen/size_10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_10"
                 android:orientation="vertical">
 
                 <com.toandoan.lol.widget.view.RobotoTextView
                     android:id="@+id/tvName"
-                    android:padding="@dimen/size_5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="ToanD oan"
+                    android:padding="@dimen/size_5"
+                    android:text="Toan Doan"
                     android:textAllCaps="true"
                     android:textColor="@color/yellow_D4BC6C"
                     android:textSize="@dimen/text_size_20"
+                    android:textStyle="bold"
                     app:typeface="roboto_bold"/>
 
                 <com.toandoan.lol.widget.view.RobotoTextView
                     android:id="@+id/tvLevel"
-                    android:layout_marginTop="@dimen/size_3"
-                    android:padding="@dimen/size_5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_3"
+                    android:padding="@dimen/size_5"
                     android:text="ToanDoan"
                     android:textAllCaps="true"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_13"
-                    app:typeface="roboto_light" />
+                    app:typeface="roboto_light"/>
             </LinearLayout>
         </LinearLayout>
+
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:layout_marginTop="@dimen/size_10"
+            android:id="@+id/tvPassiveName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tips"
+            android:textColor="@color/yellow_D4BC6C"
+            android:textSize="@dimen/text_size_16"
+            app:typeface="roboto_bold" />
+
     </LinearLayout>
 
 </FrameLayout>

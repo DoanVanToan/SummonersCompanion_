@@ -93,11 +93,7 @@ public class UserOverviewFragment extends BaseFragment {
                 tvLevel.setText("- " + userEnity.getSummonerLevel());
 
                 SumonerDetailActivity.startActivity(getContext(), userEnity);
-            }else {
-
             }
-
-
         }
 
 
