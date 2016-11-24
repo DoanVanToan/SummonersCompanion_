@@ -77,4 +77,11 @@
     <string name="match_story">MATCH HISTORY</string>
     <string name="champions">CHAMPIONS</string>
     <string name="wins">Wins</string>
+    <string name="most_play">Most Played</string>
+    <string name="ranks">Ranked</string>
+    <string name="unranked">UNRANKED</string>
+    <string name="team_5v5">Team 5v5</string>
+    <string name="team_3v3">Team 3v3</string>
+    <string name="solo_duo">Solo/Duo</string>
+    <string name="soming_was_wrong">Somthing was wrong, please try again.</string>
 </resources>

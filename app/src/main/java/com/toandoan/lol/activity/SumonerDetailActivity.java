@@ -16,7 +16,8 @@ import com.toandoan.lol.adapter.MyFragmentPagerAdapter;
 import com.toandoan.lol.base.BaseActivity;
 import com.toandoan.lol.constant.Constant;
 import com.toandoan.lol.fragment.SumonerMatchesListFragment;
-import com.toandoan.lol.model.UserEnity;
+import com.toandoan.lol.fragment.SumonerOverviewFragment;
+import com.toandoan.lol.model.SumonerEnity;
 import com.toandoan.lol.mvp_abstract.SumonerDetailAsbtract;
 import com.toandoan.lol.presentation.match.ChampionDetailBySeasonFragment;
 
@@ -32,14 +33,15 @@ public class SumonerDetailActivity extends BaseActivity implements SumonerDetail
 
     private FloatingActionButton mRunesButton, mMasteriesButton;
     private Toolbar mToolbar;
-    private UserEnity mUserEnity;
+    private SumonerEnity mSumonerEnity;
     private FloatingActionMenu mMenu;
     private CollapsingToolbarLayout mCollapsingTollbar;
     private SumonerMatchesListFragment mMatchesListFragment;
     private ChampionDetailBySeasonFragment mChampionStatsFragment;
     private MyFragmentPagerAdapter mPagerAdapter;
+    private SumonerOverviewFragment mOverviewFragment;
 
-    public static void startActivity(Context context, UserEnity userID) {
+    public static void startActivity(Context context, SumonerEnity userID) {
         Intent intent = new Intent(context, SumonerDetailActivity.class);
         intent.putExtra(Constant.IntentKey.SUMONER, userID);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -49,7 +51,7 @@ public class SumonerDetailActivity extends BaseActivity implements SumonerDetail
     private void getData() {
         Intent intent = getIntent();
         if (intent != null) {
-            mUserEnity = (UserEnity) intent.getExtras().getSerializable(Constant.IntentKey.SUMONER);
+            mSumonerEnity = (SumonerEnity) intent.getExtras().getSerializable(Constant.IntentKey.SUMONER);
         }
     }
 
@@ -69,7 +71,7 @@ public class SumonerDetailActivity extends BaseActivity implements SumonerDetail
         mCollapsingTollbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mCollapsingTollbar.setTitle(mUserEnity.getName());
+        mCollapsingTollbar.setTitle(mSumonerEnity.getName());
 
         mRunesButton = (FloatingActionButton) findViewById(R.id.menu_runes);
         mMasteriesButton = (FloatingActionButton) findViewById(R.id.menu_masteries);
@@ -77,12 +79,15 @@ public class SumonerDetailActivity extends BaseActivity implements SumonerDetail
         mRunesButton.setOnClickListener(this);
         mMasteriesButton.setOnClickListener(this);
 
-        mMatchesListFragment = SumonerMatchesListFragment.newInstance(mUserEnity);
-        mChampionStatsFragment = ChampionDetailBySeasonFragment.newInstance(mUserEnity);
+        mMatchesListFragment = SumonerMatchesListFragment.newInstance(mSumonerEnity);
+        mChampionStatsFragment = ChampionDetailBySeasonFragment.newInstance(mSumonerEnity);
+        mOverviewFragment = SumonerOverviewFragment.newInstance(mSumonerEnity);
 
         mPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
         mPagerAdapter.addFrag(mMatchesListFragment, getString(R.string.match_story));
         mPagerAdapter.addFrag(mChampionStatsFragment, getString(R.string.champions));
+        mPagerAdapter.addFrag(mOverviewFragment, getString(R.string.overview));
+
         sumonerViewpager.setAdapter(mPagerAdapter);
         mTabLayout.setupWithViewPager(sumonerViewpager);
     }
@@ -92,11 +97,11 @@ public class SumonerDetailActivity extends BaseActivity implements SumonerDetail
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.menu_runes:
-                SumonerRunesActivity.startActivity(this, mUserEnity);
+                SumonerRunesActivity.startActivity(this, mSumonerEnity);
                 mMenu.close(true);
                 break;
             case R.id.menu_masteries:
-                SumonerMasteriesActivity.startActivity(this, mUserEnity);
+                SumonerMasteriesActivity.startActivity(this, mSumonerEnity);
                 mMenu.close(true);
                 break;
             case R.id.menu:

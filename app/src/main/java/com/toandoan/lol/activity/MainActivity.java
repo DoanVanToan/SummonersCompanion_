@@ -3,7 +3,6 @@ package com.toandoan.lol.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.SearchView;
@@ -19,23 +18,22 @@ import android.view.MenuItem;
 import com.toandoan.lol.R;
 import com.toandoan.lol.base.BaseActivity;
 import com.toandoan.lol.base.BaseFragment;
-import com.toandoan.lol.fragment.ChampionOverviewFragment;
 import com.toandoan.lol.fragment.ItemFragment;
 import com.toandoan.lol.fragment.MasteriesFragment;
 import com.toandoan.lol.fragment.RunesFragment;
+import com.toandoan.lol.fragment.SearchSumonerFragment;
 import com.toandoan.lol.fragment.SelectChampionFragment;
-import com.toandoan.lol.fragment.SpellsFragment;
-import com.toandoan.lol.fragment.UserOverviewFragment;
+import com.toandoan.lol.fragment.SumonerOverviewFragment;
 import com.toandoan.lol.utility.Utils;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private UserOverviewFragment mUserOverviewFragment;
     private SelectChampionFragment mSelectChampionFragment;
     private ItemFragment mItemFragment;
     private RunesFragment mRunesFragment;
     private SearchView mSearchView;
     private MasteriesFragment mMasteriesFragment;
+    private SearchSumonerFragment mSumonerFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,13 +46,13 @@ public class MainActivity extends BaseActivity
 
 
     private void initUserViews() {
-        mUserOverviewFragment = UserOverviewFragment.newInstance();
+        mSumonerFragment = SearchSumonerFragment.newInstance();
         mSelectChampionFragment = SelectChampionFragment.newInstance();
         mItemFragment = ItemFragment.newInstance();
         mRunesFragment = RunesFragment.newInstance();
         mMasteriesFragment = MasteriesFragment.newInstance();
 
-        changeFramget(mUserOverviewFragment);
+        changeFramget(mSumonerFragment);
     }
 
     public void initViews() {
@@ -151,7 +149,7 @@ public class MainActivity extends BaseActivity
 
         switch (id) {
             case R.id.nav_sumonners:
-                changeFramget(mUserOverviewFragment);
+                changeFramget(mSumonerFragment);
                 break;
             case R.id.nav_champions:
                 changeFramget(mSelectChampionFragment);

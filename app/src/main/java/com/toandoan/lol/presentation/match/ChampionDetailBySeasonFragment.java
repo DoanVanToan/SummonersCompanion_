@@ -13,10 +13,8 @@ import com.toandoan.lol.R;
 import com.toandoan.lol.adapter.ChampionDetailStatsAdapter;
 import com.toandoan.lol.base.BaseActivity;
 import com.toandoan.lol.constant.Constant;
-import com.toandoan.lol.listenner.ChampionDetailActivityListenner;
-import com.toandoan.lol.model.UserEnity;
+import com.toandoan.lol.model.SumonerEnity;
 import com.toandoan.lol.model.champion_by_season.ChampionStatsEnity;
-import com.toandoan.lol.presenter.ChampionDetailActivityPresenter;
 
 import java.util.List;
 
@@ -32,21 +30,21 @@ public class ChampionDetailBySeasonFragment extends Fragment implements Champion
     @BindView(R.id.champion_stats_recyclerview)
     RecyclerView mChampionStatsRecyclerview;
 
-    private UserEnity mUser;
+    private SumonerEnity mUser;
     private ChampionDetailBySeasonPresenter mPresenter;
     private ChampionDetailStatsAdapter mAdapter;
 
-    public UserEnity getmUser() {
+    public SumonerEnity getmUser() {
         return mUser;
     }
 
-    public void setmUser(UserEnity mUser) {
+    public void setmUser(SumonerEnity mUser) {
         this.mUser = mUser;
     }
 
-    public static ChampionDetailBySeasonFragment newInstance(UserEnity mUserEnity) {
+    public static ChampionDetailBySeasonFragment newInstance(SumonerEnity mSumonerEnity) {
         ChampionDetailBySeasonFragment fragment = new ChampionDetailBySeasonFragment();
-        fragment.setmUser(mUserEnity);
+        fragment.setmUser(mSumonerEnity);
         return fragment;
     }
 

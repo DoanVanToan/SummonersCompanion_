@@ -3,7 +3,6 @@ package com.toandoan.lol.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -12,12 +11,7 @@ import com.toandoan.lol.R;
 import com.toandoan.lol.adapter.MatchDetailTeamAdapter;
 import com.toandoan.lol.base.BaseActivity;
 import com.toandoan.lol.constant.Constant;
-import com.toandoan.lol.model.UserEnity;
-import com.toandoan.lol.model.match_detail.MatchDetail;
-import com.toandoan.lol.model.match_detail.Participant;
-import com.toandoan.lol.model.match_detail.ParticipantIdentity;
-import com.toandoan.lol.model.match_detail.ParticipantStats;
-import com.toandoan.lol.model.match_detail.Player;
+import com.toandoan.lol.model.SumonerEnity;
 import com.toandoan.lol.model.recent_match.GameEnity;
 import com.toandoan.lol.model.recent_match.PlayerEnity;
 import com.toandoan.lol.mvp_abstract.MatchDetailContract;
@@ -109,9 +103,9 @@ public class MatchDetailActivity extends BaseActivity implements MatchDetailCont
 
     @Override
     public void onItemClick(View v, int position, PlayerEnity player) {
-        UserEnity userEnity = new UserEnity();
-        userEnity.setName(player.getSumonerName());
-        userEnity.setId((int) player.getSummonerId());
-        SumonerDetailActivity.startActivity(activity, userEnity);
+        SumonerEnity sumonerEnity = new SumonerEnity();
+        sumonerEnity.setName(player.getSumonerName());
+        sumonerEnity.setId((int) player.getSummonerId());
+        SumonerDetailActivity.startActivity(activity, sumonerEnity);
     }
 }

@@ -2,7 +2,6 @@ package com.toandoan.lol.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,12 +12,9 @@ import com.toandoan.lol.R;
 import com.toandoan.lol.adapter.SumonerRuneAdapter;
 import com.toandoan.lol.base.BaseActivity;
 import com.toandoan.lol.constant.Constant;
-import com.toandoan.lol.model.UserEnity;
-import com.toandoan.lol.model.matery.MasteryEnity;
-import com.toandoan.lol.model.matery.PageMasteries;
+import com.toandoan.lol.model.SumonerEnity;
 import com.toandoan.lol.model.rune.PageRunes;
 import com.toandoan.lol.model.rune.RuneEnity;
-import com.toandoan.lol.mvp_abstract.SumonerMasteriesAbstract;
 import com.toandoan.lol.mvp_abstract.SumonerRunesAbstract;
 import com.toandoan.lol.presenter.SummonerRunersPresenter;
 
@@ -34,9 +30,9 @@ public class SumonerRunesActivity extends BaseActivity implements SumonerRunesAb
     private TextView mTitleTextView;
     private SumonerRuneAdapter mAdapter;
     private List<PageRunes> mPageRunes;
-    private UserEnity mUserEnity;
+    private SumonerEnity mSumonerEnity;
 
-    public static void startActivity(Context context, UserEnity userID) {
+    public static void startActivity(Context context, SumonerEnity userID) {
         Intent intent = new Intent(context, SumonerRunesActivity.class);
         intent.putExtra(Constant.IntentKey.SUMONER, userID);
         context.startActivity(intent);
@@ -51,8 +47,8 @@ public class SumonerRunesActivity extends BaseActivity implements SumonerRunesAb
     }
 
     private void initData() {
-        mUserEnity = (UserEnity) getIntent().getExtras().getSerializable(Constant.IntentKey.SUMONER);
-        mID = String.valueOf(mUserEnity.getId());
+        mSumonerEnity = (SumonerEnity) getIntent().getExtras().getSerializable(Constant.IntentKey.SUMONER);
+        mID = String.valueOf(mSumonerEnity.getId());
     }
 
     @Override

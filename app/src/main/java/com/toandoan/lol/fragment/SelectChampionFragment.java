@@ -17,7 +17,7 @@ import com.toandoan.lol.adapter.SelectChampionAdapter;
 import com.toandoan.lol.base.BaseActivity;
 import com.toandoan.lol.base.BaseFragment;
 import com.toandoan.lol.constant.Constant;
-import com.toandoan.lol.presenter.SelectChampionPresenter;
+import com.toandoan.lol.presenter.ChampionPresenter;
 import com.toandoan.lol.listenner.ISelectChampListenner;
 import com.toandoan.lol.model.champion.ChampionEnity;
 import com.toandoan.lol.utility.Utils;
@@ -32,7 +32,7 @@ public class SelectChampionFragment extends BaseFragment {
     private final String TAG = "SelectChampionFragment";
     private Context mContext;
     private RecyclerView rvChamps;
-    private SelectChampionPresenter helper;
+    private ChampionPresenter helper;
     private SelectChampionAdapter adapter;
     private List<ChampionEnity> champions;
     private List<ChampionEnity> searchChampions;
@@ -62,7 +62,7 @@ public class SelectChampionFragment extends BaseFragment {
         rvChamps = (RecyclerView) v.findViewById(R.id.rvChamps);
         mContext = getContext();
 
-        helper = new SelectChampionPresenter((BaseActivity) getActivity(), listenner);
+        helper = new ChampionPresenter((BaseActivity) getActivity(), listenner);
         helper.loadCacheData();
     }
 

@@ -12,12 +12,9 @@ import android.view.ViewGroup;
 import com.toandoan.lol.R;
 import com.toandoan.lol.adapter.SumonerMatchesAdapter;
 import com.toandoan.lol.base.BaseActivity;
-import com.toandoan.lol.base.BaseFragment;
 import com.toandoan.lol.constant.Constant;
-import com.toandoan.lol.model.UserEnity;
-import com.toandoan.lol.model.match_detail.Participant;
+import com.toandoan.lol.model.SumonerEnity;
 import com.toandoan.lol.model.recent_match.GameEnity;
-import com.toandoan.lol.mvp_abstract.SumonerMasteriesAbstract;
 import com.toandoan.lol.mvp_abstract.SumonerMatchesListAbstract;
 import com.toandoan.lol.presenter.SumonerMatchesListPresenter;
 
@@ -28,7 +25,7 @@ import java.util.List;
  */
 public class SumonerMatchesListFragment extends Fragment implements SumonerMatchesListAbstract.View, SumonerMatchesAdapter.OnItemClickListenner {
     private SumonerMatchesListPresenter mPresenter;
-    private UserEnity mUser;
+    private SumonerEnity mUser;
     private SumonerMatchesAdapter mAdapter;
     private RecyclerView mRecyclerView;
 
@@ -37,17 +34,17 @@ public class SumonerMatchesListFragment extends Fragment implements SumonerMatch
         // Required empty public constructor
     }
 
-    public static SumonerMatchesListFragment newInstance(UserEnity user) {
+    public static SumonerMatchesListFragment newInstance(SumonerEnity user) {
         SumonerMatchesListFragment sumonerMatchesListFragment = new SumonerMatchesListFragment();
         sumonerMatchesListFragment.setUser(user);
         return sumonerMatchesListFragment;
     }
 
-    public UserEnity getUser() {
+    public SumonerEnity getUser() {
         return mUser;
     }
 
-    public void setUser(UserEnity user) {
+    public void setUser(SumonerEnity user) {
         mUser = user;
     }
 

@@ -95,6 +95,8 @@ public class Constant {
 
         public static final String GET_SUMMONER_RECENT_MATCHES = "api/lol/{region}/v1.3/game/by-summoner/{summonerId}/recent" + ApiKey.API_KEY_URL;
 
+        public static final String GET_SUMMONER_RANK_STATS = "/api/lol/{region}/v1.3/stats/by-summoner/{summonerId}/ranked?season=SEASON2016&api_key=" + ApiKey.API_KEY_VALUES;
+
 
     }
 
