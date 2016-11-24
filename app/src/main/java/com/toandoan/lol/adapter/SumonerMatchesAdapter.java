@@ -43,28 +43,28 @@ public class SumonerMatchesAdapter extends RecyclerView.Adapter<SumonerMatchesAd
     private OnItemClickListenner mListenner;
 
 
-    public SumonerMatchesAdapter(Context context, List<GameEnity> games, OnItemClickListenner listenner) {
-        mContext = context;
-        mGames = games;
-        mListenner = listenner;
-        loadChampions();
-        mDatabase = new MyItemImpl(mContext);
-        mSpellDatabase = new SpellsImpl(mContext);
-    }
+                public SumonerMatchesAdapter(Context context, List<GameEnity> games, OnItemClickListenner listenner) {
+                    mContext = context;
+                    mGames = games;
+                    mListenner = listenner;
+                    loadChampions();
+                    mDatabase = new MyItemImpl(mContext);
+                    mSpellDatabase = new SpellsImpl(mContext);
+                }
 
-    public void loadChampions() {
-        String fullChampStr = new FileOperations(mContext).readData(Constant.Data.FULL_CHAMP_LIST);
-        if (fullChampStr != null) {
-            Type listType = new TypeToken<ArrayList<ChampionEnity>>() {
-            }.getType();
-            mChampions = new Gson().fromJson(fullChampStr, listType);
-        }
-    }
+            public void loadChampions() {
+                String fullChampStr = new FileOperations(mContext).readData(Constant.Data.FULL_CHAMP_LIST);
+                if (fullChampStr != null) {
+                    Type listType = new TypeToken<ArrayList<ChampionEnity>>() {
+                    }.getType();
+                    mChampions = new Gson().fromJson(fullChampStr, listType);
+                }
+            }
 
-    public ChampionEnity getChampionByID(String id) {
-        for (ChampionEnity championEnity : mChampions) {
-            if (championEnity.getId().equalsIgnoreCase(id)) {
-                return championEnity;
+            public ChampionEnity getChampionByID(String id) {
+                for (ChampionEnity championEnity : mChampions) {
+                    if (championEnity.getId().equalsIgnoreCase(id)) {
+                        return championEnity;
             }
         }
         return null;

@@ -14,6 +14,15 @@ public class Constant {
         public static final String LINE_BREAK = "\n";
         public static final String DIV = "/";
         public static final String MOD = ":";
+        public static final String LEVEL = "Level";
+    }
+
+    public static class SumonerStaticData{
+        public static final String RANKED_SOLO_5X5 = "RANKED_SOLO_5x5";
+        public static final String RANKED_FLEX_SR = "RANKED_FLEX_SR";
+        public static final String RANKED_TEAM_3X3 = "RANKED_TEAM_3x3";
+        public static final String RANKED_TEAM_5X5 = "RANKED_TEAM_5x5";
+        public static final String POINT = "LP";
     }
 
     public static class Config {
@@ -95,7 +104,7 @@ public class Constant {
 
         public static final String GET_SUMMONER_RECENT_MATCHES = "api/lol/{region}/v1.3/game/by-summoner/{summonerId}/recent" + ApiKey.API_KEY_URL;
 
-        public static final String GET_SUMMONER_RANK_STATS = "/api/lol/{region}/v1.3/stats/by-summoner/{summonerId}/ranked?season=SEASON2016&api_key=" + ApiKey.API_KEY_VALUES;
+        public static final String GET_SUMMONER_RANK_STATS = "/api/lol/{region}/v2.5/league/by-summoner/{summonerIds}/entry" + ApiKey.API_KEY_URL;
 
 
     }

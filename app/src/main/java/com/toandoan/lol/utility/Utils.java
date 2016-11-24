@@ -318,6 +318,29 @@ public class Utils {
         return bitmap;
     }
 
+    public static Bitmap getRankImageFromAssets(Context context, String fileName) {
+        Bitmap bitmap = null;
+        try {
+            AssetManager assetManager = context.getAssets();
+            fileName = "masteries_image/" + fileName;
+            InputStream istr = null;
+
+            istr = assetManager.open(fileName);
+
+            bitmap = BitmapFactory.decodeStream(istr);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
+    }
+
+    public static void loadImageAssets(Context context, ImageView imageView, String fileName) {
+        if (imageView == null) return;
+        Bitmap bitmap = getRankImageFromAssets(context, fileName);
+        if (bitmap ==null) return;
+        imageView.setImageBitmap(bitmap);
+    }
+
     public static void showMasteryDialog(final Activity activity, MasteryEnity masteryEnity) {
         View view = LayoutInflater.from(activity).inflate(R.layout.can_not_start_layout, null);
         ImageView imgTitle = (ImageView) view.findViewById(R.id.imageview_icon);

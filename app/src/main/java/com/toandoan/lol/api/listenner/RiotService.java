@@ -62,5 +62,5 @@ public interface RiotService {
 
     @GET(Constant.Api.GET_SUMMONER_RANK_STATS)
     Call<ResponseBody> getSumonnerRankStats(@Path(Constant.ApiKey.REGION) String region,
-                                                @Path(Constant.ApiKey.SUMMONER_ID) String sumonerID);
+                                                @Path(Constant.ApiKey.SUMMONER_IDS) String sumonerID);
 }

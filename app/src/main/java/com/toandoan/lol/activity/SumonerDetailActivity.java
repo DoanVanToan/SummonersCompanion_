@@ -44,7 +44,7 @@ public class SumonerDetailActivity extends BaseActivity implements SumonerDetail
     public static void startActivity(Context context, SumonerEnity userID) {
         Intent intent = new Intent(context, SumonerDetailActivity.class);
         intent.putExtra(Constant.IntentKey.SUMONER, userID);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         context.startActivity(intent);
     }
 
@@ -90,6 +90,7 @@ public class SumonerDetailActivity extends BaseActivity implements SumonerDetail
 
         sumonerViewpager.setAdapter(mPagerAdapter);
         mTabLayout.setupWithViewPager(sumonerViewpager);
+        sumonerViewpager.setOffscreenPageLimit(mPagerAdapter.getCount());
     }
 
 

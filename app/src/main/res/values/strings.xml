@@ -84,4 +84,10 @@
     <string name="team_3v3">Team 3v3</string>
     <string name="solo_duo">Solo/Duo</string>
     <string name="soming_was_wrong">Somthing was wrong, please try again.</string>
+    <string name="kda">kda</string>
+    <string name="take_down">Take down</string>
+    <string name="minions">Minions</string>
+    <string name="win_rate">Winrate</string>
+    <string name="average">Averages</string>
+    <string name="wins_lose">Wins/Loses</string>
 </resources>
