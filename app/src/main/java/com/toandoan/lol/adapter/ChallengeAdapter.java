@@ -73,7 +73,10 @@ public class ChallengeAdapter extends RecyclerView.Adapter<ChallengeAdapter.View
 
         public ViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(itemView);
+            ButterKnife.bind(this, itemView);
+            if (getAdapterPosition() % 2 == 0) {
+                itemView.setBackgroundColor(mContext.getResources().getColor(R.color.trans_80));
+            }
         }
 
         public void bindViewItem(LeagueEntryEnity leagueEntryEnity) {
@@ -87,10 +90,17 @@ public class ChallengeAdapter extends RecyclerView.Adapter<ChallengeAdapter.View
         }
 
         public void bindHeader() {
-            mSumonerId.setText(R.string.position);
+            mSumonerId.setText(R.string.id);
+            mSumonerId.setTextSize(16);
             mSumonerName.setText(R.string.name);
+            mSumonerName.setTextSize(16);
             mSumonerPoint.setText(R.string.points);
+            mSumonerPoint.setTextSize(16);
             mSumonerWinLose.setText(R.string.wins_lose);
+            mSumonerWinLose.setTextSize(16);
+            if (getAdapterPosition() % 2 == 0) {
+                itemView.setBackgroundColor(mContext.getResources().getColor(R.color.trans_80));
+            }
         }
     }
 }
