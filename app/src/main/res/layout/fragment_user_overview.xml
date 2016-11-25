@@ -50,7 +50,6 @@
                     android:layout_marginTop="@dimen/size_3"
                     android:padding="@dimen/size_5"
                     android:text="ToanDoan"
-                    android:textAllCaps="true"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_13"
                     app:typeface="roboto_regular" />
@@ -121,7 +120,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/take_down"
+                    android:text="@string/turet_kill"
                     android:textAllCaps="true"
                     android:textColor="@color/gray_b7baba"
                     android:textSize="@dimen/text_size_10"
@@ -217,8 +216,7 @@
                     android:layout_width="@dimen/size_60"
                     android:layout_height="@dimen/size_60"
                     android:background="@drawable/bg_icon"
-                    android:padding="@dimen/size_3"
-                    android:src="@mipmap/ic_launcher" />
+                    android:padding="@dimen/size_3" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -237,7 +235,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="1/2/7"
                         android:textColor="@color/white"
                         android:textSize="@dimen/text_size_12"
                         app:typeface="roboto_bold" />
@@ -250,7 +247,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="W: 20%"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_12"
                     app:typeface="roboto_bold" />
@@ -269,8 +265,7 @@
                     android:layout_width="@dimen/size_60"
                     android:layout_height="@dimen/size_60"
                     android:background="@drawable/bg_icon"
-                    android:padding="@dimen/size_3"
-                    android:src="@mipmap/ic_launcher" />
+                    android:padding="@dimen/size_3" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -289,7 +284,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="1/2/7"
                         android:textColor="@color/white"
                         android:textSize="@dimen/text_size_12"
                         app:typeface="roboto_bold" />
@@ -302,7 +296,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="W: 20%"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_12"
                     app:typeface="roboto_bold" />
@@ -321,8 +314,7 @@
                     android:layout_width="@dimen/size_60"
                     android:layout_height="@dimen/size_60"
                     android:background="@drawable/bg_icon"
-                    android:padding="@dimen/size_3"
-                    android:src="@mipmap/ic_launcher" />
+                    android:padding="@dimen/size_3"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -341,7 +333,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="1/2/7"
                         android:textColor="@color/white"
                         android:textSize="@dimen/text_size_12"
                         app:typeface="roboto_bold" />
@@ -354,7 +345,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="W: 20%"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_12"
                     app:typeface="roboto_bold" />
@@ -373,8 +363,7 @@
                     android:layout_width="@dimen/size_60"
                     android:layout_height="@dimen/size_60"
                     android:background="@drawable/bg_icon"
-                    android:padding="@dimen/size_3"
-                    android:src="@mipmap/ic_launcher" />
+                    android:padding="@dimen/size_3"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -393,7 +382,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="1/2/7"
                         android:textColor="@color/white"
                         android:textSize="@dimen/text_size_12"
                         app:typeface="roboto_bold" />
@@ -406,7 +394,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="W: 20%"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_12"
                     app:typeface="roboto_bold" />

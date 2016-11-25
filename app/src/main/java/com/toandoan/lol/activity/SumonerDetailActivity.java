@@ -18,13 +18,18 @@ import com.toandoan.lol.constant.Constant;
 import com.toandoan.lol.fragment.SumonerMatchesListFragment;
 import com.toandoan.lol.fragment.SumonerOverviewFragment;
 import com.toandoan.lol.model.SumonerEnity;
+import com.toandoan.lol.model.champion_by_season.ChampionStatsEnity;
 import com.toandoan.lol.mvp_abstract.SumonerDetailAsbtract;
 import com.toandoan.lol.presentation.match.ChampionDetailBySeasonFragment;
+import com.toandoan.lol.presentation.match.ChampionDetailBySeasonPresenter;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SumonerDetailActivity extends BaseActivity implements SumonerDetailAsbtract.View, View.OnClickListener {
+public class SumonerDetailActivity extends BaseActivity implements SumonerDetailAsbtract.View, View.OnClickListener
+, ChampionDetailBySeasonPresenter.OnLoadChampionFinnish{
 
     @BindView(R.id.sumoner_viewpager)
     ViewPager sumonerViewpager;
@@ -80,7 +85,7 @@ public class SumonerDetailActivity extends BaseActivity implements SumonerDetail
         mMasteriesButton.setOnClickListener(this);
 
         mMatchesListFragment = SumonerMatchesListFragment.newInstance(mSumonerEnity);
-        mChampionStatsFragment = ChampionDetailBySeasonFragment.newInstance(mSumonerEnity);
+        mChampionStatsFragment = ChampionDetailBySeasonFragment.newInstance(mSumonerEnity, this);
         mOverviewFragment = SumonerOverviewFragment.newInstance(mSumonerEnity);
 
         mPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
@@ -109,5 +114,11 @@ public class SumonerDetailActivity extends BaseActivity implements SumonerDetail
 
                 break;
         }
+    }
+
+
+    @Override
+    public void onLoadFinnish(List<ChampionStatsEnity> stats) {
+        mOverviewFragment.updateMostChampionPlayed(stats);
     }
 }

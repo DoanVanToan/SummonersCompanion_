@@ -15,14 +15,19 @@ public class Constant {
         public static final String DIV = "/";
         public static final String MOD = ":";
         public static final String LEVEL = "Level";
+        public static final String W = "W";
     }
 
-    public static class SumonerStaticData{
+    public static class SumonerStaticData {
         public static final String RANKED_SOLO_5X5 = "RANKED_SOLO_5x5";
         public static final String RANKED_FLEX_SR = "RANKED_FLEX_SR";
         public static final String RANKED_TEAM_3X3 = "RANKED_TEAM_3x3";
         public static final String RANKED_TEAM_5X5 = "RANKED_TEAM_5x5";
         public static final String POINT = "LP";
+    }
+
+    public static class SumonerSumary {
+        public static final String RANKEDSOLO5X5 = "RankedSolo5x5";
     }
 
     public static class Config {
@@ -105,6 +110,12 @@ public class Constant {
         public static final String GET_SUMMONER_RECENT_MATCHES = "api/lol/{region}/v1.3/game/by-summoner/{summonerId}/recent" + ApiKey.API_KEY_URL;
 
         public static final String GET_SUMMONER_RANK_STATS = "/api/lol/{region}/v2.5/league/by-summoner/{summonerIds}/entry" + ApiKey.API_KEY_URL;
+
+        public static final String GET_SUMMONER_RANK_SUMARY = "/api/lol/{region}/v1.3/stats/by-summoner/{summonerId}/summary?season=SEASON2016&api_key=" + ApiKey.API_KEY_VALUES;
+
+        public static final String GET_SUMMONER_BY_ID = "/api/lol/{region}/v1.4/summoner/{summonerIds}" + ApiKey.API_KEY_URL;
+
+        public static final String GET_CHALLANGE_RANK = "api/lol/{region}/v2.5/league/challenger?type=RANKED_SOLO_5x5&api_key=" + ApiKey.API_KEY_VALUES;
 
 
     }

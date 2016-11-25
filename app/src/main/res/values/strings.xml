@@ -90,4 +90,9 @@
     <string name="win_rate">Winrate</string>
     <string name="average">Averages</string>
     <string name="wins_lose">Wins/Loses</string>
+    <string name="turet_kill">Turret kills</string>
+    <string name="show_challange">Show Challange</string>
+    <string name="position">Position</string>
+    <string name="name">Name</string>
+    <string name="points">Points</string>
 </resources>

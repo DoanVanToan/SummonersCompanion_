@@ -24,6 +24,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     public ACProgressFlower loadingDialog;
     protected BaseActivity activity;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

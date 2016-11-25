@@ -43,28 +43,28 @@ public class SumonerMatchesAdapter extends RecyclerView.Adapter<SumonerMatchesAd
     private OnItemClickListenner mListenner;
 
 
-                public SumonerMatchesAdapter(Context context, List<GameEnity> games, OnItemClickListenner listenner) {
-                    mContext = context;
-                    mGames = games;
-                    mListenner = listenner;
-                    loadChampions();
-                    mDatabase = new MyItemImpl(mContext);
-                    mSpellDatabase = new SpellsImpl(mContext);
-                }
+    public SumonerMatchesAdapter(Context context, List<GameEnity> games, OnItemClickListenner listenner) {
+        mContext = context;
+        mGames = games;
+        mListenner = listenner;
+        loadChampions();
+        mDatabase = new MyItemImpl(mContext);
+        mSpellDatabase = new SpellsImpl(mContext);
+    }
 
-            public void loadChampions() {
-                String fullChampStr = new FileOperations(mContext).readData(Constant.Data.FULL_CHAMP_LIST);
-                if (fullChampStr != null) {
-                    Type listType = new TypeToken<ArrayList<ChampionEnity>>() {
-                    }.getType();
-                    mChampions = new Gson().fromJson(fullChampStr, listType);
-                }
-            }
+    public void loadChampions() {
+        String fullChampStr = new FileOperations(mContext).readData(Constant.Data.FULL_CHAMP_LIST);
+        if (fullChampStr != null) {
+            Type listType = new TypeToken<ArrayList<ChampionEnity>>() {
+            }.getType();
+            mChampions = new Gson().fromJson(fullChampStr, listType);
+        }
+    }
 
-            public ChampionEnity getChampionByID(String id) {
-                for (ChampionEnity championEnity : mChampions) {
-                    if (championEnity.getId().equalsIgnoreCase(id)) {
-                        return championEnity;
+    public ChampionEnity getChampionByID(String id) {
+        for (ChampionEnity championEnity : mChampions) {
+            if (championEnity.getId().equalsIgnoreCase(id)) {
+                return championEnity;
             }
         }
         return null;
@@ -146,7 +146,9 @@ public class SumonerMatchesAdapter extends RecyclerView.Adapter<SumonerMatchesAd
                     .append(game.getStats().getAssists());
             mItemKda.setText(builder);
             mItemGold.setText(Utils.formatDouble(game.getStats().getGoldEarned()));
-            mItemCrep.setText(String.valueOf(game.getStats().getMinionsKilled()));
+            mItemCrep.setText(String.valueOf(game.getStats().getMinionsKilled()
+                    + game.getStats().getNeutralMinionsKilledYourJungle()
+                    + game.getStats().getNeutralMinionsKilledEnemyJungle()));
             mItemTime.setText(Utils.getHourFormatFromSecond(game.getCreateDate()));
             mItemDate.setText(Utils.getDateFormatFromSecond(game.getCreateDate()));
             loadItemView(game);

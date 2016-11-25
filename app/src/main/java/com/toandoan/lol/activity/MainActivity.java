@@ -163,6 +163,9 @@ public class MainActivity extends BaseActivity
             case R.id.nav_masteries:
                 changeFramget(mMasteriesFragment);
                 break;
+            case R.id.nav_challange:
+                ChallengerActivity.startActivity(this);
+                break;
             case R.id.nav_share:
 
                 break;

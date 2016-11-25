@@ -33,18 +33,20 @@ public class ChampionDetailBySeasonFragment extends Fragment implements Champion
     private SumonerEnity mUser;
     private ChampionDetailBySeasonPresenter mPresenter;
     private ChampionDetailStatsAdapter mAdapter;
-
-    public SumonerEnity getmUser() {
-        return mUser;
-    }
+    private ChampionDetailBySeasonPresenter.OnLoadChampionFinnish mListenner;
 
     public void setmUser(SumonerEnity mUser) {
         this.mUser = mUser;
     }
 
-    public static ChampionDetailBySeasonFragment newInstance(SumonerEnity mSumonerEnity) {
+    public void setListenner(ChampionDetailBySeasonPresenter.OnLoadChampionFinnish listenner) {
+        mListenner = listenner;
+    }
+
+    public static ChampionDetailBySeasonFragment newInstance(SumonerEnity mSumonerEnity, ChampionDetailBySeasonPresenter.OnLoadChampionFinnish listenner) {
         ChampionDetailBySeasonFragment fragment = new ChampionDetailBySeasonFragment();
         fragment.setmUser(mSumonerEnity);
+        fragment.setListenner(listenner);
         return fragment;
     }
 
@@ -58,8 +60,8 @@ public class ChampionDetailBySeasonFragment extends Fragment implements Champion
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_champion_detail_by_season, container, false);
-        initViews(v);
         ButterKnife.bind(this, v);
+        initViews();
         return v;
     }
 
@@ -70,16 +72,14 @@ public class ChampionDetailBySeasonFragment extends Fragment implements Champion
         mChampionStatsRecyclerview.setAdapter(mAdapter);
     }
 
-    private void initViews(View v) {
-        ButterKnife.bind(v);
-        mPresenter = new ChampionDetailBySeasonPresenter((BaseActivity) getActivity(), this);
+    @Override
+    public void initViews() {
+        mPresenter = new ChampionDetailBySeasonPresenter((BaseActivity) getActivity(), this, mListenner);
         mPresenter.loadChampionDetailStats(Constant.Region.NORTH_AMERICA, String.valueOf(mUser.getId()));
     }
 
-    @Override
-    public void initViews() {
 
-    }
+
 
 
 }

@@ -24,9 +24,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
 import com.toandoan.lol.R;
+import com.toandoan.lol.constant.Constant;
 import com.toandoan.lol.model.SpellEnity;
 import com.toandoan.lol.model.champion.ChampionEnity;
 import com.toandoan.lol.model.champion.ChampionSkinEnity;
@@ -40,6 +43,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Type;
 import java.nio.channels.FileChannel;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -337,7 +341,7 @@ public class Utils {
     public static void loadImageAssets(Context context, ImageView imageView, String fileName) {
         if (imageView == null) return;
         Bitmap bitmap = getRankImageFromAssets(context, fileName);
-        if (bitmap ==null) return;
+        if (bitmap == null) return;
         imageView.setImageBitmap(bitmap);
     }
 
@@ -431,6 +435,28 @@ public class Utils {
         Date date = new Date(number);
         SimpleDateFormat format = new SimpleDateFormat("HH:mm");
         return format.format(date);
+    }
+
+    public static List<ChampionEnity> loadChampions(Context context) {
+        List<ChampionEnity> champions = null;
+        String fullChampStr = new FileOperations(context).readData(Constant.Data.FULL_CHAMP_LIST);
+        if (fullChampStr != null) {
+            Type listType = new TypeToken<ArrayList<ChampionEnity>>() {
+            }.getType();
+            champions = new Gson().fromJson(fullChampStr, listType);
+        }
+        return champions;
+    }
+
+    public static ChampionEnity getChampionByID(Context context, String id) {
+        List<ChampionEnity> champions = loadChampions(context);
+        if (champions == null) return null;
+        for (ChampionEnity championEnity : champions) {
+            if (championEnity.getId().equalsIgnoreCase(id)) {
+                return championEnity;
+            }
+        }
+        return null;
     }
 
 }

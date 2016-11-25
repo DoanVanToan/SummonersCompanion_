@@ -4,17 +4,23 @@ package com.toandoan.lol.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.toandoan.lol.R;
 import com.toandoan.lol.base.BaseActivity;
 import com.toandoan.lol.constant.Constant;
 import com.toandoan.lol.model.SumonerEnity;
+import com.toandoan.lol.model.champion.ChampionEnity;
+import com.toandoan.lol.model.champion_by_season.ChampionStatsEnity;
 import com.toandoan.lol.model.sumoner_overview.LeagueEnity;
+import com.toandoan.lol.model.sumoner_sumary.PlayerStatsSummaryEnity;
 import com.toandoan.lol.mvp_abstract.SumonerOverviewContract;
 import com.toandoan.lol.presenter.SumonerOverviewPresenter;
 import com.toandoan.lol.utility.Utils;
@@ -102,6 +108,7 @@ public class SumonerOverviewFragment extends Fragment implements SumonerOverview
     private SumonerEnity mSumonerEnity;
     private SumonerOverviewPresenter mPresenter;
     private Context mContext;
+    private final int MAX_CHAMPION_REVIEWS = 5;
 
     public void setSumonerEnity(SumonerEnity sumonerEnity) {
         mSumonerEnity = sumonerEnity;
@@ -133,15 +140,14 @@ public class SumonerOverviewFragment extends Fragment implements SumonerOverview
         mContext = getContext();
         mPresenter = new SumonerOverviewPresenter((BaseActivity) mContext, this);
         mPresenter.loadSumonerStats(Constant.Region.NORTH_AMERICA, String.valueOf(mSumonerEnity.getId()));
+        mPresenter.loadSumonerSumary(Constant.Region.NORTH_AMERICA, String.valueOf(mSumonerEnity.getId()));
+        if (TextUtils.isEmpty(mSumonerEnity.getName()))
+            mPresenter.loadSumonerById(Constant.Region.NORTH_AMERICA, String.valueOf(mSumonerEnity.getId()));
     }
 
     @Override
-    public void loadSumonerStats(List<LeagueEnity> leagueEnity) {
-        Glide.with(mContext)
-                .load(Utils.RiotStatic.getProfileIcon(mSumonerEnity.getProfileIconId()))
-                .into(sumonerAvatr);
-        sumonerName.setText(mSumonerEnity.getName());
-        sumnonerLevel.setText(Constant.Charactor.LEVEL + Constant.Charactor.MOD + Constant.Charactor.SPACE + mSumonerEnity.getSummonerLevel());
+    public void updateSumonerStats(List<LeagueEnity> leagueEnity) {
+        updateSumoner(mSumonerEnity);
         for (LeagueEnity league : leagueEnity) {
             switch (league.getQueue()) {
                 case Constant.SumonerStaticData.RANKED_SOLO_5X5:
@@ -178,5 +184,95 @@ public class SumonerOverviewFragment extends Fragment implements SumonerOverview
                     break;
             }
         }
+    }
+
+    @Override
+    public void updateMostChampionPlayed(List<ChampionStatsEnity> champions) {
+        for (int i = 0; i < MAX_CHAMPION_REVIEWS; i++) {
+            if (i < champions.size()) {
+                ChampionStatsEnity champion = champions.get(i);
+                switch (i) {
+                    case 0:
+                        loadMostPlay(champion, mostPlayImage1, mostPlayKda1, mostPlayWin1);
+                        break;
+                    case 1:
+                        loadMostPlay(champion, mostPlayImage2, mostPlayKda2, mostPlayWin2);
+                        break;
+                    case 2:
+                        loadMostPlay(champion, mostPlayImage3, mostPlayKda3, mostPlayWin3);
+                        break;
+                    case 3:
+                        loadMostPlay(champion, mostPlayImage4, mostPlayKda4, mostPlayWin4);
+                        break;
+                }
+            }
+        }
+    }
+
+    @Override
+    public void updateSumonerSumary(PlayerStatsSummaryEnity stats) {
+        int totalGame = stats.getWins() + stats.getLosses();
+        if (totalGame == 0) totalGame = 1;
+        int winPercent = 0;
+        winPercent = (stats.getWins() * 100 / totalGame);
+        sumonerWinrate.setText(winPercent + Constant.Charactor.SPACE + Constant.Charactor.PERCENT);
+
+        float turret = stats.getAggregatedStats().getTotalTurretsKilled();
+        float totalGameFloat = totalGame;
+        turret /= totalGameFloat;
+        int minions = (stats.getAggregatedStats().getTotalMinionKills() + stats.getAggregatedStats().getTotalNeutralMinionsKilled())
+                / totalGame;
+        sumonerMinions.setText(minions + "");
+        sumonerTakeDown.setText(String.format("%.2f", turret));
+
+        StringBuilder builder = new StringBuilder()
+                .append(stats.getAggregatedStats().getTotalChampionKills() / totalGame)
+                .append(Constant.Charactor.DIV)
+                .append(stats.getAggregatedStats().getTotalAssists() / totalGame)
+                .append(Constant.Charactor.DIV)
+                .append(stats.getAggregatedStats().getTotalDeathsPerSession() / totalGame);
+        sumonerKda.setText(builder);
+    }
+
+    @Override
+    public void updateSumoner(SumonerEnity sumoner) {
+        mSumonerEnity = sumoner;
+        Glide.with(mContext)
+                .load(Utils.RiotStatic.getProfileIcon(mSumonerEnity.getProfileIconId()))
+                .into(sumonerAvatr);
+        sumonerName.setText(mSumonerEnity.getName());
+        sumnonerLevel.setText(Constant.Charactor.LEVEL
+                + Constant.Charactor.MOD
+                + Constant.Charactor.SPACE
+                + mSumonerEnity.getSummonerLevel());
+    }
+
+    private void loadMostPlay(ChampionStatsEnity championStats, ImageView championAvt, TextView tvKDA, TextView tvWinPercent) {
+        ChampionEnity champion = Utils.getChampionByID(mContext, String.valueOf(championStats.getId()));
+        if (champion != null) {
+            Glide.with(mContext)
+                    .load(Utils.RiotStatic.getChampionIcon(champion.getKey()))
+                    .into(championAvt);
+        }
+        StringBuilder builder = new StringBuilder();
+        builder
+                .append(championStats.getStats().getTotalChampionKills() / championStats.getStats().getTotalSessionsPlayed())
+                .append(Constant.Charactor.SPACE)
+                .append(Constant.Charactor.DIV)
+                .append(Constant.Charactor.SPACE)
+                .append(championStats.getStats().getTotalDeathsPerSession() / championStats.getStats().getTotalSessionsPlayed())
+                .append(Constant.Charactor.SPACE)
+                .append(Constant.Charactor.DIV)
+                .append(Constant.Charactor.SPACE)
+                .append(championStats.getStats().getTotalAssists() / championStats.getStats().getTotalSessionsPlayed());
+
+        tvKDA.setText(builder);
+
+        builder = new StringBuilder();
+        builder
+                .append(Constant.Charactor.W + ": ")
+                .append(championStats.getStats().getTotalSessionsWon() * 100 / championStats.getStats().getTotalSessionsPlayed())
+                .append(Constant.Charactor.PERCENT);
+        tvWinPercent.setText(builder);
     }
 }
