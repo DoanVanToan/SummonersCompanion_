@@ -96,4 +96,5 @@
     <string name="name">Name</string>
     <string name="points">Points</string>
     <string name="id">ID</string>
+    <string name="w_l">W/L</string>
 </resources>

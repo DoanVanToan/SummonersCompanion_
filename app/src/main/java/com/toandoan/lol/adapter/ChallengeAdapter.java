@@ -76,6 +76,8 @@ public class ChallengeAdapter extends RecyclerView.Adapter<ChallengeAdapter.View
             ButterKnife.bind(this, itemView);
             if (getAdapterPosition() % 2 == 0) {
                 itemView.setBackgroundColor(mContext.getResources().getColor(R.color.trans_80));
+            } else {
+                itemView.setBackgroundColor(mContext.getResources().getColor(R.color.yellow_D4BC6C));
             }
         }
 
@@ -86,6 +88,8 @@ public class ChallengeAdapter extends RecyclerView.Adapter<ChallengeAdapter.View
             mSumonerWinLose.setText(leagueEntryEnity.getWins() + "/" + leagueEntryEnity.getLosses());
             if (getAdapterPosition() % 2 == 0) {
                 itemView.setBackgroundColor(mContext.getResources().getColor(R.color.trans_80));
+            } else {
+                itemView.setBackgroundColor(mContext.getResources().getColor(R.color.yellow_D4BC6C));
             }
         }
 
@@ -96,10 +100,12 @@ public class ChallengeAdapter extends RecyclerView.Adapter<ChallengeAdapter.View
             mSumonerName.setTextSize(16);
             mSumonerPoint.setText(R.string.points);
             mSumonerPoint.setTextSize(16);
-            mSumonerWinLose.setText(R.string.wins_lose);
+            mSumonerWinLose.setText(R.string.w_l);
             mSumonerWinLose.setTextSize(16);
             if (getAdapterPosition() % 2 == 0) {
                 itemView.setBackgroundColor(mContext.getResources().getColor(R.color.trans_80));
+            } else {
+                itemView.setBackgroundColor(mContext.getResources().getColor(R.color.yellow_D4BC6C));
             }
         }
     }
