@@ -10,6 +10,7 @@ import com.toandoan.lol.R;
 import com.toandoan.lol.adapter.ChallengeAdapter;
 import com.toandoan.lol.base.BaseActivity;
 import com.toandoan.lol.constant.Constant;
+import com.toandoan.lol.model.SumonerEnity;
 import com.toandoan.lol.model.sumoner_overview.LeagueEntryEnity;
 import com.toandoan.lol.mvp_abstract.ChallengerContract;
 import com.toandoan.lol.presenter.ChallengerPresenter;
@@ -20,7 +21,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ChallengerActivity extends BaseActivity implements ChallengerContract.View {
+public class ChallengerActivity extends BaseActivity implements ChallengerContract.View
+        , ChallengeAdapter.OnItemClickListenner {
     @BindView(R.id.challange_recyclerview)
     RecyclerView mChallangeRecyclerview;
 
@@ -51,8 +53,15 @@ public class ChallengerActivity extends BaseActivity implements ChallengerContra
     public void updateChallengeSumoner(List<LeagueEntryEnity> entries) {
         mEntries = new ArrayList<>(entries);
         mEntries.add(0, null);
-        mAdapter = new ChallengeAdapter(this, mEntries);
+        mAdapter = new ChallengeAdapter(this, mEntries, this);
         mChallangeRecyclerview.setLayoutManager(new LinearLayoutManager(activity));
         mChallangeRecyclerview.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onItemClick(int position, LeagueEntryEnity leagueEntryEnity) {
+        SumonerEnity sumonerEnity = new SumonerEnity();
+        sumonerEnity.setId(leagueEntryEnity.getLosses());
+        SumonerDetailActivity.startActivity(this, sumonerEnity);
     }
 }

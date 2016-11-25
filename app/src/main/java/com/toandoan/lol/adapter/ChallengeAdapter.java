@@ -25,13 +25,15 @@ public class ChallengeAdapter extends RecyclerView.Adapter<ChallengeAdapter.View
 
     private List<LeagueEntryEnity> mLeagues;
     private Context mContext;
+    private OnItemClickListenner mListenner;
 
     private int HEADER = 0;
     private int ITEM = 1;
 
-    public ChallengeAdapter(Context context, List<LeagueEntryEnity> leagues) {
+    public ChallengeAdapter(Context context, List<LeagueEntryEnity> leagues, OnItemClickListenner listenner) {
         mContext = context;
         mLeagues = leagues;
+        mListenner = listenner;
     }
 
     @Override
@@ -79,6 +81,13 @@ public class ChallengeAdapter extends RecyclerView.Adapter<ChallengeAdapter.View
             } else {
                 itemView.setBackgroundColor(mContext.getResources().getColor(R.color.yellow_D4BC6C));
             }
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (ChallengeAdapter.this.getItemViewType(getAdapterPosition()) != HEADER)
+                        mListenner.onItemClick(getAdapterPosition(), mLeagues.get(getAdapterPosition()));
+                }
+            });
         }
 
         public void bindViewItem(LeagueEntryEnity leagueEntryEnity) {
@@ -108,5 +117,9 @@ public class ChallengeAdapter extends RecyclerView.Adapter<ChallengeAdapter.View
                 itemView.setBackgroundColor(mContext.getResources().getColor(R.color.yellow_D4BC6C));
             }
         }
+    }
+
+    public interface OnItemClickListenner {
+        void onItemClick(int position, LeagueEntryEnity leagueEntryEnity);
     }
 }
