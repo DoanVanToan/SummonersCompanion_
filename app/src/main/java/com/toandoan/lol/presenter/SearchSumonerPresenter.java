@@ -1,6 +1,5 @@
 package com.toandoan.lol.presenter;
 
-import android.content.Context;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -10,7 +9,6 @@ import com.toandoan.lol.activity.SumonerDetailActivity;
 import com.toandoan.lol.api.listenner.RiotService;
 import com.toandoan.lol.base.BaseActivity;
 import com.toandoan.lol.constant.Constant;
-import com.toandoan.lol.listenner.IUserOverviewListenner;
 import com.toandoan.lol.model.SumonerEnity;
 import com.toandoan.lol.mvp_abstract.SearchSumonerContract;
 import com.toandoan.lol.utility.JsonUtil;
@@ -47,7 +45,7 @@ public class SearchSumonerPresenter implements SearchSumonerContract.Presenter {
 
         RiotService service = retrofit.create(RiotService.class);
 
-        Call<ResponseBody> call = service.findUserByName(region, name);
+        Call<ResponseBody> call = service.getSumonerByName(region, name);
         call.enqueue(searchUserByName);
 
     }

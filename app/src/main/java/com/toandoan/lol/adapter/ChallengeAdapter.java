@@ -111,11 +111,7 @@ public class ChallengeAdapter extends RecyclerView.Adapter<ChallengeAdapter.View
             mSumonerPoint.setTextSize(16);
             mSumonerWinLose.setText(R.string.w_l);
             mSumonerWinLose.setTextSize(16);
-            if (getAdapterPosition() % 2 == 0) {
-                itemView.setBackgroundColor(mContext.getResources().getColor(R.color.trans_80));
-            } else {
-                itemView.setBackgroundColor(mContext.getResources().getColor(R.color.yellow_D4BC6C));
-            }
+            itemView.setBackgroundColor(mContext.getResources().getColor(R.color.colorPrimaryDark));
         }
     }
 

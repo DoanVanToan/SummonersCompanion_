@@ -13,7 +13,7 @@ import retrofit2.http.Path;
 
 public interface RiotService {
     @GET(Constant.Api.FIND_BY_NAME)
-    Call<ResponseBody> findUserByName(@Path(Constant.ApiKey.REGION) String region
+    Call<ResponseBody> getSumonerByName(@Path(Constant.ApiKey.REGION) String region
             , @Path(Constant.ApiKey.SUMMONER_NAMES) String userName);
 
     @GET(Constant.Api.GET_LIST_CHAMPIONS)
@@ -54,24 +54,28 @@ public interface RiotService {
 
     @GET(Constant.Api.GET_SUMMONER_CHAMPIONS_STATS_BY_ID)
     Call<ResponseBody> getSumonnerChampionStatsByID(@Path(Constant.ApiKey.REGION) String region,
-                                             @Path(Constant.ApiKey.SUMMONER_ID) String sumonerID);
+                                                    @Path(Constant.ApiKey.SUMMONER_ID) String sumonerID);
 
     @GET(Constant.Api.GET_SUMMONER_RECENT_MATCHES)
     Call<ResponseBody> getSumonnerRecentMatches(@Path(Constant.ApiKey.REGION) String region,
-                                                    @Path(Constant.ApiKey.SUMMONER_ID) String sumonerID);
+                                                @Path(Constant.ApiKey.SUMMONER_ID) String sumonerID);
 
     @GET(Constant.Api.GET_SUMMONER_RANK_STATS)
     Call<ResponseBody> getSumonnerRankStats(@Path(Constant.ApiKey.REGION) String region,
-                                                @Path(Constant.ApiKey.SUMMONER_IDS) String sumonerID);
+                                            @Path(Constant.ApiKey.SUMMONER_IDS) String sumonerID);
 
     @GET(Constant.Api.GET_SUMMONER_RANK_SUMARY)
     Call<ResponseBody> getSumonnerRankSumary(@Path(Constant.ApiKey.REGION) String region,
-                                            @Path(Constant.ApiKey.SUMMONER_ID) String sumonerID);
+                                             @Path(Constant.ApiKey.SUMMONER_ID) String sumonerID);
 
     @GET(Constant.Api.GET_SUMMONER_BY_ID)
     Call<ResponseBody> getSumonnerByID(@Path(Constant.ApiKey.REGION) String region,
-                                             @Path(Constant.ApiKey.SUMMONER_IDS) String sumonerID);
+                                       @Path(Constant.ApiKey.SUMMONER_IDS) String sumonerID);
 
     @GET(Constant.Api.GET_CHALLANGE_RANK)
     Call<ResponseBody> getRankChallange(@Path(Constant.ApiKey.REGION) String region);
+
+    @GET(Constant.Api.GET_SUMONER_RANK)
+    Call<ResponseBody> getRankBySumoner(@Path(Constant.ApiKey.REGION) String region,
+                                        @Path(Constant.ApiKey.SUMMONER_IDS) String sumonerID);
 }

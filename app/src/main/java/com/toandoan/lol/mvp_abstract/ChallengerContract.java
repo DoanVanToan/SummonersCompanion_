@@ -12,9 +12,12 @@ public interface ChallengerContract {
     interface View {
         void initViews();
         void updateChallengeSumoner(List<LeagueEntryEnity> entries);
+        void scrollToCurrentPosition();
     }
 
     interface Presenter {
         void loadChallengerSumoner(String region);
+        void searchSumoner(String key);
+        void loadSumonerRank(String region, String sumonerID, String typeRank);
     }
 }

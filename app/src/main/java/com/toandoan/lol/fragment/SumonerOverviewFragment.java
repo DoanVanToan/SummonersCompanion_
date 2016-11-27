@@ -4,7 +4,6 @@ package com.toandoan.lol.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.toandoan.lol.R;
+import com.toandoan.lol.activity.ChallengerActivity;
 import com.toandoan.lol.base.BaseActivity;
 import com.toandoan.lol.constant.Constant;
 import com.toandoan.lol.model.SumonerEnity;
@@ -31,6 +31,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -141,8 +142,6 @@ public class SumonerOverviewFragment extends Fragment implements SumonerOverview
         mPresenter = new SumonerOverviewPresenter((BaseActivity) mContext, this);
         mPresenter.loadSumonerStats(Constant.Region.NORTH_AMERICA, String.valueOf(mSumonerEnity.getId()));
         mPresenter.loadSumonerSumary(Constant.Region.NORTH_AMERICA, String.valueOf(mSumonerEnity.getId()));
-        if (TextUtils.isEmpty(mSumonerEnity.getName()))
-            mPresenter.loadSumonerById(Constant.Region.NORTH_AMERICA, String.valueOf(mSumonerEnity.getId()));
     }
 
     @Override
@@ -274,5 +273,20 @@ public class SumonerOverviewFragment extends Fragment implements SumonerOverview
                 .append(championStats.getStats().getTotalSessionsWon() * 100 / championStats.getStats().getTotalSessionsPlayed())
                 .append(Constant.Charactor.PERCENT);
         tvWinPercent.setText(builder);
+    }
+
+    @OnClick({R.id.rank_solo_image, R.id.rank_5v5_image, R.id.rank_3v3_image})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.rank_solo_image:
+                ChallengerActivity.startActivity(getContext(), mSumonerEnity, Constant.SumonerStaticData.RANKED_SOLO_5X5);
+                break;
+            case R.id.rank_5v5_image:
+                ChallengerActivity.startActivity(getContext(), mSumonerEnity, Constant.SumonerStaticData.RANKED_TEAM_5X5);
+                break;
+            case R.id.rank_3v3_image:
+                ChallengerActivity.startActivity(getContext(), mSumonerEnity, Constant.SumonerStaticData.RANKED_TEAM_3X3);
+                break;
+        }
     }
 }

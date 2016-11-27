@@ -53,7 +53,7 @@ public class ChampionDetailBySeasonPresenter implements ChampionDetailBySeasonCo
             if (jsonRespone != null) {
                 RankedStatsEnity rankStats = new Gson().fromJson(jsonRespone.toString(), RankedStatsEnity.class);
                 LogUtil.e("getChampionStatsCallBack", jsonRespone.toString());
-                if (rankStats != null) {
+                if (rankStats != null && rankStats.getChampions() != null) {
                     sortChampionByMatchCount(rankStats.getChampions());
                     mListenner.onLoadFinnish(rankStats.getChampions());
                     mView.updateListChampionStats(rankStats.getChampions());

@@ -22,6 +22,7 @@ import com.toandoan.lol.model.champion_by_season.ChampionStatsEnity;
 import com.toandoan.lol.mvp_abstract.SumonerDetailAsbtract;
 import com.toandoan.lol.presentation.match.ChampionDetailBySeasonFragment;
 import com.toandoan.lol.presentation.match.ChampionDetailBySeasonPresenter;
+import com.toandoan.lol.presenter.SumonerDetailPresenter;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SumonerDetailActivity extends BaseActivity implements SumonerDetailAsbtract.View, View.OnClickListener
-, ChampionDetailBySeasonPresenter.OnLoadChampionFinnish{
+        , ChampionDetailBySeasonPresenter.OnLoadChampionFinnish {
 
     @BindView(R.id.sumoner_viewpager)
     ViewPager sumonerViewpager;
@@ -45,11 +46,11 @@ public class SumonerDetailActivity extends BaseActivity implements SumonerDetail
     private ChampionDetailBySeasonFragment mChampionStatsFragment;
     private MyFragmentPagerAdapter mPagerAdapter;
     private SumonerOverviewFragment mOverviewFragment;
+    private SumonerDetailPresenter mPresenter;
 
     public static void startActivity(Context context, SumonerEnity userID) {
         Intent intent = new Intent(context, SumonerDetailActivity.class);
         intent.putExtra(Constant.IntentKey.SUMONER, userID);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         context.startActivity(intent);
     }
 
@@ -83,19 +84,16 @@ public class SumonerDetailActivity extends BaseActivity implements SumonerDetail
         mMenu = (FloatingActionMenu) findViewById(R.id.menu);
         mRunesButton.setOnClickListener(this);
         mMasteriesButton.setOnClickListener(this);
-
-        mMatchesListFragment = SumonerMatchesListFragment.newInstance(mSumonerEnity);
-        mChampionStatsFragment = ChampionDetailBySeasonFragment.newInstance(mSumonerEnity, this);
-        mOverviewFragment = SumonerOverviewFragment.newInstance(mSumonerEnity);
-
-        mPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
-        mPagerAdapter.addFrag(mMatchesListFragment, getString(R.string.match_story));
-        mPagerAdapter.addFrag(mChampionStatsFragment, getString(R.string.champions));
-        mPagerAdapter.addFrag(mOverviewFragment, getString(R.string.overview));
-
-        sumonerViewpager.setAdapter(mPagerAdapter);
-        mTabLayout.setupWithViewPager(sumonerViewpager);
-        sumonerViewpager.setOffscreenPageLimit(mPagerAdapter.getCount());
+        mPresenter = new SumonerDetailPresenter(this, this);
+        if (mSumonerEnity.getId() == 0
+                && mSumonerEnity.getName() != null && mSumonerEnity.getName().length() != 0) {
+            mPresenter.getSumonerByName(Constant.Region.NORTH_AMERICA, mSumonerEnity.getName());
+        } else if (mSumonerEnity.getId() != 0
+                && (mSumonerEnity.getName() == null || mSumonerEnity.getName().length() == 0)) {
+            mPresenter.getSumonerByID(Constant.Region.NORTH_AMERICA, String.valueOf(mSumonerEnity.getId()));
+        } else {
+            initViewPager(mSumonerEnity);
+        }
     }
 
 
@@ -120,5 +118,22 @@ public class SumonerDetailActivity extends BaseActivity implements SumonerDetail
     @Override
     public void onLoadFinnish(List<ChampionStatsEnity> stats) {
         mOverviewFragment.updateMostChampionPlayed(stats);
+    }
+
+    @Override
+    public void initViewPager(SumonerEnity sumoner) {
+        mSumonerEnity = sumoner;
+        mMatchesListFragment = SumonerMatchesListFragment.newInstance(sumoner);
+        mChampionStatsFragment = ChampionDetailBySeasonFragment.newInstance(sumoner, this);
+        mOverviewFragment = SumonerOverviewFragment.newInstance(sumoner);
+
+        mPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
+        mPagerAdapter.addFrag(mMatchesListFragment, getString(R.string.match_story));
+        mPagerAdapter.addFrag(mChampionStatsFragment, getString(R.string.champions));
+        mPagerAdapter.addFrag(mOverviewFragment, getString(R.string.overview));
+
+        sumonerViewpager.setAdapter(mPagerAdapter);
+        mTabLayout.setupWithViewPager(sumonerViewpager);
+        sumonerViewpager.setOffscreenPageLimit(mPagerAdapter.getCount());
     }
 }

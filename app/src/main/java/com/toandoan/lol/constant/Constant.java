@@ -23,6 +23,7 @@ public class Constant {
         public static final String RANKED_FLEX_SR = "RANKED_FLEX_SR";
         public static final String RANKED_TEAM_3X3 = "RANKED_TEAM_3x3";
         public static final String RANKED_TEAM_5X5 = "RANKED_TEAM_5x5";
+        public static final String CHALLENGE_RANK = "challenge_rank";
         public static final String POINT = "LP";
     }
 
@@ -76,6 +77,7 @@ public class Constant {
         public static final String PARTICIPANT = "participant";
         public static final String MATCHDETAIL = "matchdetail";
         public static final String GAME_ENITY = "game_enity";
+        public static final String RANK_TYPE = "rank_type";
     }
 
 
@@ -116,6 +118,8 @@ public class Constant {
         public static final String GET_SUMMONER_BY_ID = "/api/lol/{region}/v1.4/summoner/{summonerIds}" + ApiKey.API_KEY_URL;
 
         public static final String GET_CHALLANGE_RANK = "api/lol/{region}/v2.5/league/challenger?type=RANKED_SOLO_5x5&api_key=" + ApiKey.API_KEY_VALUES;
+
+        public static final String GET_SUMONER_RANK = "/api/lol/{region}/v2.5/league/by-summoner/{summonerIds}" + ApiKey.API_KEY_URL;
 
 
     }

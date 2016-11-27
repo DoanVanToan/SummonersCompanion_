@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import com.toandoan.lol.R;
 import com.toandoan.lol.base.BaseActivity;
 import com.toandoan.lol.base.BaseFragment;
+import com.toandoan.lol.constant.Constant;
 import com.toandoan.lol.fragment.ItemFragment;
 import com.toandoan.lol.fragment.MasteriesFragment;
 import com.toandoan.lol.fragment.RunesFragment;
@@ -164,7 +165,7 @@ public class MainActivity extends BaseActivity
                 changeFramget(mMasteriesFragment);
                 break;
             case R.id.nav_challange:
-                ChallengerActivity.startActivity(this);
+                ChallengerActivity.startActivity(this, null, Constant.SumonerStaticData.CHALLENGE_RANK);
                 break;
             case R.id.nav_share:
 
