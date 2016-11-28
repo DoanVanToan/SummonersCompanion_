@@ -23,6 +23,7 @@ import com.toandoan.lol.mvp_abstract.SumonerDetailAsbtract;
 import com.toandoan.lol.presentation.match.ChampionDetailBySeasonFragment;
 import com.toandoan.lol.presentation.match.ChampionDetailBySeasonPresenter;
 import com.toandoan.lol.presenter.SumonerDetailPresenter;
+import com.toandoan.lol.utility.Utils;
 
 import java.util.List;
 
@@ -85,12 +86,13 @@ public class SumonerDetailActivity extends BaseActivity implements SumonerDetail
         mRunesButton.setOnClickListener(this);
         mMasteriesButton.setOnClickListener(this);
         mPresenter = new SumonerDetailPresenter(this, this);
+        String region = Utils.getRegion(activity);
         if (mSumonerEnity.getId() == 0
                 && mSumonerEnity.getName() != null && mSumonerEnity.getName().length() != 0) {
-            mPresenter.getSumonerByName(Constant.Region.NORTH_AMERICA, mSumonerEnity.getName());
+            mPresenter.getSumonerByName(region, mSumonerEnity.getName());
         } else if (mSumonerEnity.getId() != 0
                 && (mSumonerEnity.getName() == null || mSumonerEnity.getName().length() == 0)) {
-            mPresenter.getSumonerByID(Constant.Region.NORTH_AMERICA, String.valueOf(mSumonerEnity.getId()));
+            mPresenter.getSumonerByID(region, String.valueOf(mSumonerEnity.getId()));
         } else {
             initViewPager(mSumonerEnity);
         }

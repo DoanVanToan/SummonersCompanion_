@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -31,6 +32,7 @@ import com.orhanobut.dialogplus.ViewHolder;
 import com.toandoan.lol.R;
 import com.toandoan.lol.constant.Constant;
 import com.toandoan.lol.model.SpellEnity;
+import com.toandoan.lol.model.SumonerEnity;
 import com.toandoan.lol.model.champion.ChampionEnity;
 import com.toandoan.lol.model.champion.ChampionSkinEnity;
 import com.toandoan.lol.model.matery.MasteryEnity;
@@ -457,6 +459,20 @@ public class Utils {
             }
         }
         return null;
+    }
+
+    public static String getRegion(Context context, SumonerEnity sumoner) {
+        if (sumoner.getName() != null && sumoner.getName().length() > 0) {
+            return sumoner.getName();
+        } else {
+            return PreferenceManager.getDefaultSharedPreferences(context)
+                    .getString(Constant.SharePreference.PRE_REGION, Constant.Region.NORTH_AMERICA);
+        }
+    }
+
+    public static String getRegion(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getString(Constant.SharePreference.PRE_REGION, Constant.Region.NORTH_AMERICA);
     }
 
 }

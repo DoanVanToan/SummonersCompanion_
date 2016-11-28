@@ -15,6 +15,7 @@ import com.toandoan.lol.base.BaseActivity;
 import com.toandoan.lol.constant.Constant;
 import com.toandoan.lol.model.SumonerEnity;
 import com.toandoan.lol.model.champion_by_season.ChampionStatsEnity;
+import com.toandoan.lol.utility.Utils;
 
 import java.util.List;
 
@@ -75,7 +76,8 @@ public class ChampionDetailBySeasonFragment extends Fragment implements Champion
     @Override
     public void initViews() {
         mPresenter = new ChampionDetailBySeasonPresenter((BaseActivity) getActivity(), this, mListenner);
-        mPresenter.loadChampionDetailStats(Constant.Region.NORTH_AMERICA, String.valueOf(mUser.getId()));
+        String region = Utils.getRegion(getContext());
+        mPresenter.loadChampionDetailStats(region, String.valueOf(mUser.getId()));
     }
 
 

@@ -217,6 +217,7 @@ public class ChampionDetailActivity extends BaseActivity implements ViewPager.On
 
     @Override
     public void onRefresh() {
-        helper.getChampionByID(Constant.Region.NORTH_AMERICA, championEnity.getId());
+        String region = Utils.getRegion(activity);
+        helper.getChampionByID(region, championEnity.getId());
     }
 }

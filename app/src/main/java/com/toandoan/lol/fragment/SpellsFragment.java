@@ -18,6 +18,7 @@ import com.toandoan.lol.constant.Constant;
 import com.toandoan.lol.database.impl.SpellsImpl;
 import com.toandoan.lol.model.SpellEnity;
 import com.toandoan.lol.utility.JsonUtil;
+import com.toandoan.lol.utility.Utils;
 
 import org.json.JSONObject;
 
@@ -46,7 +47,8 @@ public class SpellsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        getAllSpellsFromServer(Constant.Region.NORTH_AMERICA);
+        String region = Utils.getRegion(getContext());
+        getAllSpellsFromServer(region);
         return inflater.inflate(R.layout.fragment_spells, container, false);
     }
 

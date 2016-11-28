@@ -17,6 +17,7 @@ import com.toandoan.lol.model.rune.PageRunes;
 import com.toandoan.lol.model.rune.RuneEnity;
 import com.toandoan.lol.mvp_abstract.SumonerRunesAbstract;
 import com.toandoan.lol.presenter.SummonerRunersPresenter;
+import com.toandoan.lol.utility.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +60,8 @@ public class SumonerRunesActivity extends BaseActivity implements SumonerRunesAb
         mTitleTextView = (TextView) findViewById(R.id.text_title);
 
         mPresenter = new SummonerRunersPresenter(this, this);
-        mPresenter.loadSumonerRunes(Constant.Region.NORTH_AMERICA, mID);
+        String region = Utils.getRegion(getApplicationContext());
+        mPresenter.loadSumonerRunes(region, mID);
         mRuneSpinner.setOnItemSelectedListener(this);
     }
 

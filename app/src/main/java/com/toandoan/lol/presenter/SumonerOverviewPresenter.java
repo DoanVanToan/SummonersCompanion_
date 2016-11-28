@@ -57,17 +57,19 @@ public class SumonerOverviewPresenter implements SumonerOverviewContract.Present
             JSONObject jsonResponse = JsonUtil.convertResponseToJson(response);
             LogUtil.e("getSummonerStatsCallBack", jsonResponse.toString());
             if (jsonResponse != null) {
-                JSONArray jsonData = jsonResponse.optJSONArray(jsonResponse.keys().next());
-                if (jsonData != null) {
-                    List<LeagueEnity> listData;
-                    Type listType = new TypeToken<ArrayList<LeagueEnity>>() {
-                    }.getType();
-                    listData = new Gson().fromJson(jsonData.toString(), listType);
-                    if (listData != null) {
-                        mView.updateSumonerStats(listData);
-                    } else {
-                        //TODO some thing
+                try {
+                    JSONArray jsonData = jsonResponse.optJSONArray(jsonResponse.keys().next());
+                    if (jsonData != null) {
+                        List<LeagueEnity> listData;
+                        Type listType = new TypeToken<ArrayList<LeagueEnity>>() {
+                        }.getType();
+                        listData = new Gson().fromJson(jsonData.toString(), listType);
+                        if (listData != null) {
+                            mView.updateSumonerStats(listData);
+                        }
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
             } else {
@@ -97,7 +99,8 @@ public class SumonerOverviewPresenter implements SumonerOverviewContract.Present
             if (jsonResponse != null) {
                 PlayerStatsSummaryListEnity playerList = new Gson().fromJson(jsonResponse.toString(), PlayerStatsSummaryListEnity.class);
                 if (playerList != null) {
-                    if (playerList != null && playerList.getPlayerStatSummaries().size() != 0) {
+                    if (playerList != null && playerList.getPlayerStatSummaries() != null &&
+                            playerList.getPlayerStatSummaries().size() != 0) {
 
                         for (PlayerStatsSummaryEnity playerStats : playerList.getPlayerStatSummaries()) {
 

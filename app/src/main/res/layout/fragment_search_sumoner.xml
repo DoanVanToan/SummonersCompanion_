@@ -1,32 +1,66 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:background="@color/colorPrimaryDark"
               android:orientation="vertical"
               tools:context="com.toandoan.lol.fragment.SearchSumonerFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <Button
-        android:id="@+id/sumoner_1"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Annie Bot"/>
+        android:layout_margin="@dimen/size_5"
+        android:background="@drawable/bg_search_sumoner"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/sumoner_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="C9 Hai"/>
+        <EditText
+            android:id="@+id/search_sumoner_editext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:hint="@string/search_sommoner"
+            android:imeOptions="actionSearch"
+            android:padding="@dimen/size_10"
+            android:singleLine="true"
+            android:textColor="@color/black_0c1111"
+            android:textColorHint="@color/black_646464"
+            android:textSize="@dimen/text_size_16"/>
 
-    <Button
-        android:id="@+id/sumoner_3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Soerenbjerg"/>
+        <com.toandoan.lol.widget.view.RobotoTextView
+            android:id="@+id/region_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:gravity="center"
+            android:paddingLeft="@dimen/size_10"
+            android:paddingRight="@dimen/size_10"
+            android:text="KR"
+            android:textAllCaps="true"
+            android:textColor="@color/black_0c1111"
+            android:textSize="@dimen/text_size_15"
+            android:textStyle="bold"
+            app:typeface="roboto_regular"/>
 
-    <Button
-        android:id="@+id/sumoner_4"
+        <ImageView
+            android:id="@+id/search_image"
+            android:layout_width="@dimen/size_30"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/size_10"
+            android:layout_marginRight="@dimen/size_10"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="@dimen/size_7"
+            android:src="@drawable/ic_search"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/sumoner_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Lee Bai"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/size_10"
+        android:background="@color/gray_0E1617"/>
 </LinearLayout>

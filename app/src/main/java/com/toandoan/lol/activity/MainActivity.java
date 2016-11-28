@@ -54,6 +54,11 @@ public class MainActivity extends BaseActivity
         mMasteriesFragment = MasteriesFragment.newInstance();
 
         changeFramget(mSumonerFragment);
+        updateToolBar(R.string.sumoner);
+    }
+
+    private void updateToolBar(int resourceID){
+        getSupportActionBar().setTitle(resourceID);
     }
 
     public void initViews() {
@@ -103,8 +108,10 @@ public class MainActivity extends BaseActivity
         mSearchView = (SearchView) menuSearch.getActionView();
         mSearchView.setQueryHint(getResources().getString(R.string.search_hint));
         mSearchView.setOnQueryTextListener(onQueryTextListener);
+        mSearchView.setVisibility(View.GONE);
         return true;
     }
+
 
 
     private SearchView.OnQueryTextListener onQueryTextListener = new SearchView.OnQueryTextListener() {
@@ -151,21 +158,32 @@ public class MainActivity extends BaseActivity
         switch (id) {
             case R.id.nav_sumonners:
                 changeFramget(mSumonerFragment);
+                mSearchView.setVisibility(View.GONE);
+                updateToolBar(R.string.sumoner);
                 break;
             case R.id.nav_champions:
                 changeFramget(mSelectChampionFragment);
+                mSearchView.setVisibility(View.VISIBLE);
+                updateToolBar(R.string.champions_);
                 break;
             case R.id.nav_items:
                 changeFramget(mItemFragment);
+                mSearchView.setVisibility(View.VISIBLE);
+                updateToolBar(R.string.items);
                 break;
             case R.id.nav_runes:
                 changeFramget(mRunesFragment);
+                mSearchView.setVisibility(View.VISIBLE);
+                updateToolBar(R.string.runes);
                 break;
             case R.id.nav_masteries:
                 changeFramget(mMasteriesFragment);
+                mSearchView.setVisibility(View.GONE);
+                updateToolBar(R.string.mastery);
                 break;
             case R.id.nav_challange:
                 ChallengerActivity.startActivity(this, null, Constant.SumonerStaticData.CHALLENGE_RANK);
+                mSearchView.setVisibility(View.VISIBLE);
                 break;
             case R.id.nav_share:
 

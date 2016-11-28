@@ -1,5 +1,7 @@
 package com.toandoan.lol.constant;
 
+import android.content.SharedPreferences;
+
 /**
  * Created by ToanDoan on 9/29/2016.
  */
@@ -18,6 +20,10 @@ public class Constant {
         public static final String W = "W";
     }
 
+    public static class SharePreference{
+        public static final String PRE_REGION = "pre_region";
+    }
+
     public static class SumonerStaticData {
         public static final String RANKED_SOLO_5X5 = "RANKED_SOLO_5x5";
         public static final String RANKED_FLEX_SR = "RANKED_FLEX_SR";
@@ -32,23 +38,18 @@ public class Constant {
     }
 
     public static class Config {
-        public static final String REGION = Region.NORTH_AMERICA;
-
         public static final String URL = "api.pvp.net";
 
         public static final boolean DEBUG = true;
 
-        public static final String getBaseUrl() {
-            return "https://" + REGION + "." + URL;
+        public static final String getBaseUrl(String region) {
+            return "https://" + region + "." + URL;
         }
 
         public static final String getStaticBaseUrl() {
             return "https://global.api.pvp.net";
         }
 
-        public static final String getREGION() {
-            return Config.REGION;
-        }
     }
 
     public static class Region {

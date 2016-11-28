@@ -19,6 +19,7 @@ import com.toandoan.lol.model.SumonerEnity;
 import com.toandoan.lol.model.sumoner_overview.LeagueEntryEnity;
 import com.toandoan.lol.mvp_abstract.ChallengerContract;
 import com.toandoan.lol.presenter.ChallengerPresenter;
+import com.toandoan.lol.utility.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,10 +72,12 @@ public class ChallengerActivity extends BaseActivity implements ChallengerContra
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mPresenter = new ChallengerPresenter(this, this);
 
+        String region = Utils.getRegion(activity);
+
         if (isChallengerank) {
-            mPresenter.loadChallengerSumoner(Constant.Region.NORTH_AMERICA);
+            mPresenter.loadChallengerSumoner(region);
         } else {
-            mPresenter.loadSumonerRank(Constant.Region.NORTH_AMERICA, String.valueOf(mSumoner.getId()), mRankType);
+            mPresenter.loadSumonerRank(region, String.valueOf(mSumoner.getId()), mRankType);
         }
     }
 

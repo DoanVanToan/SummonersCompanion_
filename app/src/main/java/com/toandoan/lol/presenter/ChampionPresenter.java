@@ -15,6 +15,7 @@ import com.toandoan.lol.model.champion.ChampionEnity;
 import com.toandoan.lol.utility.FileOperations;
 import com.toandoan.lol.utility.JsonUtil;
 import com.toandoan.lol.utility.LogUtil;
+import com.toandoan.lol.utility.Utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,7 +54,8 @@ public class ChampionPresenter {
             listData = new Gson().fromJson(fullChampStr, listType);
             listenner.getAllChampionSuccess(listData);
         } else {
-            loadChampionFromServer(Constant.Region.NORTH_AMERICA);
+            String region = Utils.getRegion(activity);
+            loadChampionFromServer(region);
         }
     }
 

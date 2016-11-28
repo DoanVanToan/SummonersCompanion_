@@ -43,7 +43,8 @@ public class SumonerMatchesListPresenter implements SumonerMatchesListAbstract.P
     @Override
     public void getAllMatches(String region, String id) {
         mActivity.showDialog();
-        RiotService service = ServiceGenerator.createService(RiotService.class);
+        RiotService service = ServiceGenerator.createService(RiotService.class, mActivity);
+
         Call<ResponseBody> call = service.getSumonnerRecentMatches(region, id);
         call.enqueue(getSumonerMatchesListCallback);
     }
@@ -52,7 +53,6 @@ public class SumonerMatchesListPresenter implements SumonerMatchesListAbstract.P
     public void onItemClickListenner(View v, int position, GameEnity gameEnity) {
         MatchDetailActivity.startActivity(mActivity, gameEnity, (int) mRecentGames.getSummonerId());
     }
-
 
     Callback<ResponseBody> getSumonerMatchesListCallback = new Callback<ResponseBody>() {
         @Override

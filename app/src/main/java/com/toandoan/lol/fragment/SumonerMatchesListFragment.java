@@ -17,6 +17,7 @@ import com.toandoan.lol.model.SumonerEnity;
 import com.toandoan.lol.model.recent_match.GameEnity;
 import com.toandoan.lol.mvp_abstract.SumonerMatchesListAbstract;
 import com.toandoan.lol.presenter.SumonerMatchesListPresenter;
+import com.toandoan.lol.utility.Utils;
 
 import java.util.List;
 
@@ -62,7 +63,8 @@ public class SumonerMatchesListFragment extends Fragment implements SumonerMatch
     public void initViews(View v) {
         mRecyclerView = (RecyclerView) v.findViewById(R.id.sumoner_match_recyclerview);
         mPresenter = new SumonerMatchesListPresenter((BaseActivity) getActivity(), this, mUser);
-        mPresenter.getAllMatches(Constant.Region.NORTH_AMERICA, String.valueOf(mUser.getId()));
+        String region = Utils.getRegion(getContext());
+        mPresenter.getAllMatches(region, String.valueOf(mUser.getId()));
     }
 
     @Override

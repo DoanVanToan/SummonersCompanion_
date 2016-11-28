@@ -62,7 +62,8 @@ public class SumonerMasteriesActivity extends BaseActivity implements SumonerMas
         mMasterySpinner = (MaterialSpinner) findViewById(R.id.matery_spinner);
         getSupportActionBar().hide();
         mPresenter = new SumonerMasteriesPresenter(this, this);
-        mPresenter.loadSumonerMasteries(Constant.Region.NORTH_AMERICA, mSumonerID);
+        String region = Utils.getRegion(activity);
+        mPresenter.loadSumonerMasteries(region, mSumonerID);
         mMasterySpinner.setOnItemSelectedListener(this);
 
     }

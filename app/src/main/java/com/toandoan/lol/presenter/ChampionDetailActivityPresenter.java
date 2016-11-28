@@ -13,6 +13,7 @@ import com.toandoan.lol.model.champion.ChampionEnity;
 import com.toandoan.lol.utility.FileOperations;
 import com.toandoan.lol.utility.JsonUtil;
 import com.toandoan.lol.utility.LogUtil;
+import com.toandoan.lol.utility.Utils;
 
 import org.json.JSONObject;
 
@@ -50,7 +51,8 @@ public class ChampionDetailActivityPresenter {
             listenner.getChampionByIDSucces(championEnity);
         } else {
             activity.showDialog();
-            getChampionByID(Constant.Region.NORTH_AMERICA, id);
+            String region = Utils.getRegion(activity);
+            getChampionByID(region, id);
         }
     }
 

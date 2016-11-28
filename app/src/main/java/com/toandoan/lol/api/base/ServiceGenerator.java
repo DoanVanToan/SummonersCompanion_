@@ -1,9 +1,14 @@
 package com.toandoan.lol.api.base;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 
 import com.toandoan.lol.api.listenner.RiotService;
 import com.toandoan.lol.constant.Constant;
+import com.toandoan.lol.utility.Utils;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -20,9 +25,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class ServiceGenerator {
 
-    public static <S> S createService(Class<S> serviceClass) {
+    public static <S> S createService(Class<S> serviceClass, Context context) {
+        String region = Utils.getRegion(context);
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constant.Config.getBaseUrl())
+                .baseUrl(Constant.Config.getBaseUrl(region))
                 .build();
 
         return retrofit.create(serviceClass);

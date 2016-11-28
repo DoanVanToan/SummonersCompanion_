@@ -140,8 +140,9 @@ public class SumonerOverviewFragment extends Fragment implements SumonerOverview
     private void initViews() {
         mContext = getContext();
         mPresenter = new SumonerOverviewPresenter((BaseActivity) mContext, this);
-        mPresenter.loadSumonerStats(Constant.Region.NORTH_AMERICA, String.valueOf(mSumonerEnity.getId()));
-        mPresenter.loadSumonerSumary(Constant.Region.NORTH_AMERICA, String.valueOf(mSumonerEnity.getId()));
+        String region = Utils.getRegion(getContext());
+        mPresenter.loadSumonerStats(region, String.valueOf(mSumonerEnity.getId()));
+        mPresenter.loadSumonerSumary(region, String.valueOf(mSumonerEnity.getId()));
     }
 
     @Override

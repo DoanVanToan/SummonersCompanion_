@@ -6,6 +6,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.toandoan.lol.R;
 import com.toandoan.lol.activity.SumonerDetailActivity;
+import com.toandoan.lol.api.base.ServiceGenerator;
 import com.toandoan.lol.api.listenner.RiotService;
 import com.toandoan.lol.base.BaseActivity;
 import com.toandoan.lol.constant.Constant;
@@ -39,12 +40,7 @@ public class SearchSumonerPresenter implements SearchSumonerContract.Presenter {
         if (!TextUtils.isEmpty(region)) {
         }
         mActivity.showDialog();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constant.Config.getBaseUrl())
-                .build();
-
-        RiotService service = retrofit.create(RiotService.class);
-
+        RiotService service = ServiceGenerator.createService(RiotService.class, mActivity);
         Call<ResponseBody> call = service.getSumonerByName(region, name);
         call.enqueue(searchUserByName);
 

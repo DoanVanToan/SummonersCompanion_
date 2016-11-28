@@ -41,7 +41,7 @@ public class ChampionDetailBySeasonPresenter implements ChampionDetailBySeasonCo
 
     @Override
     public void loadChampionDetailStats(String region, String summonerID) {
-        RiotService service = ServiceGenerator.createService(RiotService.class);
+        RiotService service = ServiceGenerator.createService(RiotService.class, mActivity);
         Call<ResponseBody> call = service.getSumonnerChampionStatsByID(region, summonerID);
         call.enqueue(getChampionStatsCallBack);
     }
