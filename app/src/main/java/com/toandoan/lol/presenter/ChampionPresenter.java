@@ -33,7 +33,6 @@ import retrofit2.Response;
 /**
  * Created by ToanDoan on 9/29/2016.
  */
-
 public class ChampionPresenter {
     private BaseActivity activity;
     private ISelectChampListenner listenner;
@@ -68,14 +67,12 @@ public class ChampionPresenter {
 
     public void loadChampionFromServer(String region) {
         activity.showDialog();
-
-        RiotService service = ServiceGenerator.createStaticService(RiotService.class);
-        Call<ResponseBody> call = service.getAllChampions(region);
+        RiotService service = ServiceGenerator.createService(RiotService.class, activity);
+        Call<ResponseBody> call = service.getAllChampions(region, Constant.ApiKeyValue.API_KEY_VALUE);
         call.enqueue(getAllChampionCallBack);
     }
 
     Callback<ResponseBody> getAllChampionCallBack = new Callback<ResponseBody>() {
-
         @Override
         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
             JSONObject responseJson = JsonUtil.convertResponseToJson(response);
@@ -84,14 +81,16 @@ public class ChampionPresenter {
                 listenner.getAllChampionSuccess(listData);
                 saveListData(listData);
             } else {
-                Toast.makeText(activity, activity.getString(R.string.not_internet_connected), Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, activity.getString(R.string.not_internet_connected),
+                    Toast.LENGTH_SHORT).show();
             }
         }
 
         @Override
         public void onFailure(Call<ResponseBody> call, Throwable t) {
             activity.dismissDialog();
-            Toast.makeText(activity, activity.getString(R.string.not_internet_connected), Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, activity.getString(R.string.not_internet_connected),
+                Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -107,21 +106,18 @@ public class ChampionPresenter {
                         while (iter.hasNext()) {
                             String key = iter.next();
                             JSONObject championObj = dataObj.optJSONObject(key);
-                            ChampionEnity champion = new Gson().fromJson(championObj.toString(), ChampionEnity.class);
-
+                            ChampionEnity champion =
+                                new Gson().fromJson(championObj.toString(), ChampionEnity.class);
                             if (champion != null) {
                                 result.add(champion);
                             }
-
                         }
                     }
-
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-
         return result;
     }
 }

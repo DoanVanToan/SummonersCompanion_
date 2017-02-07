@@ -1,13 +1,9 @@
 package com.toandoan.lol.constant;
 
-import android.content.SharedPreferences;
-
 /**
  * Created by ToanDoan on 9/29/2016.
  */
-
 public class Constant {
-    public static int MAX_MATCH_SIZE = 10;
 
     public static class Charactor {
         public static final String PLUS = "+";
@@ -20,7 +16,7 @@ public class Constant {
         public static final String W = "W";
     }
 
-    public static class SharePreference{
+    public static class SharePreference {
         public static final String PRE_REGION = "pre_region";
     }
 
@@ -39,7 +35,6 @@ public class Constant {
 
     public static class Config {
         public static final String URL = "api.pvp.net";
-
         public static final boolean DEBUG = true;
 
         public static final String getBaseUrl(String region) {
@@ -49,7 +44,6 @@ public class Constant {
         public static final String getStaticBaseUrl() {
             return "https://global.api.pvp.net";
         }
-
     }
 
     public static class Region {
@@ -64,7 +58,6 @@ public class Constant {
         public static final String OCEANIA = "oce";
         public static final String RUSSIA = "ru";
         public static final String TURKEY = "tr";
-
     }
 
     public static class IntentKey {
@@ -81,64 +74,72 @@ public class Constant {
         public static final String RANK_TYPE = "rank_type";
     }
 
-
     public static class Api {
+        public static final String FIND_BY_NAME =
+            "/api/lol/{region}/v1.4/summoner/by-name/{summonerNames}";
+        public static final String GET_LIST_CHAMPIONS =
+            "/api/lol/static-data/{region}/v1.2/champion";
+        public static final String GET_LIST_ITEMS =
+            "/api/lol/static-data/{region}/v1.2/item";
+        public static final String GET_LIST_RUNES =
+            "/api/lol/static-data/{region}/v1.2/rune";
+        public static final String GET_LIST_SPELLS =
+            "/api/lol/static-data/{region}/v1.2/summoner-spell";
+        public static final String GET_LIST_MASTERIES =
+            "/api/lol/static-data/{region}/v1.2/mastery";
+        public static final String GET_CHAMPION_BY_ID =
+            "/api/lol/static-data/{region}/v1.2/champion/{id}";
+        public static final String GET_SUMMONER_MASTERIES =
+            "/api/lol/{region}/v1.4/summoner/{summonerIds}/masteries";
+        public static final String GET_SUMMONER_RUNES =
+            " /api/lol/{region}/v1.4/summoner/{summonerIds}/runes";
+        public static final String GET_SUMMONER_MATCHES_LIST =
+            "/api/lol/{region}/v2.2/matchlist/by-summoner/{summonerId}";
+        public static final String GET_SUMMONER_MATCHE_BY_ID =
+            "/api/lol/{region}/v2.2/match/{matchId}";
+        public static final String GET_SUMMONER_CHAMPIONS_STATS_BY_ID =
+            "/api/lol/{region}/v1.3/stats/by-summoner/{summonerId}/ranked";
+        public static final String GET_SUMMONER_RECENT_MATCHES =
+            "api/lol/{region}/v1.3/game/by-summoner/{summonerId}/recent";
+        public static final String GET_SUMMONER_RANK_STATS =
+            "/api/lol/{region}/v2.5/league/by-summoner/{summonerIds}/entry";
+        public static final String GET_SUMMONER_RANK_SUMARY =
+            "/api/lol/{region}/v1.3/stats/by-summoner/{summonerId}/summary";
+        public static final String GET_SUMMONER_BY_ID =
+            "/api/lol/{region}/v1.4/summoner/{summonerIds}";
+        public static final String GET_CHALLANGE_RANK =
+            "api/lol/{region}/v2.5/league/challenger";
+        public static final String GET_SUMONER_RANK =
+            "/api/lol/{region}/v2.5/league/by-summoner/{summonerIds}";
+    }
 
-        public static final String FIND_BY_NAME = "/api/lol/{" + ApiKey.REGION + "}/v1.4/summoner/by-name/{"
-                + ApiKey.SUMMONER_NAMES + "}" + ApiKey.API_KEY_URL;
-
-
-        public static final String GET_LIST_CHAMPIONS = "/api/lol/static-data/{region}/v1.2/champion" + ApiKey.API_KEY_URL;
-
-        public static final String GET_LIST_ITEMS = "/api/lol/static-data/{region}/v1.2/item?itemListData=all&api_key=" + ApiKey.API_KEY_VALUES;
-
-        public static final String GET_LIST_RUNES = "/api/lol/static-data/{region}/v1.2/rune?runeListData=all&api_key=" + ApiKey.API_KEY_VALUES;
-
-        public static final String GET_LIST_SPELLS = "/api/lol/static-data/{region}/v1.2/summoner-spell?spellData=image&api_key=" + ApiKey.API_KEY_VALUES;
-
-        public static final String GET_LIST_MASTERIES = "/api/lol/static-data/{region}/v1.2/mastery?masteryListData=all&api_key=" + ApiKey.API_KEY_VALUES;
-
-        public static final String GET_CHAMPION_BY_ID = "/api/lol/static-data/{region}/v1.2/champion/{id}?champData=all&api_key=" + ApiKey.API_KEY_VALUES;
-
-        public static final String GET_SUMMONER_MASTERIES = "/api/lol/{region}/v1.4/summoner/{summonerIds}/masteries" + ApiKey.API_KEY_URL;
-
-        public static final String GET_SUMMONER_RUNES = " /api/lol/{region}/v1.4/summoner/{summonerIds}/runes" + ApiKey.API_KEY_URL;
-
-        public static final String GET_SUMMONER_MATCHES_LIST = "/api/lol/{region}/v2.2/matchlist/by-summoner/{summonerId}" + ApiKey.API_KEY_URL;
-
-        public static final String GET_SUMMONER_MATCHE_BY_ID = "/api/lol/{region}/v2.2/match/{matchId}" + ApiKey.API_KEY_URL;
-
-        public static final String GET_SUMMONER_CHAMPIONS_STATS_BY_ID = "/api/lol/{region}/v1.3/stats/by-summoner/{summonerId}/ranked?season=SEASON2016&api_key=" + ApiKey.API_KEY_VALUES;
-
-        public static final String GET_SUMMONER_RECENT_MATCHES = "api/lol/{region}/v1.3/game/by-summoner/{summonerId}/recent" + ApiKey.API_KEY_URL;
-
-        public static final String GET_SUMMONER_RANK_STATS = "/api/lol/{region}/v2.5/league/by-summoner/{summonerIds}/entry" + ApiKey.API_KEY_URL;
-
-        public static final String GET_SUMMONER_RANK_SUMARY = "/api/lol/{region}/v1.3/stats/by-summoner/{summonerId}/summary?season=SEASON2016&api_key=" + ApiKey.API_KEY_VALUES;
-
-        public static final String GET_SUMMONER_BY_ID = "/api/lol/{region}/v1.4/summoner/{summonerIds}" + ApiKey.API_KEY_URL;
-
-        public static final String GET_CHALLANGE_RANK = "api/lol/{region}/v2.5/league/challenger?type=RANKED_SOLO_5x5&api_key=" + ApiKey.API_KEY_VALUES;
-
-        public static final String GET_SUMONER_RANK = "/api/lol/{region}/v2.5/league/by-summoner/{summonerIds}" + ApiKey.API_KEY_URL;
-
-
+    public static class ApiKeyValue {
+        public static final String ALL = "all";
+        public static final String SPELL_DATA_IMAGE = "image";
+        public static final String SEASON_VALUE = "SEASON2016";
+        public static final String RANK_TYPE_5_5 = "RANKED_SOLO_5x5";
+        public static final String API_KEY_VALUE = "RGAPI-950d5f5c-cbae-4b0e-8bea-89daff98c0bf";
     }
 
     public static class ApiKey {
         public static final String API_KEY = "api_key";
-        public static final String API_KEY_VALUES = "RGAPI-950d5f5c-cbae-4b0e-8bea-89daff98c0bf";
         public static final String REGION = "region";
         public static final String SUMMONER_IDS = "summonerIds";
         public static final String SUMMONER_ID = "summonerId";
         public static final String MATCH_ID = "matchId";
         public static final String SUMMONER_NAMES = "summonerNames";
-        public static final String API_KEY_URL = "?" + API_KEY + "=" + API_KEY_VALUES;
         public static final String ID = "id";
         public static final String NAME = "name";
         public static final String PROFILE_ICON_ID = "profileIconId";
         public static final String REVISION_DATE = "revisionDate";
         public static final String SUMMONER_LEVEL = "summonerLevel";
+        public static final String ITEM_LIST_DATA = "itemListData";
+        public static final String CHAMP_DATA = "champData";
+        public static final String RUNE_LIST_DATA = "runeListData";
+        public static final String SPELL_DATA = "spellData";
+        public static final String MASTERY_LIST_DATA = "masteryListData";
+        public static final String SEASON = "season";
+        public static final String RANK_TYPE = "type";
         /**
          * ChampionStats
          **/
@@ -162,11 +163,9 @@ public class Constant {
         public static final String ATTACKDAMAGEPERLEVEL = "hp";
         public static final String ATTACKSPEEDOFFSET = "hp";
         public static final String ATTACKSPEEDPERLEVEL = "hp";
-
         public static final String DATA = "data";
         public static final String PAGES = "pages";
         public static final String SLOTS = "slots";
-
     }
 
     public static class Data {

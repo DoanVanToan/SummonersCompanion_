@@ -7,6 +7,7 @@ import com.toandoan.lol.R;
 import com.toandoan.lol.api.base.ServiceGenerator;
 import com.toandoan.lol.api.listenner.RiotService;
 import com.toandoan.lol.base.BaseActivity;
+import com.toandoan.lol.constant.Constant;
 import com.toandoan.lol.model.champion_by_season.ChampionStatsEnity;
 import com.toandoan.lol.model.champion_by_season.RankedStatsEnity;
 import com.toandoan.lol.utility.JsonUtil;
@@ -26,13 +27,13 @@ import retrofit2.Response;
 /**
  * Created by ToanDoan on 11/20/2016.
  */
-
 public class ChampionDetailBySeasonPresenter implements ChampionDetailBySeasonContract.Presenter {
     private BaseActivity mActivity;
     private ChampionDetailBySeasonContract.View mView;
     private OnLoadChampionFinnish mListenner;
 
-    public ChampionDetailBySeasonPresenter(BaseActivity mActivity, ChampionDetailBySeasonContract.View mView,
+    public ChampionDetailBySeasonPresenter(BaseActivity mActivity,
+                                           ChampionDetailBySeasonContract.View mView,
                                            OnLoadChampionFinnish listenner) {
         this.mActivity = mActivity;
         this.mView = mView;
@@ -42,7 +43,10 @@ public class ChampionDetailBySeasonPresenter implements ChampionDetailBySeasonCo
     @Override
     public void loadChampionDetailStats(String region, String summonerID) {
         RiotService service = ServiceGenerator.createService(RiotService.class, mActivity);
-        Call<ResponseBody> call = service.getSumonnerChampionStatsByID(region, summonerID);
+        Call<ResponseBody> call = service.getSumonnerChampionStatsByID(region,
+            summonerID,
+            Constant.ApiKeyValue.SEASON_VALUE,
+            Constant.ApiKeyValue.API_KEY_VALUE);
         call.enqueue(getChampionStatsCallBack);
     }
 
@@ -51,7 +55,8 @@ public class ChampionDetailBySeasonPresenter implements ChampionDetailBySeasonCo
         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
             JSONObject jsonRespone = JsonUtil.convertResponseToJson(response);
             if (jsonRespone != null) {
-                RankedStatsEnity rankStats = new Gson().fromJson(jsonRespone.toString(), RankedStatsEnity.class);
+                RankedStatsEnity rankStats =
+                    new Gson().fromJson(jsonRespone.toString(), RankedStatsEnity.class);
                 LogUtil.e("getChampionStatsCallBack", jsonRespone.toString());
                 if (rankStats != null && rankStats.getChampions() != null) {
                     sortChampionByMatchCount(rankStats.getChampions());
@@ -59,13 +64,15 @@ public class ChampionDetailBySeasonPresenter implements ChampionDetailBySeasonCo
                     mView.updateListChampionStats(rankStats.getChampions());
                 }
             } else {
-                Toast.makeText(mActivity, mActivity.getString(R.string.not_internet_connected), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity, mActivity.getString(R.string.not_internet_connected),
+                    Toast.LENGTH_SHORT).show();
             }
         }
 
         @Override
         public void onFailure(Call<ResponseBody> call, Throwable t) {
-            Toast.makeText(mActivity, mActivity.getString(R.string.not_internet_connected), Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity, mActivity.getString(R.string.not_internet_connected),
+                Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -73,16 +80,17 @@ public class ChampionDetailBySeasonPresenter implements ChampionDetailBySeasonCo
         Collections.sort(stats, new Comparator<ChampionStatsEnity>() {
             @Override
             public int compare(ChampionStatsEnity o1, ChampionStatsEnity o2) {
-                if (o1.getStats().getTotalSessionsPlayed() > o2.getStats().getTotalSessionsPlayed()) {
+                if (o1.getStats().getTotalSessionsPlayed() >
+                    o2.getStats().getTotalSessionsPlayed()) {
                     return -1;
-                } else if (o1.getStats().getTotalSessionsPlayed() < o2.getStats().getTotalSessionsPlayed()) {
+                } else if (o1.getStats().getTotalSessionsPlayed() <
+                    o2.getStats().getTotalSessionsPlayed()) {
                     return 1;
                 } else {
                     return 0;
                 }
             }
         });
-
         if (stats != null && stats.size() != 0) {
             if (stats.get(0).getId() == 0) {
                 stats.remove(0);

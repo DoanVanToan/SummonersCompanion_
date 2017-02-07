@@ -5,7 +5,6 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.toandoan.lol.R;
-import com.toandoan.lol.activity.SumonerDetailActivity;
 import com.toandoan.lol.api.base.ServiceGenerator;
 import com.toandoan.lol.api.listenner.RiotService;
 import com.toandoan.lol.base.BaseActivity;
@@ -33,7 +32,6 @@ import retrofit2.Response;
 /**
  * Created by framgia on 24/11/2016.
  */
-
 public class SumonerOverviewPresenter implements SumonerOverviewContract.Presenter {
     private BaseActivity mActivity;
     private SumonerOverviewContract.View mView;
@@ -45,15 +43,16 @@ public class SumonerOverviewPresenter implements SumonerOverviewContract.Present
 
     @Override
     public void loadSumonerStats(String region, String sumonerID) {
-        RiotService service = ServiceGenerator.createStaticService(RiotService.class);
-        Call<ResponseBody> call = service.getSumonnerRankStats(region, sumonerID);
+        RiotService service = ServiceGenerator.createService(RiotService.class, mActivity);
+        Call<ResponseBody> call =
+            service.getSumonnerRankStats(region, sumonerID, Constant.ApiKeyValue.API_KEY_VALUE);
         call.enqueue(getSummonerStatsCallBack);
     }
-
 
     Callback<ResponseBody> getSummonerStatsCallBack = new Callback<ResponseBody>() {
         @Override
         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            mActivity.dismissDialog();
             JSONObject jsonResponse = JsonUtil.convertResponseToJson(response);
             LogUtil.e("getSummonerStatsCallBack", jsonResponse.toString());
             if (jsonResponse != null) {
@@ -71,61 +70,68 @@ public class SumonerOverviewPresenter implements SumonerOverviewContract.Present
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             } else {
-                Toast.makeText(mActivity, R.string.not_internet_connected, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity, R.string.not_internet_connected, Toast.LENGTH_SHORT)
+                    .show();
             }
         }
 
         @Override
         public void onFailure(Call<ResponseBody> call, Throwable t) {
+            mActivity.dismissDialog();
             Toast.makeText(mActivity, R.string.not_internet_connected, Toast.LENGTH_SHORT).show();
         }
     };
 
     @Override
     public void loadSumonerSumary(String region, String sumonerID) {
-        RiotService service = ServiceGenerator.createStaticService(RiotService.class);
-        Call<ResponseBody> call = service.getSumonnerRankSumary(region, sumonerID);
+        RiotService service = ServiceGenerator.createService(RiotService.class, mActivity);
+        Call<ResponseBody> call = service.getSumonnerRankSumary(region,
+            sumonerID,
+            Constant.ApiKeyValue.SEASON_VALUE,
+            Constant.ApiKeyValue.API_KEY_VALUE);
         call.enqueue(getSummonerSumaryCallBack);
     }
-
 
     Callback<ResponseBody> getSummonerSumaryCallBack = new Callback<ResponseBody>() {
         @Override
         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            mActivity.dismissDialog();
             JSONObject jsonResponse = JsonUtil.convertResponseToJson(response);
             LogUtil.e("getSummonerSumaryCallBack", jsonResponse.toString());
             if (jsonResponse != null) {
-                PlayerStatsSummaryListEnity playerList = new Gson().fromJson(jsonResponse.toString(), PlayerStatsSummaryListEnity.class);
+                PlayerStatsSummaryListEnity playerList =
+                    new Gson().fromJson(jsonResponse.toString(), PlayerStatsSummaryListEnity.class);
                 if (playerList != null) {
                     if (playerList != null && playerList.getPlayerStatSummaries() != null &&
-                            playerList.getPlayerStatSummaries().size() != 0) {
-
-                        for (PlayerStatsSummaryEnity playerStats : playerList.getPlayerStatSummaries()) {
-
-                            if (playerStats.getPlayerStatSummaryType().equalsIgnoreCase(Constant.SumonerSumary.RANKEDSOLO5X5)) {
+                        playerList.getPlayerStatSummaries().size() != 0) {
+                        for (PlayerStatsSummaryEnity playerStats : playerList
+                            .getPlayerStatSummaries()) {
+                            if (playerStats.getPlayerStatSummaryType()
+                                .equalsIgnoreCase(Constant.SumonerSumary.RANKEDSOLO5X5)) {
                                 mView.updateSumonerSumary(playerStats);
                             }
                         }
                     }
-
                 }
             } else {
-                Toast.makeText(mActivity, R.string.not_internet_connected, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity, R.string.not_internet_connected, Toast.LENGTH_SHORT)
+                    .show();
             }
         }
 
         @Override
         public void onFailure(Call<ResponseBody> call, Throwable t) {
+            mActivity.dismissDialog();
             Toast.makeText(mActivity, R.string.not_internet_connected, Toast.LENGTH_SHORT).show();
         }
     };
 
     @Override
     public void loadSumonerById(String region, String sumonerID) {
-        RiotService service = ServiceGenerator.createStaticService(RiotService.class);
-        Call<ResponseBody> call = service.getSumonnerByID(region, sumonerID);
+        RiotService service = ServiceGenerator.createService(RiotService.class, mActivity);
+        Call<ResponseBody> call =
+            service.getSumonnerByID(region, sumonerID, Constant.ApiKeyValue.API_KEY_VALUE);
         call.enqueue(searchUserByID);
     }
 
@@ -137,7 +143,8 @@ public class SumonerOverviewPresenter implements SumonerOverviewContract.Present
             if (responseJson != null) {
                 JSONObject jsonData = responseJson.optJSONObject(responseJson.keys().next());
                 if (jsonData != null) {
-                    SumonerEnity sumoner = new Gson().fromJson(jsonData.toString(), SumonerEnity.class);
+                    SumonerEnity sumoner =
+                        new Gson().fromJson(jsonData.toString(), SumonerEnity.class);
                     if (sumoner != null) {
                         mView.updateSumoner(sumoner);
                     }

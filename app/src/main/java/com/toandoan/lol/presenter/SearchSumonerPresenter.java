@@ -20,7 +20,6 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * Created by ToanDoan on 9/29/2016.
@@ -41,7 +40,7 @@ public class SearchSumonerPresenter implements SearchSumonerContract.Presenter {
         }
         mActivity.showDialog();
         RiotService service = ServiceGenerator.createService(RiotService.class, mActivity);
-        Call<ResponseBody> call = service.getSumonerByName(region, name);
+        Call<ResponseBody> call = service.getSumonerByName(region, name, Constant.ApiKeyValue.API_KEY_VALUE);
         call.enqueue(searchUserByName);
 
     }

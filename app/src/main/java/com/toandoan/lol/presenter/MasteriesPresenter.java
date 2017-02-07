@@ -7,6 +7,7 @@ import com.toandoan.lol.R;
 import com.toandoan.lol.api.base.ServiceGenerator;
 import com.toandoan.lol.api.listenner.RiotService;
 import com.toandoan.lol.base.BaseActivity;
+import com.toandoan.lol.constant.Constant;
 import com.toandoan.lol.database.impl.MasteriesImpl;
 import com.toandoan.lol.listenner.MasteriesListenner;
 import com.toandoan.lol.model.matery.MasteryEnity;
@@ -28,7 +29,6 @@ import retrofit2.Response;
 /**
  * Created by ToanDoan on 10/29/2016.
  */
-
 public class MasteriesPresenter {
     private final BaseActivity mBaseActivity;
     private String TAG;
@@ -57,9 +57,10 @@ public class MasteriesPresenter {
 
     public void getAllMasteriesFromServer(String region) {
         mBaseActivity.showDialog();
-
         RiotService service = ServiceGenerator.createStaticService(RiotService.class);
-        Call<ResponseBody> call = service.getAllMasteries(region);
+        Call<ResponseBody> call = service.getAllMasteries(region,
+            Constant.ApiKeyValue.ALL,
+            Constant.ApiKeyValue.API_KEY_VALUE);
         call.enqueue(getAllMasteriesCallBack);
     }
 
@@ -69,32 +70,31 @@ public class MasteriesPresenter {
             JSONObject jsonObject = JsonUtil.convertResponseToJson(response);
             if (jsonObject != null) {
                 LogUtil.e(TAG, "getAllMasteriesCallBack>" + jsonObject.toString());
-
                 JSONObject data = JsonUtil.getJsonData(jsonObject);
                 if (data != null) {
                     List<MasteryEnity> listData;
                     Type listType = new TypeToken<Map<String, MasteryEnity>>() {
                     }.getType();
-                    LinkedTreeMap<String, MasteryEnity> hmTemp = new Gson().fromJson(data.toString(), listType);
+                    LinkedTreeMap<String, MasteryEnity> hmTemp =
+                        new Gson().fromJson(data.toString(), listType);
                     listData = new ArrayList<>(hmTemp.values());
-
                     mListenner.getAllMasteriesSuccessful(listData);
                     saveItemToDB(listData);
                 } else {
                     mListenner.getAllMasteriesFail(JsonUtil.getStatusMsg(jsonObject));
                 }
             } else {
-                mListenner.getAllMasteriesFail(mBaseActivity.getString(R.string.not_internet_connected));
+                mListenner
+                    .getAllMasteriesFail(mBaseActivity.getString(R.string.not_internet_connected));
             }
-
             mBaseActivity.dismissDialog();
-
         }
 
         @Override
         public void onFailure(Call<ResponseBody> call, Throwable t) {
             mBaseActivity.dismissDialog();
-            mListenner.getAllMasteriesFail(mBaseActivity.getString(R.string.not_internet_connected));
+            mListenner
+                .getAllMasteriesFail(mBaseActivity.getString(R.string.not_internet_connected));
         }
     };
 

@@ -32,8 +32,8 @@ import java.util.List;
 /**
  * Created by framgia on 17/11/2016.
  */
-
-public class SumonerMatchesAdapter extends RecyclerView.Adapter<SumonerMatchesAdapter.SumonerMatchesViewHolder> {
+public class SumonerMatchesAdapter
+    extends RecyclerView.Adapter<SumonerMatchesAdapter.SumonerMatchesViewHolder> {
     private List<GameEnity> mGames;
     private Context mContext;
     private List<ChampionEnity> mChampions;
@@ -42,8 +42,8 @@ public class SumonerMatchesAdapter extends RecyclerView.Adapter<SumonerMatchesAd
     private ItemDialog mItemDialog;
     private OnItemClickListenner mListenner;
 
-
-    public SumonerMatchesAdapter(Context context, List<GameEnity> games, OnItemClickListenner listenner) {
+    public SumonerMatchesAdapter(Context context, List<GameEnity> games,
+                                 OnItemClickListenner listenner) {
         mContext = context;
         mGames = games;
         mListenner = listenner;
@@ -70,11 +70,10 @@ public class SumonerMatchesAdapter extends RecyclerView.Adapter<SumonerMatchesAd
         return null;
     }
 
-
     @Override
     public SumonerMatchesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(mContext)
-                .inflate(R.layout.sumoner_match_item_layout, parent, false);
+            .inflate(R.layout.sumoner_match_item_layout, parent, false);
         return new SumonerMatchesViewHolder(v);
     }
 
@@ -89,16 +88,16 @@ public class SumonerMatchesAdapter extends RecyclerView.Adapter<SumonerMatchesAd
         return mGames != null ? mGames.size() : 0;
     }
 
-
     public interface OnItemClickListenner {
         void onItemClick(View v, int position, GameEnity game);
     }
 
-    public class SumonerMatchesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class SumonerMatchesViewHolder extends RecyclerView.ViewHolder
+        implements View.OnClickListener {
         private ImageView mItemImage;
         private TextView mItemTitle, mItemKda, mItemGold, mItemCrep, mItemTime, mItemDate;
         private ImageView mItemViewSlot1, mItemViewSlot2,
-                mItemViewSlot3, mItemViewSlot4, mItemViewSlot5, mItemViewSlot6, mItemViewSlot7;
+            mItemViewSlot3, mItemViewSlot4, mItemViewSlot5, mItemViewSlot6, mItemViewSlot7;
         private ImageView mItemSpell1, mItemSpell2;
         private GameEnity mGame;
         private TextView mMatchResult;
@@ -125,7 +124,8 @@ public class SumonerMatchesAdapter extends RecyclerView.Adapter<SumonerMatchesAd
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mListenner.onItemClick(v, getAdapterPosition(), mGames.get(getAdapterPosition()));
+                    mListenner
+                        .onItemClick(v, getAdapterPosition(), mGames.get(getAdapterPosition()));
                 }
             });
         }
@@ -134,21 +134,21 @@ public class SumonerMatchesAdapter extends RecyclerView.Adapter<SumonerMatchesAd
             mGame = game;
             StringBuilder builder = new StringBuilder();
             ChampionEnity championEnity = getChampionByID(String.valueOf(game.getChampionId()));
+            if (championEnity == null) return;
             Glide.with(mContext)
-                    .load(Utils.RiotStatic.getChampionIcon(championEnity.getKey()))
-                    .into(mItemImage);
-
+                .load(Utils.RiotStatic.getChampionIcon(championEnity.getKey()))
+                .into(mItemImage);
             mItemTitle.setText(championEnity.getName());
             builder.append(game.getStats().getChampionsKilled())
-                    .append(Constant.Charactor.DIV)
-                    .append(game.getStats().getNumDeaths())
-                    .append(Constant.Charactor.DIV)
-                    .append(game.getStats().getAssists());
+                .append(Constant.Charactor.DIV)
+                .append(game.getStats().getNumDeaths())
+                .append(Constant.Charactor.DIV)
+                .append(game.getStats().getAssists());
             mItemKda.setText(builder);
             mItemGold.setText(Utils.formatDouble(game.getStats().getGoldEarned()));
             mItemCrep.setText(String.valueOf(game.getStats().getMinionsKilled()
-                    + game.getStats().getNeutralMinionsKilledYourJungle()
-                    + game.getStats().getNeutralMinionsKilledEnemyJungle()));
+                + game.getStats().getNeutralMinionsKilledYourJungle()
+                + game.getStats().getNeutralMinionsKilledEnemyJungle()));
             mItemTime.setText(Utils.getHourFormatFromSecond(game.getCreateDate()));
             mItemDate.setText(Utils.getDateFormatFromSecond(game.getCreateDate()));
             loadItemView(game);
@@ -158,76 +158,68 @@ public class SumonerMatchesAdapter extends RecyclerView.Adapter<SumonerMatchesAd
         public void loadSpellView(GameEnity game) {
             SpellEnity firstSpell = mSpellDatabase.getSpellByID(game.getSpell1());
             SpellEnity secondSpell = mSpellDatabase.getSpellByID(game.getSpell2());
-
             if (firstSpell != null) {
                 Glide.with(mContext)
-                        .load(Utils.RiotStatic.getSpellImage(firstSpell.getImage().getFull()))
-                        .into(mItemSpell1);
+                    .load(Utils.RiotStatic.getSpellImage(firstSpell.getImage().getFull()))
+                    .into(mItemSpell1);
                 mItemSpell1.setOnClickListener(this);
             }
-
             if (secondSpell != null) {
                 Glide.with(mContext)
-                        .load(Utils.RiotStatic.getSpellImage(secondSpell.getImage().getFull()))
-                        .into(mItemSpell2);
+                    .load(Utils.RiotStatic.getSpellImage(secondSpell.getImage().getFull()))
+                    .into(mItemSpell2);
                 mItemSpell2.setOnClickListener(this);
             }
         }
 
         public void loadItemView(GameEnity game) {
-
             ItemEnity itemEnity = mDatabase.getItemById((int) game.getStats().getItem0());
             if (itemEnity != null) {
                 Glide.with(mContext)
-                        .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
-                        .into(mItemViewSlot1);
+                    .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
+                    .into(mItemViewSlot1);
                 mItemViewSlot1.setOnClickListener(this);
             }
             itemEnity = mDatabase.getItemById((int) game.getStats().getItem1());
             if (itemEnity != null) {
                 Glide.with(mContext)
-                        .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
-                        .into(mItemViewSlot2);
+                    .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
+                    .into(mItemViewSlot2);
                 mItemViewSlot2.setOnClickListener(this);
             }
-
             itemEnity = mDatabase.getItemById((int) game.getStats().getItem2());
             if (itemEnity != null) {
                 Glide.with(mContext)
-                        .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
-                        .into(mItemViewSlot3);
+                    .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
+                    .into(mItemViewSlot3);
                 mItemViewSlot3.setOnClickListener(this);
             }
-
             itemEnity = mDatabase.getItemById((int) game.getStats().getItem3());
             if (itemEnity != null) {
                 Glide.with(mContext)
-                        .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
-                        .into(mItemViewSlot4);
+                    .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
+                    .into(mItemViewSlot4);
                 mItemViewSlot4.setOnClickListener(this);
             }
-
             itemEnity = mDatabase.getItemById((int) game.getStats().getItem4());
             if (itemEnity != null) {
                 Glide.with(mContext)
-                        .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
-                        .into(mItemViewSlot5);
+                    .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
+                    .into(mItemViewSlot5);
                 mItemViewSlot5.setOnClickListener(this);
             }
-
             itemEnity = mDatabase.getItemById((int) game.getStats().getItem5());
             if (itemEnity != null) {
                 Glide.with(mContext)
-                        .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
-                        .into(mItemViewSlot6);
+                    .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
+                    .into(mItemViewSlot6);
                 mItemViewSlot6.setOnClickListener(this);
             }
-
             itemEnity = mDatabase.getItemById((int) game.getStats().getItem6());
             if (itemEnity != null) {
                 Glide.with(mContext)
-                        .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
-                        .into(mItemViewSlot7);
+                    .load(Utils.RiotStatic.getItemImage(itemEnity.getImage().getFull()))
+                    .into(mItemViewSlot7);
                 mItemViewSlot7.setOnClickListener(this);
             }
             if (game.getStats().isWin()) {
@@ -235,7 +227,6 @@ public class SumonerMatchesAdapter extends RecyclerView.Adapter<SumonerMatchesAd
             } else {
                 mMatchResult.setBackgroundColor(Color.RED);
             }
-
         }
 
         @Override
@@ -282,13 +273,14 @@ public class SumonerMatchesAdapter extends RecyclerView.Adapter<SumonerMatchesAd
             }
         }
 
-        private ItemDialog.ItemDialogOnClickListenner mItemClickListenner = new ItemDialog.ItemDialogOnClickListenner() {
-            @Override
-            public void onItemClickListenner(ItemEnity itemEnity) {
-                if (mItemDialog != null && mItemDialog.isShowing()) {
-                    mItemDialog.setUp(itemEnity, mItemClickListenner);
+        private ItemDialog.ItemDialogOnClickListenner mItemClickListenner =
+            new ItemDialog.ItemDialogOnClickListenner() {
+                @Override
+                public void onItemClickListenner(ItemEnity itemEnity) {
+                    if (mItemDialog != null && mItemDialog.isShowing()) {
+                        mItemDialog.setUp(itemEnity, mItemClickListenner);
+                    }
                 }
-            }
-        };
+            };
     }
 }

@@ -9,6 +9,7 @@ import com.toandoan.lol.activity.MatchDetailActivity;
 import com.toandoan.lol.api.base.ServiceGenerator;
 import com.toandoan.lol.api.listenner.RiotService;
 import com.toandoan.lol.base.BaseActivity;
+import com.toandoan.lol.constant.Constant;
 import com.toandoan.lol.model.SumonerEnity;
 import com.toandoan.lol.model.recent_match.GameEnity;
 import com.toandoan.lol.model.recent_match.RecentGamesEnity;
@@ -45,7 +46,7 @@ public class SumonerMatchesListPresenter implements SumonerMatchesListAbstract.P
         mActivity.showDialog();
         RiotService service = ServiceGenerator.createService(RiotService.class, mActivity);
 
-        Call<ResponseBody> call = service.getSumonnerRecentMatches(region, id);
+        Call<ResponseBody> call = service.getSumonnerRecentMatches(region, id, Constant.ApiKeyValue.API_KEY_VALUE);
         call.enqueue(getSumonerMatchesListCallback);
     }
 

@@ -87,8 +87,6 @@ public class MasteriesFragment extends Fragment {
             Utils.showMasteryDialog(getActivity(), masteryEnity);
         }
 
-
-
     };
 
 }

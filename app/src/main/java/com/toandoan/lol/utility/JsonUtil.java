@@ -1,16 +1,10 @@
 package com.toandoan.lol.utility;
 
-import android.content.Context;
-
-
-import com.google.gson.JsonObject;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import okhttp3.ResponseBody;
 import retrofit2.Response;
-
 
 public class JsonUtil {
     private static final String CODE_USER_BLOCK = "1074";
@@ -23,7 +17,6 @@ public class JsonUtil {
     private static final String CODE_JSON_ERROR = "8766";
     private static final String CODE_AUTHEN_TOKEN = "1007";
     private static final String CODE_REMOVE_FRIEND_NOT_OK = "1033";
-
     private static final String STATUS = "status";
     private static final String CODE = "code";
     private static final String MESSAGE = "message";
@@ -37,6 +30,7 @@ public class JsonUtil {
     private static final String SLIDER_IMGS = "slider_imgs";
 
     public static JSONObject convertResponseToJson(Response<ResponseBody> response) {
+        if (response == null || response.body() == null) return null;
         JSONObject jsonObject = new JSONObject();
         try {
             String dataResponse = response.body().string();
@@ -49,7 +43,7 @@ public class JsonUtil {
 
     public static JSONObject getJsonData(JSONObject jsonObject) {
         JSONObject result = null;
-        if (jsonObject != null&& !jsonObject.isNull(DATA)) {
+        if (jsonObject != null && !jsonObject.isNull(DATA)) {
             result = jsonObject.optJSONObject(DATA);
         }
         return result;
@@ -57,12 +51,11 @@ public class JsonUtil {
 
     public static JSONArray getJsonArrayData(JSONObject jsonObject) {
         JSONArray result = null;
-        if (jsonObject != null&& !jsonObject.isNull(DATA)) {
+        if (jsonObject != null && !jsonObject.isNull(DATA)) {
             result = jsonObject.optJSONArray(DATA);
         }
         return result;
     }
-
 
     public static JSONObject getJsonStatus(JSONObject json) {
         if (json != null) {
@@ -101,6 +94,4 @@ public class JsonUtil {
         }
         return message;
     }
-
-
 }

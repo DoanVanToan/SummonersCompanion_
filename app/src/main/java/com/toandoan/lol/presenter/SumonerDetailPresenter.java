@@ -7,6 +7,7 @@ import com.toandoan.lol.R;
 import com.toandoan.lol.api.base.ServiceGenerator;
 import com.toandoan.lol.api.listenner.RiotService;
 import com.toandoan.lol.base.BaseActivity;
+import com.toandoan.lol.constant.Constant;
 import com.toandoan.lol.model.SumonerEnity;
 import com.toandoan.lol.mvp_abstract.SumonerDetailAsbtract;
 import com.toandoan.lol.utility.JsonUtil;
@@ -21,9 +22,7 @@ import retrofit2.Response;
 /**
  * Created by ToanDoan on 11/25/2016.
  */
-
 public class SumonerDetailPresenter implements SumonerDetailAsbtract.Presenter {
-
     private BaseActivity mActivity;
     private SumonerDetailAsbtract.View mView;
 
@@ -35,15 +34,17 @@ public class SumonerDetailPresenter implements SumonerDetailAsbtract.Presenter {
     @Override
     public void getSumonerByID(String region, String sumonerID) {
         mActivity.showDialog();
-        RiotService service = ServiceGenerator.createStaticService(RiotService.class);
-        Call<ResponseBody> call = service.getSumonnerByID(region, sumonerID);
+        RiotService service = ServiceGenerator.createService(RiotService.class, mActivity);
+        Call<ResponseBody> call =
+            service.getSumonnerByID(region, sumonerID, Constant.ApiKeyValue.API_KEY_VALUE);
         call.enqueue(getUserCallBack);
     }
 
     @Override
     public void getSumonerByName(String region, String sumonerName) {
-        RiotService service = ServiceGenerator.createStaticService(RiotService.class);
-        Call<ResponseBody> call = service.getSumonerByName(region, sumonerName);
+        RiotService service = ServiceGenerator.createService(RiotService.class, mActivity);
+        Call<ResponseBody> call =
+            service.getSumonerByName(region, sumonerName, Constant.ApiKeyValue.API_KEY_VALUE);
         call.enqueue(getUserCallBack);
     }
 
@@ -55,13 +56,13 @@ public class SumonerDetailPresenter implements SumonerDetailAsbtract.Presenter {
             if (responseJson != null) {
                 JSONObject jsonData = responseJson.optJSONObject(responseJson.keys().next());
                 if (jsonData != null) {
-                    SumonerEnity sumoner = new Gson().fromJson(jsonData.toString(), SumonerEnity.class);
+                    SumonerEnity sumoner =
+                        new Gson().fromJson(jsonData.toString(), SumonerEnity.class);
                     if (sumoner != null) {
                         mView.initViewPager(sumoner);
                     }
                 }
             }
-
             mActivity.showDialog();
         }
 
@@ -71,6 +72,4 @@ public class SumonerDetailPresenter implements SumonerDetailAsbtract.Presenter {
             mActivity.dismissDialog();
         }
     };
-
-
 }

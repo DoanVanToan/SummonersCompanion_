@@ -7,6 +7,7 @@ import com.toandoan.lol.R;
 import com.toandoan.lol.api.base.ServiceGenerator;
 import com.toandoan.lol.api.listenner.RiotService;
 import com.toandoan.lol.base.BaseActivity;
+import com.toandoan.lol.constant.Constant;
 import com.toandoan.lol.database.impl.RunesImpl;
 import com.toandoan.lol.listenner.RuneListenner;
 import com.toandoan.lol.model.rune.RuneEnity;
@@ -28,7 +29,6 @@ import retrofit2.Response;
 /**
  * Created by ToanDoan on 10/29/2016.
  */
-
 public class RunesPresenter {
     private final BaseActivity mBaseActivity;
     private String TAG;
@@ -50,9 +50,10 @@ public class RunesPresenter {
 
     public void getAllRunesFromServer(String region) {
         mBaseActivity.showDialog();
-
         RiotService service = ServiceGenerator.createStaticService(RiotService.class);
-        Call<ResponseBody> call = service.getAllRunes(region);
+        Call<ResponseBody> call = service.getAllRunes(region,
+            Constant.ApiKeyValue.ALL,
+            Constant.ApiKeyValue.API_KEY_VALUE);
         call.enqueue(getAllRunesCallBack);
     }
 
@@ -62,26 +63,24 @@ public class RunesPresenter {
             JSONObject jsonObject = JsonUtil.convertResponseToJson(response);
             if (jsonObject != null) {
                 LogUtil.e(TAG, "getAllRunesCallBack>" + jsonObject.toString());
-
                 JSONObject data = JsonUtil.getJsonData(jsonObject);
                 if (data != null) {
                     List<RuneEnity> listData;
                     Type listType = new TypeToken<Map<String, RuneEnity>>() {
                     }.getType();
-                    LinkedTreeMap<String, RuneEnity> hmTemp = new Gson().fromJson(data.toString(), listType);
+                    LinkedTreeMap<String, RuneEnity> hmTemp =
+                        new Gson().fromJson(data.toString(), listType);
                     listData = new ArrayList<>(hmTemp.values());
-
                     mListenner.getAllRunesSuccessful(listData);
                     saveItemToDB(listData);
                 } else {
                     mListenner.getAllRunesFail(JsonUtil.getStatusMsg(jsonObject));
                 }
             } else {
-                mListenner.getAllRunesFail(mBaseActivity.getString(R.string.not_internet_connected));
+                mListenner
+                    .getAllRunesFail(mBaseActivity.getString(R.string.not_internet_connected));
             }
-
             mBaseActivity.dismissDialog();
-
         }
 
         @Override

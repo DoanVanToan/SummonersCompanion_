@@ -7,6 +7,7 @@ import com.toandoan.lol.R;
 import com.toandoan.lol.api.base.ServiceGenerator;
 import com.toandoan.lol.api.listenner.RiotService;
 import com.toandoan.lol.base.BaseActivity;
+import com.toandoan.lol.constant.Constant;
 import com.toandoan.lol.database.impl.MyItemImpl;
 import com.toandoan.lol.listenner.ItemListenner;
 import com.toandoan.lol.model.item.ItemEnity;
@@ -27,7 +28,6 @@ import retrofit2.Response;
 /**
  * Created by ToanDoan on 10/29/2016.
  */
-
 public class ItemsPresenter {
     private final BaseActivity mBaseActivity;
     private ItemListenner mListenner;
@@ -49,9 +49,10 @@ public class ItemsPresenter {
 
     public void getAllItemFromServer(String region) {
         mBaseActivity.showDialog();
-
         RiotService service = ServiceGenerator.createStaticService(RiotService.class);
-        Call<ResponseBody> call = service.getAllItems(region);
+        Call<ResponseBody> call = service.getAllItems(region,
+            Constant.ApiKeyValue.ALL,
+            Constant.ApiKeyValue.API_KEY_VALUE);
         call.enqueue(getAllItemCallBack);
     }
 
@@ -65,9 +66,9 @@ public class ItemsPresenter {
                     List<ItemEnity> listData;
                     Type listType = new TypeToken<Map<String, ItemEnity>>() {
                     }.getType();
-                    LinkedTreeMap<String, ItemEnity> hmTemp = new Gson().fromJson(data.toString(), listType);
+                    LinkedTreeMap<String, ItemEnity> hmTemp =
+                        new Gson().fromJson(data.toString(), listType);
                     listData = new ArrayList<>(hmTemp.values());
-
                     mListenner.getAllItemSuccessful(listData);
                     saveItemToDB(listData);
                 } else {
@@ -76,9 +77,7 @@ public class ItemsPresenter {
             } else {
                 mListenner.getAllItemFail(mBaseActivity.getString(R.string.not_internet_connected));
             }
-
             mBaseActivity.dismissDialog();
-
         }
 
         @Override

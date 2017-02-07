@@ -1,6 +1,5 @@
 package com.toandoan.lol.fragment;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -37,11 +36,9 @@ import retrofit2.Response;
 public class SpellsFragment extends Fragment {
     private BaseActivity mBaseActivity;
 
-
     public SpellsFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,9 +51,10 @@ public class SpellsFragment extends Fragment {
 
     public void getAllSpellsFromServer(String region) {
         mBaseActivity.showDialog();
-
         RiotService service = ServiceGenerator.createStaticService(RiotService.class);
-        Call<ResponseBody> call = service.getAllSpells(region);
+        Call<ResponseBody> call = service.getAllSpells(region,
+            Constant.ApiKeyValue.SPELL_DATA_IMAGE,
+            Constant.ApiKeyValue.API_KEY_VALUE);
         call.enqueue(getAllSpellsCallBack);
     }
 
@@ -67,29 +65,30 @@ public class SpellsFragment extends Fragment {
             if (jsonRespones != null) {
                 JSONObject jsonData = JsonUtil.getJsonData(jsonRespones);
                 HashMap<String, SpellEnity> hmData = new Gson()
-                        .fromJson(jsonData.toString(), new TypeToken<HashMap<String, SpellEnity>>() {
-                        }.getType());
+                    .fromJson(jsonData.toString(), new TypeToken<HashMap<String, SpellEnity>>() {
+                    }.getType());
                 List<SpellEnity> spells = new ArrayList<>(hmData.values());
                 SpellsImpl database = new SpellsImpl(getContext());
                 database.insertListSpells(spells);
             } else {
-                Toast.makeText(mBaseActivity, getString(R.string.not_internet_connected), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mBaseActivity, getString(R.string.not_internet_connected),
+                    Toast.LENGTH_SHORT).show();
             }
-
             mBaseActivity.dismissDialog();
         }
 
         @Override
         public void onFailure(Call<ResponseBody> call, Throwable t) {
             mBaseActivity.dismissDialog();
-            Toast.makeText(mBaseActivity, getString(R.string.not_internet_connected), Toast.LENGTH_SHORT).show();
+            Toast.makeText(mBaseActivity, getString(R.string.not_internet_connected),
+                Toast.LENGTH_SHORT).show();
         }
     };
 
     public static SpellsFragment newInstance(BaseActivity baseActivity) {
-        SpellsFragment spellsFragment  = new SpellsFragment();
+        SpellsFragment spellsFragment = new SpellsFragment();
         spellsFragment.setBaseActivity(baseActivity);
-        return  spellsFragment;
+        return spellsFragment;
     }
 
     public BaseActivity getBaseActivity() {

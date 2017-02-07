@@ -1,6 +1,5 @@
 package com.toandoan.lol.presenter;
 
-import android.view.View;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -12,19 +11,15 @@ import com.toandoan.lol.base.BaseActivity;
 import com.toandoan.lol.constant.Constant;
 import com.toandoan.lol.model.sumoner_overview.LeagueEnity;
 import com.toandoan.lol.model.sumoner_overview.LeagueEntryEnity;
-import com.toandoan.lol.model.sumoner_sumary.PlayerStatsSummaryEnity;
-import com.toandoan.lol.model.sumoner_sumary.PlayerStatsSummaryListEnity;
 import com.toandoan.lol.mvp_abstract.ChallengerContract;
 import com.toandoan.lol.utility.JsonUtil;
 import com.toandoan.lol.utility.LogUtil;
-import com.toandoan.lol.utility.Utils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -37,7 +32,6 @@ import retrofit2.Response;
 /**
  * Created by framgia on 25/11/2016.
  */
-
 public class ChallengerPresenter implements ChallengerContract.Presenter {
     private ChallengerContract.View mView;
     private BaseActivity mActivity;
@@ -51,8 +45,10 @@ public class ChallengerPresenter implements ChallengerContract.Presenter {
 
     @Override
     public void loadChallengerSumoner(String region) {
-        RiotService service = ServiceGenerator.createStaticService(RiotService.class);
-        Call<ResponseBody> call = service.getRankChallange(region);
+        RiotService service = ServiceGenerator.createService(RiotService.class, mActivity);
+        Call<ResponseBody> call = service.getRankChallange(region,
+            Constant.ApiKeyValue.RANK_TYPE_5_5,
+            Constant.ApiKeyValue.API_KEY_VALUE);
         call.enqueue(getChallengerCallBack);
     }
 
@@ -64,7 +60,6 @@ public class ChallengerPresenter implements ChallengerContract.Presenter {
                 mView.updateChallengeSumoner(mLeagueEntries);
                 return;
             }
-
             for (LeagueEntryEnity leangue : mLeagueEntries) {
                 if (leangue.getPlayerOrTeamName().toLowerCase().contains(key.toLowerCase())) {
                     result.add(leangue);
@@ -74,15 +69,14 @@ public class ChallengerPresenter implements ChallengerContract.Presenter {
         }
     }
 
-
     @Override
     public void loadSumonerRank(String region, String sumonerID, String typeRank) {
-        RiotService service = ServiceGenerator.createStaticService(RiotService.class);
+        RiotService service = ServiceGenerator.createService(RiotService.class, mActivity);
         mTypeRank = typeRank;
-        Call<ResponseBody> call = service.getRankBySumoner(region, sumonerID);
+        Call<ResponseBody> call =
+            service.getRankBySumoner(region, sumonerID, Constant.ApiKeyValue.API_KEY_VALUE);
         call.enqueue(getSummonerRankCallBack);
     }
-
 
     Callback<ResponseBody> getSummonerRankCallBack = new Callback<ResponseBody>() {
         @Override
@@ -99,13 +93,13 @@ public class ChallengerPresenter implements ChallengerContract.Presenter {
                     if (listData != null) {
                         mLeagueEntries = getListLegueByType(listData);
                         sortListLegue(mLeagueEntries);
-                        mView.updateChallengeSumoner(mLeagueEntries );
+                        mView.updateChallengeSumoner(mLeagueEntries);
                         mView.scrollToCurrentPosition();
                     }
                 }
-
             } else {
-                Toast.makeText(mActivity, R.string.not_internet_connected, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity, R.string.not_internet_connected, Toast.LENGTH_SHORT)
+                    .show();
             }
         }
 
@@ -123,21 +117,22 @@ public class ChallengerPresenter implements ChallengerContract.Presenter {
         return new ArrayList<>();
     }
 
-
     Callback<ResponseBody> getChallengerCallBack = new Callback<ResponseBody>() {
         @Override
         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
             JSONObject jsonResponse = JsonUtil.convertResponseToJson(response);
             LogUtil.e("getChallengerCallBack", jsonResponse.toString());
             if (jsonResponse != null) {
-                LeagueEnity league = new Gson().fromJson(jsonResponse.toString(), LeagueEnity.class);
+                LeagueEnity league =
+                    new Gson().fromJson(jsonResponse.toString(), LeagueEnity.class);
                 if (league != null) {
                     sortListLegue(league.getEntries());
                     mLeagueEntries = league.getEntries();
                     mView.updateChallengeSumoner(league.getEntries());
                 }
             } else {
-                Toast.makeText(mActivity, R.string.not_internet_connected, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity, R.string.not_internet_connected, Toast.LENGTH_SHORT)
+                    .show();
             }
         }
 
@@ -148,6 +143,7 @@ public class ChallengerPresenter implements ChallengerContract.Presenter {
     };
 
     public void sortListLegue(List<LeagueEntryEnity> entries) {
+        if (entries == null) return;
         Collections.sort(entries, new Comparator<LeagueEntryEnity>() {
             @Override
             public int compare(LeagueEntryEnity o1, LeagueEntryEnity o2) {
